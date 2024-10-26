@@ -2,451 +2,587 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Start your development with Meyawo landing page.">
-    <meta name="author" content="Devcrud">
-    <title>Aditya Kumar | 3D Rigging artist</title>
-    <!-- font icons -->
-    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
-    <!-- Bootstrap + Meyawo main styles -->
-    <link rel="stylesheet" href="assets/css/meyawo.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aditya Kumar | Technical Artist</title>
+  <link rel="shortcut icon" href="./assets/images/Colours=Purple.svg">
+  <link rel="stylesheet" href="./assets/css/index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
-<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
-
-    <!-- Page Navbar -->
-    <nav class="custom-navbar" data-spy="affix" data-offset-top="20">
-        <div class="container">
-            <a class="logo" href="#">Making controls to bring life!</a>
-            <ul class="nav">
-                <li class="item">
-                    <a class="link" href="#home">Home</a>
-                </li>
-                <li class="item">
-                    <a class="link" href="#about">About</a>
-                </li>
-                <li class="item">
-                    <a class="link" href="#portfolio">Portfolio</a>
-                </li>
-                <li class="item">
-                    <a class="link" href="#testmonial">Testmonial</a>
-                </li>
-                <li class="item">
-                    <a class="link" href="#blog">Blog</a>
-                </li>
-                <li class="item">
-                    <a class="link" href="#contact">Contact</a>
-                </li>
-                <li class="item ml-md-3">
-                    <a href="components.html" class="btn btn-primary">Components</a>
-                </li>
-            </ul>
-            <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
-                <div class="hamburger-box">
-                    <div class="hamburger-inner"></div>
-                </div>
+<body>
+  <main>
+    <aside class="sidebar" data-sidebar>
+      <div class="sidebar-info">
+        <figure class="avatar-box">
+          <img src="./assets/images/aditya.png" alt="Aditya Kumar" width="50">
+        </figure>
+        <div class="info-content">
+          <h1 class="name" title="Aditya Kumar">Aditya Kumar</h1>
+          <p class="title">Technical Artist</p>
+        </div>
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+      </div>
+      <div class="sidebar-info_more">
+        <div class="separator"></div>
+        <ul class="contacts-list">
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+              <a href="mailto:aditya766k@gmail.com" class="contact-link">aditya766k@gmail.com</a>
+            </div>
+          </li>
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
+            <div class="contact-info">
+              <p class="contact-title">Phone</p>
+              <a href="tel:+917544805419" class="contact-link">+91 7544805419</a>
+            </div>
+          </li>
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+              <address>Mumbai, INDIA</address>
+            </div>
+          </li>
+        </ul>
+        <div class="separator"></div>
+        <ul class="social-list">
+          <li class="social-item">
+            <a href="https://www.linkedin.com/in/ifxadi/" class="social-link">
+              <ion-icon name="logo-linkedin"></ion-icon>
             </a>
+          </li>
+          <li class="social-item">
+            <a href="https://www.github.com/ifxadi/" class="social-link">
+              <ion-icon name="logo-github"></ion-icon>
+            </a>
+          </li>
+          <li class="social-item">
+            <a href="https://www.instagram.com/iadi76/" class="social-link">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <!-- navbar -->
+      <nav class="navbar">
+        <ul class="navbar-list">
+          <li class="navbar-item">
+            <button class="navbar-link  active" data-nav-link>About</button>
+          </li>
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Resume</button>
+          </li>
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Portfolio</button>
+          </li>
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Contact</button>
+          </li>
+        </ul>
+      </nav>
+      <!-- about page -->
+      <article class="about  active" data-page="about">
+        <header>
+          <h2 class="h2 article-title">About me</h2>
+        </header>
+        <section class="about-text">
+          <p>
+            I'm a technical artist, specialized in rigging, pipeline and tools development as it involves exercising my high degree of problem-solving skills. Well versed with 3D art pipeline including modeling, UV mapping, texturing,shading, lighting, FX, and animation. Highly motivated and dedicated. Excellent eye for detail. Adapt quickly to new environments and scenarios.
+          </p>
+          <p>
+          </p>
+        </section>
+        <section class="service">
+          <h3 class="h3 service-title">My specialities</h3>
+          <ul class="service-list">
+            <li class="service-item">
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-design.svg
+                " alt="design icon" width="40">
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Diverse Skillset</h4>
+                <p class="service-item-text">
+                  From prior Android OS customization experience to creating Game Art pipelines, I have developed diverse range of skillsets.
+                </p>
+              </div>
+            </li>
+            <li class="service-item">
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40">
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Problem Solver</h4>
+                <p class="service-item-text">
+                Able to quickly investigate the root of the problem and bringing up robust solutions is my biggest strength.
+                </p>
+              </div>
+            </li>
+            <li class="service-item">
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-app.svg" alt="mobile app icon" width="40">
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Passionated</h4>
+                <p class="service-item-text">
+                  Passionate about immersive technologies and video games, with a strong dedication to making meaningful contributions.
+                </p>
+              </div>
+            </li>
+            <li class="service-item">
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-photo.svg" alt="music icon" width="40">
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Collabrative </h4>
+                <p class="service-item-text">
+              My expertise lies in understanding client goals and working collaboratively across departments to bring their vision to reality with precision and clarity.    
+                </p>
+              </div>
+            </li>
+          </ul>
+        </section>
+        <div class="modal-container" data-modal-container>
+          <div class="overlay" data-overlay></div>
+          <section class="testimonials-modal">
+            <button class="modal-close-btn" data-modal-close-btn>
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+          </section>
         </div>
-    </nav><!-- End of Page Navbar -->
-
-    <!-- page header -->
-    <header id="home" class="header">
-        <div class="overlay"></div>
-        <div class="header-content container">
-            <h1 class="header-title">
-                <span class="up">HI!</span>
-                <span class="down">I am Aditya Kumar</span>
-            </h1>
-            <p class="header-subtitle">3D RIGGING ARTIST</p>
-
-            <button class="btn btn-primary">Visit My Works</button>
-        </div>
-    </header><!-- end of page header -->
-
-    <!-- about section -->
-    <section class="section pt-0" id="about">
-        <!-- container -->
-        <div class="container text-center">
-            <!-- about wrapper -->
-            <div class="about">
-                <div class="about-img-holder">
-                    <img src="assets/imgs/man.png" class="about-img"
-                        alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                </div>
-                <div class="about-caption">
-                    <p class="section-subtitle">Who Am I ?</p>
-                    <h2 class="section-title mb-3">About Me</h2>
-                    <p>
-                        As a 3D Generalist with a specialization in rigging, I possess a diverse skill set and a passion for producing animated short films and working as a game designer. I have experience with various 3D software including Autodesk Maya, Unreal Engine, 3DS Max, Zbrush, Substance Painter,and visual effects software like Adobe After Effects, Premiere Pro, and Fusion. 
-                        My ability to quickly adapt to new situations and find creative solutions to problems has been key to my success as a 3D Generalist. I am a quick learner and problem solver, always eager to take on new challenges with confidence. I prioritize delivering high-quality work that exceeds my clients' expectations, and I am continuously seeking ways to improve my skills and knowledge base.
-                        I am a collaborative team player, and I enjoy working with others to achieve our goals. I have strong technical knowledge in the technical aspects of 3D modeling, rigging, animation, and dynamics which allows me to approach complex projects with ease. My proficiency in various 3D and visual effects software is a testament to my technical skills. I understand the importance of staying up-to-date with the latest advancements in technology, and I am always eager to expand my knowledge base to maintain a competitive edge in the industry.
-                    </p>
-                    <button class="btn-rounded btn btn-outline-primary mt-4">Download CV</button>
-                </div>
-            </div><!-- end of about wrapper -->
-        </div><!-- end of container -->
-    </section> <!-- end of about section -->
-
-    <!-- service section -->
-    <section class="section" id="service">
-        <div class="container text-center">
-            <p class="section-subtitle">What I Do ?</p>
-            <h6 class="section-title mb-6">Service</h6>
-            <!-- row -->
-            <div class="row">
-                <div class="col-md-6 col-lg-3">
-                    <div class="service-card">
-                        <div class="body">
-                            <img src="assets/imgs/pencil-case.svg"
-                                alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page"
-                                class="icon">
-                            <h6 class="title">Adipisicing</h6>
-                            <p class="subtitle">Labore velit culpa adipisci excepturi consequuntur itaque in nam
-                                molestias dolorem iste quod.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="service-card">
-                        <div class="body">
-                            <img src="assets/imgs/responsive.svg"
-                                alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page"
-                                class="icon">
-                            <h6 class="title">Sapiente</h6>
-                            <p class="subtitle">Labore velit culpa adipisci excepturi consequuntur itaque in nam
-                                molestias dolorem iste quod.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="service-card">
-                        <div class="body">
-                            <img src="assets/imgs/toolbox.svg"
-                                alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page"
-                                class="icon">
-                            <h6 class="title">Placeat</h6>
-                            <p class="subtitle">Labore velit culpa adipisci excepturi consequuntur itaque in nam
-                                molestias dolorem iste quod.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="service-card">
-                        <div class="body">
-                            <img src="assets/imgs/analytics.svg"
-                                alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page"
-                                class="icon">
-                            <h6 class="title">Iusto</h6>
-                            <p class="subtitle">Labore velit culpa adipisci excepturi consequuntur itaque in nam
-                                molestias dolorem iste quod.</p>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- end of row -->
-        </div>
-    </section><!-- end of service section -->
-
-    <!-- portfolio section -->
-    <section class="section" id="portfolio">
-        <div class="container text-center">
-            <p class="section-subtitle">What I Did ?</p>
-            <h6 class="section-title mb-6">Portfolio</h6>
-            <!-- row -->
-            <div class="row">
-                <div class="col-md-4">
-                    <a href="#" class="portfolio-card">
-                        <img src="assets/imgs/folio-1.jpg" class="portfolio-card-img"
-                            alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                        <span class="portfolio-card-overlay">
-                            <span class="portfolio-card-caption">
-                                <h4>Web Designing</h5>
-                                    <p class="font-weight-normal">Category: Web Templates</p>
-                            </span>
-                        </span>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="#" class="portfolio-card">
-                        <img class="portfolio-card-img" src="assets/imgs/folio-2.jpg" class="img-responsive rounded"
-                            alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                        <span class="portfolio-card-overlay">
-                            <span class="portfolio-card-caption">
-                                <h4>Web Designing</h5>
-                                    <p class="font-weight-normal">Category: Web Templates</p>
-                            </span>
-                        </span>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="#" class="portfolio-card">
-                        <img class="portfolio-card-img" src="assets/imgs/folio-3.jpg" class="img-responsive rounded"
-                            alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                        <span class="portfolio-card-overlay">
-                            <span class="portfolio-card-caption">
-                                <h4>Web Designing</h5>
-                                    <p class="font-weight-normal">Category: Web Templates</p>
-                            </span>
-                        </span>
-                    </a>
-                </div>
-            </div><!-- end of row -->
-        </div><!-- end of container -->
-    </section> <!-- end of portfolio section -->
-
-    <!-- pricing section -->
-    <section class="section" id="pricing">
-        <div class="container text-center">
-            <p class="section-subtitle">How Much I Charge ?</p>
-            <h6 class="section-title mb-6">My Pricing</h6>
-            <!-- row -->
-            <div class="pricing-wrapper">
-                <div class="pricing-card">
-                    <div class="pricing-card-header">
-                        <img class="pricing-card-icon" src="assets/imgs/scooter.svg"
-                            alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                    </div>
-                    <div class="pricing-card-body">
-                        <h6 class="pricing-card-title">Free</h6>
-                        <div class="pricing-card-list">
-                            <p>accusamus reprehenderit</p>
-                            <p>provident dolorem </p>
-                            <p>quos neque</p>
-                            <p>fugiat quibusdam</p>
-                            <p><i class="ti-close"></i></p>
-                            <p><i class="ti-close"></i></p>
-                        </div>
-                    </div>
-                    <div class="pricing-card-footer">
-                        <span>$</span>
-                        <span>0.00/Month</span>
-                    </div>
-                    <a href="#" class="btn btn-primary mt-3 pricing-card-btn">Subscribe</a>
-                </div>
-                <div class="pricing-card">
-                    <div class="pricing-card-header">
-                        <img class="pricing-card-icon" src="assets/imgs/shipped.svg"
-                            alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                    </div>
-                    <div class="pricing-card-body">
-                        <h6 class="pricing-card-title">Basic</h6>
-                        <div class="pricing-card-list">
-                            <p>accusamus reprehenderit</p>
-                            <p>provident dolorem </p>
-                            <p>quos neque</p>
-                            <p>fugiat quibusdam</p>
-                            <p>accusamus laboriosam</p>
-                            <p><i class="ti-close"></i></p>
-                        </div>
-                    </div>
-                    <div class="pricing-card-footer">
-                        <span>$</span>
-                        <span>9.99/Month</span>
-                    </div>
-                    <a href="#" class="btn btn-primary mt-3 pricing-card-btn">Subscribe</a>
-                </div>
-                <div class="pricing-card">
-                    <div class="pricing-card-header">
-                        <img class="pricing-card-icon" src="assets/imgs/startup.svg"
-                            alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                    </div>
-                    <div class="pricing-card-body">
-                        <h6 class="pricing-card-title">Premium</h6>
-                        <div class="pricing-card-list">
-                            <p>accusamus reprehenderit</p>
-                            <p>provident dolorem </p>
-                            <p>quos neque</p>
-                            <p>fugiat quibusdam</p>
-                            <p>accusamus laboriosam</p>
-                            <p>inventore omnis</p>
-                        </div>
-                    </div>
-                    <div class="pricing-card-footer">
-                        <span>$</span>
-                        <span>99.9/Month</span>
-                    </div>
-                    <a href="#" class="btn btn-primary mt-3 pricing-card-btn">Subscribe</a>
-                </div>
-
-            </div><!-- end of pricing wrapper -->
-        </div> <!-- end of container -->
-    </section><!-- end of pricing section -->
-
-    <!-- section -->
-    <section class="section-sm bg-primary">
-        <!-- container -->
-        <div class="container text-center text-sm-left">
-            <!-- row -->
-            <div class="row align-items-center">
-                <div class="col-sm offset-md-1 mb-4 mb-md-0">
-                    <h6 class="title text-light">Want to work with me?</h6>
-                    <p class="m-0 text-light">Always feel Free to Contact & Hire me</p>
-                </div>
-                <div class="col-sm offset-sm-2 offset-md-3">
-                    <button class="btn btn-lg my-font btn-light rounded">Hire Me</button>
-                </div>
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </section> <!-- end of section -->
-
-    <!-- testimonial section -->
-    <section class="section" id="testmonial">
-        <div class="container text-center">
-            <p class="section-subtitle">What Think Client About Me ?</p>
-            <h6 class="section-title mb-6">Testmonial</h6>
-
-            <!-- row -->
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="testimonial-card">
-                        <div class="testimonial-card-img-holder">
-                            <img src="assets/imgs/avatar2.jpg" class="testimonial-card-img"
-                                alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                        </div>
-                        <div class="testimonial-card-body">
-                            <p class="testimonial-card-subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing
-                                elit. Eaque doloribus autem aperiam earum nostrum omnis blanditiis corporis perspiciatis
-                                adipisci nihil.</p>
-                            <h6 class="testimonial-card-title">Emily Reb</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="testimonial-card">
-                        <div class="testimonial-card-img-holder">
-                            <img src="assets/imgs/avatar3.jpg" class="testimonial-card-img"
-                                alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                        </div>
-                        <div class="testimonial-card-body">
-                            <p class="testimonial-card-subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing
-                                elit. Eaque doloribus autem aperiam earum nostrum omnis blanditiis corporis perspiciatis
-                                adipisci nihil.</p>
-                            <h6 class="testimonial-card-title">Emily Reb</h6>
-                        </div>
-                    </div>
-                </div>
+      </article>
+      <!-- resume -->
+      <article class="resume" data-page="resume">
+        <header>
+          <h2 class="h2 article-title">Resume</h2>
+        </header>
+        
+        <section class="timeline">
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="bag-outline"></ion-icon>
             </div>
-        </div> <!-- end of container -->
-    </section> <!-- end of testimonial section -->
-
-    <!-- blog section -->
-    <section class="section" id="blog">
-        <!-- container -->
-        <div class="container text-center">
-            <p class="section-subtitle">Recent Posts?</p>
-            <h6 class="section-title mb-6">Blog</h6>
-            <!-- blog-wrapper -->
-            <div class="blog-card">
-                <div class="blog-card-header">
-                    <img src="assets/imgs/img-1.jpg" class="blog-card-img"
-                        alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                </div>
-                <div class="blog-card-body">
-                    <h5 class="blog-card-title">Consectetur adipisicing elit</h6>
-
-                        <p class="blog-card-caption">
-                            <a href="#">By: Admin</a>
-                            <a href="#"><i class="ti-heart text-danger"></i> 234</a>
-                            <a href="#"><i class="ti-comment"></i> 123</a>
-                        </p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet nesciunt qui sit velit
-                            delectus voluptates, repellat ipsum culpa id deleniti. Rerum debitis facilis accusantium
-                            neque numquam mollitia modi quasi distinctio.</p>
-
-                        <p><b>Necessitatibus nihil impedit! Ex nisi eveniet, dolor aliquid consequuntur repudiandae.</b>
-                        </p>
-                        <p>Magnam in repellat enim harum omnis aperiam! Explicabo illo, commodi, dolor blanditiis
-                            cupiditate harum nisi vero accusamus laudantium voluptatibus dolores quae obcaecati.</p>
-
-                        <a href="#" class="blog-card-link">Read more <i class="ti-angle-double-right"></i></a>
-                </div>
-            </div><!-- end of blog wrapper -->
-
-            <!-- blog-wrapper -->
-            <div class="blog-card">
-                <div class="blog-card-header">
-                    <img src="assets/imgs/img-2.jpg" class="blog-card-img"
-                        alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
-                </div>
-                <div class="blog-card-body">
-                    <h5 class="blog-card-title">Explicabo illo</h6>
-
-                        <p class="blog-card-caption">
-                            <a href="#">By: Admin</a>
-                            <a href="#"><i class="ti-heart text-danger"></i> 456</a>
-                            <a href="#"><i class="ti-comment"></i> 264</a>
-                        </p>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit excepturi laborum enim,
-                            vitae ipsam atque eum, ad iusto consequuntur voluptas, esse doloribus. Perferendis porro
-                            quisquam vitae exercitationem aliquid, minus eos laborum repudiandae, cumque debitis iusto
-                            omnis praesentium? Laborum placeat sit adipisci illum tempore maxime, esse qui quae?
-                            Molestias excepturi corporis similique doloribus. Esse vitae earum architecto nulla non
-                            dolores illum at perspiciatis quod, et deleniti cupiditate reiciendis harum facere, delectus
-                            eum commodi soluta distinctio sit repudiandae possimus sunt. Ipsum, rem.</p>
-
-                        <a href="#" class="blog-card-link">Read more <i class="ti-angle-double-right"></i></a>
-                </div>
-            </div><!-- end of blog wrapper -->
-
-        </div><!-- end of container -->
-    </section><!-- end of blog section -->
-
-    <!-- contact section -->
-    <section class="section" id="contact">
-        <div class="container text-center">
-            <p class="section-subtitle">How can you communicate?</p>
-            <h6 class="section-title mb-5">Contact Me</h6>
-            <!-- contact form -->
-            <form action="" class="contact-form col-md-10 col-lg-8 m-auto">
-                <div class="form-row">
-                    <div class="form-group col-sm-6">
-                        <input type="text" size="50" class="form-control" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <input type="email" class="form-control" placeholder="Enter Email" requried>
-                    </div>
-                    <div class="form-group col-sm-12">
-                        <textarea name="comment" id="comment" rows="6" class="form-control"
-                            placeholder="Write Something"></textarea>
-                    </div>
-                    <div class="form-group col-sm-12 mt-3">
-                        <input type="submit" value="Send Message" class="btn btn-outline-primary rounded">
-                    </div>
-                </div>
-            </form><!-- end of contact form -->
-        </div><!-- end of container -->
-    </section><!-- end of contact section -->
-
-    <!-- footer -->
-    <div class="container">
-        <footer class="footer">
-            <p class="mb-0">Copyright
-                <script>document.write(new Date().getFullYear())</script> &copy; <a
-                    href="http://www.devcrud.com">DevCRUD</a> Distribution <a
-                    href="https://themewagon.com">ThemeWagon</a>
-            </p>
-            <div class="social-links text-right m-auto ml-sm-auto">
-                <a href="javascript:void(0)" class="link"><i class="ti-facebook"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-twitter-alt"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-google"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-pinterest-alt"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-instagram"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-rss"></i></a>
+            <h3 class="h3">Experience</h3>
+          </div>
+          <ol class="timeline-list">
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Technical Artist - Modmacon</h4>
+              <span>September 2023 — Present</span>
+              <p class="timeline-text">
+                As a Technical Artist at Modmacon, I played a pivotal role in bridging the gap between art and technology. I collaborated closely with clients to understand their project requirements and developed efficient art and integration pipelines for popular game titles. My responsibilities included creating and maintaining in-house Maya plugins to automate and streamline the production process, ensuring assets were optimized and bug-free. I also introduced innovative techniques to overcome engine limitations without sacrificing quality or performance. Additionally, I provided technical support and mentorship to the team, while designing tests and conducting interviews for new Tech Artist candidates.
+              </p>
+            </li>
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Freelance Animator - Trillbit Inc.</h4>
+              <span>May 2022 - March 2023</span>
+              <p class="timeline-text">
+                Sole responsible for developing ideas and creating animated videos for the company's product and
+services.
+              </p>
+            </li>
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">3D Generalist - Impactional Games</h4>
+              <span>March 2022 - August 2022 </span>
+              <p class="timeline-text">
+                As a Generalist, I played a crucial role in the development of a VR metaversity project. My responsibilities included designing Unity-ready assets and characters, ensuring they were optimized for the virtual environment. Additionally, I developed a robust rigging system that facilitated seamless integration into the Unity engine. To showcase the project's potential, I also produced a cinematic trailer that effectively captured the immersive experience of the metaversity.
+              </p>
+            </li>
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Freelance Android OS Developer</h4>
+              <span>Apr 2016 - Aug 2019</span>
+              <p class="timeline-text">
+                As a Freelance Android OS Developer, I specialized in developing custom operating systems for Mediatek and Spreadtrum platforms. My expertise included reverse engineering Android kernel binaries to port source code drivers and creating device trees to adapt the latest Android versions to low-end devices. My ability to tailor the operating system to specific hardware requirements enabled me to deliver optimized and efficient solutions for various projects.
+              </p>
+            </li>
+          </ol>
+        </section>
+        <section class="timeline">
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
             </div>
-        </footer>
-    </div> <!-- end of page footer -->
+            <h3 class="h3">Education</h3>
+          </div>
+          <ol class="timeline-list">
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">St. Xavier's Collage, Ranchi</h4>
+              <span>2020 — 2023</span>
+              <p class="timeline-text">
+                Bachelor’s Degree in Animation & Design - Gold Medalist
+              </p>
+            </li>
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Dr. Shyama Prasad University, Ranchi</h4>
+              <span>2019 — 2020</span>
+              <p class="timeline-text">
+                BSc. Computer Application
+              </p>
+            </li>
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Army Public School, Ramgarh</h4>
+              <span>2010 — 2018</span>
+              <p class="timeline-text">
+                Schooling- CBSE
+              </p>
+            </li>
+          </ol>
+        </section>
+        <section class="skill">
+          <h3 class="h3 skills-title">My skills</h3>
+          <ul class="skills-list content-card">
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Python,  MEL & Maya API</h5>
 
-    <!-- core  -->
-    <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
-    <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+              </div>
+            </li>
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Rigging & Skinning</h5>
 
-    <!-- bootstrap 3 affix -->
-    <script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
+              </div>
+            </li>
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Modeling & Texturing</h5>
 
-    <!-- Meyawo js -->
-    <script src="assets/js/meyawo.js"></script>
+              </div>
+            </li>
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Shader writing; GLSL/HLSL</h5>
+              </div>
+            </li>
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Asset optimization</h5>
 
+              </div>
+            </li>
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Lighing & Rendering</h5>
+              </div>
+            </li>
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Git, SVN, Perforce</h5>
+              </div>
+            </li>
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Asset Integration</h5>
+              </div>
+            </li>
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Animation</h5>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="skill">
+          <h3 class="h3 skills-title">Softwares</h3>
+          <ul class="skills-list content-card">
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Maya</h5>
+
+              </div>
+            </li>
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Unreal Engine</h5>
+
+              </div>
+            </li>
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Photoshop</h5>
+
+              </div>
+            </li>
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">3DS Max</h5>
+              </div>
+            </li>
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Unity</h5>
+
+              </div>
+            </li>
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">After Effects</h5>
+              </div>
+            </li>
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">ZBrush</h5>
+              </div>
+            </li>
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Marmoset Toolbag</h5>
+              </div>
+            </li>
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Premiere Pro</h5>
+              </div>
+              <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Blender</h5>
+              </div>
+            </li>
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Fusion</h5>
+              </div>
+            </li>
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Animate</h5>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+
+      </article>
+      <!-- portfolio -->
+      <article class="portfolio" data-page="portfolio">
+        <header>
+          <h2 class="h2 article-title">Portfolio</h2>
+        </header>
+        <section class="projects">
+          <ul class="filter-list">
+            <li class="filter-item">
+              <button class="active" data-filter-btn>All</button>
+            </li>
+            <li class="filter-item">
+              <button data-filter-btn>Tools and Scripts</button>
+            </li>
+            <li class="filter-item">
+              <button data-filter-btn>Rigging</button>
+            </li>
+            <li class="filter-item">
+              <button data-filter-btn>3D Art</button>
+            </li>
+            <li class="filter-item">
+              <button data-filter-btn>Shaders</button>
+            </li>
+            <li class="filter-item">
+              <button data-filter-btn>Real-time rendering and Trailers</button>
+            </li>
+          </ul>
+          <div class="filter-select-box">
+            <button class="filter-select" data-select>
+              <div class="select-value" data-selecct-value>Select category</div>
+              <div class="select-icon">
+                <ion-icon name="chevron-down"></ion-icon>
+              </div>
+            </button>
+            <ul class="select-list">
+              <li class="select-item">
+                <button data-select-item>All</button>
+              </li>
+              <li class="select-item">
+                <button data-select-item>Tools and Scripts</button>
+              </li>
+              <li class="select-item">
+                <button data-select-item>Rigging</button>
+              </li>
+              <li class="select-item">
+                <button data-select-item>3D Art</button>
+              </li>
+              <li class="select-item">
+                <button data-select-item>Shaders</button>
+              </li>
+              <li class="select-item">
+                <button data-select-item>Real-time rendering and Trailers</button>
+              </li>
+            </ul>
+          </div>
+          <ul class="project-list">
+            <li class="project-item  active" data-filter-item data-category="real-time rendering and trailers">
+              <a href="https://www.youtube.com/watch?v=0eoprp_G71g">
+
+                  <iframe class="yt_video" width="800" height="350" src="https://www.youtube.com/embed/0eoprp_G71g" 
+    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+    </iframe>
+                <h3 class="project-title">Unreal Engine CGI Trailer: The other Side of the Universe- Personal Project</h3>
+                <p class="project-category">Real-time rendering and Trailers</p>
+              </a>
+            </li>
+            <li class="project-item  active" data-filter-item data-category="tools and scripts">
+                <figure class="project-img">
+                  <video class="custom-video" src="assets/videos/transfer_tool.mp4" poster="assets/videos/transfer_tool.mp4.jpg?v=a55b6cfa" preload="auto" playsinline="" webkit-playsinline="" muted="" autoplay="" loop="" controls=""></video>
+                </figure>
+                <h3 class="project-title">Maya Transfer Tool - Transfers Skin and Shading groups with customized settings for multiple geo in one go</h3>
+                <p class="project-category">Tools and Scripts - One-click solution for Updating Rigs - Python</p>
+              </a>
+            </li>
+            <li class="project-item  active" data-filter-item data-category="tools and scripts">
+                <figure class="project-img">
+                  <img class="custom-video" src="./assets/images/shadypady.png" alt="fundo" loading="lazy">
+                </figure>
+                <h3 class="project-title">GLSL Shader material maker and Auto-linker: Tool to quickly create custom shader materials!</h3>
+                <p class="project-category">Tools and Scripts - Python and QT</p>
+              </a>
+            </li>
+            <li class="project-item  active" data-filter-item data-category="shaders">
+                <figure class="project-img">
+                  <video class="custom-video" src="assets/videos/downsampler_shader.mp4" poster="assets/videos/downsampler_shader.mp4?v=a55b6cfa" preload="auto" playsinline="" webkit-playsinline="" muted="" autoplay="" loop="" controls=""></video>
+                </figure>
+                <h3 class="project-title">GLSL Realtime downsampling Shader- To detect potential UV bleeding issues at different mip levels and resolutions</h3>
+                <p class="project-category">Shaders - GLSL</p>
+              </a>
+            </li>
+            <li class="project-item  active" data-filter-item data-category="rigging">
+                <figure class="project-img">
+                  <video class="custom-video" src="assets/videos/mocap_retargetting.mp4" poster="assets/videos/mocap_retargetting.mp4.jpg?v=a55b6cfa" preload="auto" playsinline="" webkit-playsinline="" muted="" autoplay="" loop="" controls=""></video>
+                </figure>
+                <h3 class="project-title">Mocap re-targetting on custom rigs</h3>
+                <p class="project-category">Rigging</p>
+              </a>
+            </li>
+            <li class="project-item  active" data-filter-item data-category="rigging">
+                <figure class="project-img">
+                  <video class="custom-video" src="assets/videos/biped_rig.mp4" poster="assets/videos/biped_rig.mp4?v=a55b6cfa" preload="auto" playsinline="" webkit-playsinline="" muted="" autoplay="" loop="" controls=""></video>
+                </figure>
+                <h3 class="project-title">Character Rigging - Rig Easy to use and Hard to break!</h3>
+                <p class="project-category">Rigging</p>
+              </a>
+            </li>
+            <li class="project-item  active" data-filter-item data-category="tools and scripts">
+                <figure class="project-img">
+                  <img class="custom-video" src="./assets/images/render_tool.jpg" alt="fundo" loading="lazy">
+                </figure>
+                <h3 class="project-title">Maya Rendering Toolkit: Tool to streamline and automate the rendering pipeline.</h3>
+                <p class="project-category">Tools and Scripts - Python and QT</p>
+              </a>
+            </li>
+            <li class="project-item  active" data-filter-item data-category="tools and scripts">
+                <figure class="project-img">
+                  <video class="custom-video" src="assets/videos/ta_tool.mp4" poster="assets/videos/ta_tool.mp4.jpg?v=a55b6cfa" preload="auto" playsinline="" webkit-playsinline="" muted="" autoplay="" loop="" controls=""></video>
+                </figure>
+                <h3 class="project-title">Maya Super Screenshot Tool - Exports model turnarounds pngs at customized angles in high quality!</h3>
+                <p class="project-category">Tools and Scripts - One-click solution for creating model turnarounds!</p>
+              </a>
+            </li>
+            <li class="project-item  active" data-filter-item data-category="tools and scripts">
+                <figure class="project-img">
+                  <video class="custom-video" src="assets/videos/placeholder_maker.mp4" poster="assets/videos/transfer_tool.mp4.jpg?v=a55b6cfa" preload="auto" playsinline="" webkit-playsinline="" muted="" autoplay="" loop="" controls=""></video>
+                </figure>
+                <h3 class="project-title">Placeholder texture maker - Tool to Quickly block out colors and Bake a rough texture map!</h3>
+                <p class="project-category">Tools and Scripts- Python</p>
+              </a>
+            </li>
+            <li class="project-item  active" data-filter-item data-category="3d art">
+                <figure class="project-img">
+                  <video class="custom-video" src="assets/videos/warriorarmor.mp4" poster="assets/videos/warriorarmor.mp4.jpg?v=a55b6cfa" preload="auto" playsinline="" webkit-playsinline="" muted="" autoplay="" loop="" controls=""></video>
+                </figure>
+                <h3 class="project-title">Warrior Armor- Modeling, texturing and Rendering - Freelance Project</h3>
+                <p class="project-category">3D Art</p>
+              </a>
+            </li>
+            <li class="project-item  active" data-filter-item data-category="3d art">
+                <figure class="project-img">
+                  <video class="custom-video" src="assets/videos/raulettetable.mp4" poster="assets/videos/raulettetable.mp4.jpg?v=a55b6cfa" preload="auto" playsinline="" webkit-playsinline="" muted="" autoplay="" loop="" controls=""></video>
+                </figure>
+                <h3 class="project-title">Raulette Table- Modeling, texturing and Rendering - VR Metaverse Project</h3>
+                <p class="project-category">3D Art</p>
+              </a>
+            </li>
+            <li class="project-item  active" data-filter-item data-category="real-time rendering and trailers">
+              <a href="https://www.youtube.com/watch?v=0eoprp_G71g">
+
+                  <iframe class="yt_video" width="800" height="350" src="https://www.youtube.com/embed/PUH7ts2_0bs" 
+    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+    </iframe>
+                <h3 class="project-title">Unreal Engine 5 + 3DS Max: 4BHK Architectural Realtime Walkthrough - Freelance Project</h3>
+                <p class="project-category">Real-time rendering and Trailers- Lumen</p>
+              </a>
+            </li>
+            <ul class="project-list">
+            <li class="project-item  active" data-filter-item data-category="real-time rendering and trailers">
+              <a href="https://www.youtube.com/watch?v=0eoprp_G71g">
+
+                  <iframe class="yt_video" width="800" height="350" src="https://www.youtube.com/embed/zZtKOa8WyIY" 
+    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+    </iframe>
+                <h3 class="project-title">Animated Short film: Lightning Portal - Personal Project</h3>
+                <p class="project-category">Real-time rendering and Trailers</p>
+              </a>
+            </li>
+            <li class="project-item  active" data-filter-item data-category="real-time rendering and trailers">
+              <a href="https://www.youtube.com/watch?v=4RcAuzyFS9M">
+
+                  <iframe class="yt_video" width="800" height="350" src="https://www.youtube.com/embed/4RcAuzyFS9M" 
+    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+    </iframe>
+                <h3 class="project-title">3D Animation - The Airdrop: PUBG - Personal Project</h3>
+                <p class="project-category">Real-time rendering and Trailers</p>
+              </a>
+            </li>
+        </section>
+      </article>
+      <article class="contact" data-page="contact">
+        <header>
+          <h2 class="h2 article-title">Contact</h2>
+        </header>
+        <section class="mapbox" data-mapbox>
+          <figure>
+            <iframe
+              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=Mumbai&zoom=10&maptype=roadmap"
+              width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </figure>
+        </section>
+        <section class="contact-form">
+          <h3 class="h3 form-title">Contact Form</h3>
+          <form action="#" class="form" data-form>
+            <div class="input-wrapper">
+              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
+              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+            </div>
+            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+            <button class="form-btn" type="submit" disabled data-form-btn>
+              <ion-icon name="paper-plane"></ion-icon>
+              <span>Send Message</span>
+            </button>
+          </form>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <script src="./assets/js/script.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
-</html>
+</html
