@@ -1655,7 +1655,7 @@ textarea.form-input::-webkit-resizer {
 /* Adjustments for mobile screens */
 @media (max-width: 450px) {
   .yt_video {
-      max-width: 300px;
+      max-width: 350px;
       border: 2px solid #333; /* Optional: add a border */
       border-radius: 10px; /* Optional: add rounded corners */
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: add a shadow */
@@ -1665,7 +1665,7 @@ textarea.form-input::-webkit-resizer {
     }
     .custom-video {
       width: 100%; /* Full width within the container */
-      max-width: 300px; /* Maximum width of the video */
+      max-width: 350px; /* Maximum width of the video */
       height: auto; /* Maintain aspect ratio */
       border: 2px solid #333; /* Optional: add a border */
       border-radius: 10px; /* Optional: add rounded corners */
