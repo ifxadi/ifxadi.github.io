@@ -1631,25 +1631,26 @@ textarea.form-input::-webkit-resizer {
   }
 }
 /* Adjustments for mobile screens */
-@media (max-width: 600px) {
+@media (max-width: 650px) {
   .yt_video {
-      max-width: 350px;
+      max-width: 300px;
       border: 2px solid #333; /* Optional: add a border */
       border-radius: 10px; /* Optional: add rounded corners */
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: add a shadow */
       justify-content: center;
       align-items: center; /* Vertically center */
-      margin-left: 20px;
+      margin-left: 10px;
+    }
     .custom-video {
       width: 100%; /* Full width within the container */
-      max-width: 350px; /* Maximum width of the video */
+      max-width: 300px; /* Maximum width of the video */
       height: auto; /* Maintain aspect ratio */
       border: 2px solid #333; /* Optional: add a border */
       border-radius: 10px; /* Optional: add rounded corners */
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: add a shadow */
       justify-content: center;
       align-items: center; /* Vertically center */
-      margin-left: 5px;
+      margin-left: 10px;
 }
 
   
