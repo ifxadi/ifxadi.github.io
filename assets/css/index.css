@@ -1631,7 +1631,7 @@ textarea.form-input::-webkit-resizer {
   }
 }
 /* Adjustments for mobile screens */
-@media (max-width: 768px) {
+@media (max-width: 500px) {
   .yt_video {
       max-width: 420px;
       border: 2px solid #333; /* Optional: add a border */
@@ -1653,7 +1653,7 @@ textarea.form-input::-webkit-resizer {
       margin-left: 5px;
 }
 /* Adjustments for mobile screens */
-@media (max-width: 430px) {
+@media (max-width: 425px) {
   .yt_video {
       max-width: 350px;
       border: 2px solid #333; /* Optional: add a border */
