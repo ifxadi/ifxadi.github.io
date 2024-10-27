@@ -1652,6 +1652,14 @@ textarea.form-input::-webkit-resizer {
       align-items: center; /* Vertically center */
       margin-left: 5px;
     }
+  .skills-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    gap: 20px; /* Add some spacing between columns */
+    list-style-type: none;
+    padding: 15px;
+    margin-bottom: 30px;
+  }
 }
 /* Adjustments for mobile screens */
 @media (max-width: 450px) {
