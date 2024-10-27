@@ -1763,6 +1763,9 @@ textarea.form-input::-webkit-resizer {
     max-width: calc(100% - 64px);
     width: calc(100% - 50px);
   }
+  .icon-container {
+    width: 450px; /* Adjust width as needed */
+  }
 }
 /* Adjustments for mobile screens */
 @media (max-width: 450px) {
@@ -1785,5 +1788,8 @@ textarea.form-input::-webkit-resizer {
       justify-content: center;
       align-items: center; /* Vertically center */
       margin-left: 5px;
+  }
+  .icon-container {
+    width: 350px; /* Adjust width as needed */
   }
 }
