@@ -1087,7 +1087,26 @@ textarea.form-input::-webkit-resizer {
   .blog-banner-box {
     height: auto;
   }
+  .contact-section p {
+  font-size: 22px;
+  color: #fff; /* Dark gray for better readability */
+  text-align: center; /* Center the paragraph */
+  margin: 20px 0;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .contact-section p a {
+    color: #aea2f2; /* Light blue for the email link */
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .contact-section p a:hover {
+    color: #aea2f2; /* Darker blue on hover for the email link */
+    text-decoration: underline; /* Underline effect on hover */
+  }
 }
+
 /**
    * responsive larger than 580px screen
    */
