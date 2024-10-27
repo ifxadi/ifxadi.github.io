@@ -1512,17 +1512,15 @@ textarea.form-input::-webkit-resizer {
     width: 20px;
   }
   body::-webkit-scrollbar-track {
-    background: var(--smoky-black);
+    background: hsla(0, 0%, 100%, 0.5);
   }
   body::-webkit-scrollbar-thumb {
-    border: 5px solid var(--smoky-black);
-    background: hsla(0, 0%, 100%, 0.1);
-    border-radius: 20px;
-    box-shadow: inset 1px 1px 0 hsla(0, 0%, 100%, 0.11),
-      inset -1px -1px 0 hsla(0, 0%, 100%, 0.11);
+    border: 5px solid var(--organge-1);
+    background: var(--organge-1);
+    border-radius: 10px;
   }
   body::-webkit-scrollbar-thumb:hover {
-    background: hsla(0, 0%, 100%, 0.15);
+    background: var(--organge-1);
   }
   body::-webkit-scrollbar-button {
     height: 60px;
