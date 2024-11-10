@@ -1108,42 +1108,24 @@ textarea.form-input::-webkit-resizer {
   }
 
   .icon-container {
-    display: flex;
-    justify-content: center; /* Center the icons within the container */
-    width: 850px; /* Adjust width as needed */
-    overflow: hidden;
-    position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Adjusts the space between icons */
+  flex-wrap: wrap; /* Allows wrapping if the container is smaller than needed */
+  padding: 10px;
 }
 
 .icon {
-    padding: 0 -25px;
-    animation: moveScale 4s linear infinite;
+  width: 80px;
+  filter: grayscale(0%); /* Black and white by default */
+  transition: filter 0.3s, transform 0.3s; /* Smooth transition effect */
 }
 
-/* Add delay to each icon for a staggered effect */
-.icon:nth-child(1) { animation-delay: 0s; }
-.icon:nth-child(2) { animation-delay: 1s; }
-.icon:nth-child(3) { animation-delay: 2s; }
-.icon:nth-child(4) { animation-delay: 3s; }
-.icon:nth-child(5) { animation-delay: 4s; }
-
-@keyframes moveScale {
-    0% {
-        transform: translateX(100%) scale(1);
-        opacity: 0;
-    }
-    20% {
-        transform: translateX(0) scale(1.2);
-        opacity: 1;
-    }
-    80% {
-        transform: translateX(-100%) scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(-100%) scale(1);
-        opacity: 0;
-    }
+.icon:hover {
+  filter: grayscale(0%); /* Restores original color on hover */
+  transform: scale(1.1); /* Slight enlargement on hover */
+}
 }
 
 /**
@@ -1765,9 +1747,6 @@ textarea.form-input::-webkit-resizer {
     max-width: calc(100% - 64px);
     width: calc(100% - 50px);
   }
-  .icon-container {
-    width: 450px; /* Adjust width as needed */
-  }
 }
 /* Adjustments for mobile screens */
 @media (max-width: 450px) {
@@ -1790,8 +1769,5 @@ textarea.form-input::-webkit-resizer {
       justify-content: center;
       align-items: center; /* Vertically center */
       margin-left: 5px;
-  }
-  .icon-container {
-    width: 350px; /* Adjust width as needed */
   }
 }
