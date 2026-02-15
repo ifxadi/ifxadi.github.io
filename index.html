@@ -249,57 +249,14 @@
                     left: 0;
                 }
 
-        /* Skills Section */
         .skills-section {
             padding: 80px 40px;
-            background: var(--paper);
+            background: transparent;
             border-bottom: 3px solid var(--rust);
             position: relative;
-            overflow: hidden;
+            overflow: visible;
         }
 
-            /* Animated background for skills section */
-            .skills-section::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                z-index: 0;
-                opacity: 0.06;
-                background: radial-gradient(circle at 20% 30%, var(--rust) 0%, transparent 40%), radial-gradient(circle at 80% 70%, var(--teal) 0%, transparent 40%), radial-gradient(circle at 50% 50%, var(--purple) 0%, transparent 50%);
-                animation: skillsWave 15s ease-in-out infinite;
-                filter: blur(50px);
-            }
-
-        @keyframes skillsWave {
-            0%, 100% {
-                background-position: 0% 0%, 100% 100%, 50% 50%;
-                transform: scale(1);
-            }
-
-            50% {
-                background-position: 100% 100%, 0% 0%, 60% 40%;
-                transform: scale(1.1);
-            }
-        }
-
-        /* Floating points in skills section */
-        .skills-section::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--gold);
-            border-radius: 50%;
-            top: 30%;
-            left: 15%;
-            opacity: 0;
-            animation: skillPoint1 10s ease-in-out infinite;
-            box-shadow: 0 0 15px var(--gold);
-            z-index: 0;
-        }
 
         @keyframes skillPoint1 {
             0%, 100% {
@@ -318,85 +275,6 @@
             margin: 0 auto;
             position: relative;
             z-index: 1;
-        }
-
-        /* Additional skill section decorations */
-        .skill-decoration {
-            position: absolute;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .skill-decoration-1 {
-            width: 3px;
-            height: 3px;
-            background: var(--rust);
-            border-radius: 50%;
-            top: 20%;
-            right: 20%;
-            opacity: 0;
-            animation: skillFloat1 12s ease-in-out infinite;
-            box-shadow: 0 0 12px var(--rust);
-        }
-
-        .skill-decoration-2 {
-            width: 3px;
-            height: 3px;
-            background: var(--teal);
-            border-radius: 50%;
-            bottom: 30%;
-            left: 25%;
-            opacity: 0;
-            animation: skillFloat2 14s ease-in-out infinite 2s;
-            box-shadow: 0 0 12px var(--teal);
-        }
-
-        .skill-decoration-3 {
-            width: 2px;
-            height: 2px;
-            background: var(--purple);
-            border-radius: 50%;
-            top: 60%;
-            right: 30%;
-            opacity: 0;
-            animation: skillFloat3 11s ease-in-out infinite 4s;
-            box-shadow: 0 0 10px var(--purple);
-        }
-
-        @keyframes skillFloat1 {
-            0%, 100% {
-                opacity: 0;
-                transform: translate(0, 0) scale(1);
-            }
-
-            50% {
-                opacity: 0.5;
-                transform: translate(-25px, 35px) scale(1.5);
-            }
-        }
-
-        @keyframes skillFloat2 {
-            0%, 100% {
-                opacity: 0;
-                transform: translate(0, 0) scale(1);
-            }
-
-            50% {
-                opacity: 0.4;
-                transform: translate(40px, -30px) scale(1.8);
-            }
-        }
-
-        @keyframes skillFloat3 {
-            0%, 100% {
-                opacity: 0;
-                transform: translate(0, 0) scale(1);
-            }
-
-            50% {
-                opacity: 0.6;
-                transform: translate(-30px, -25px) scale(1.3);
-            }
         }
 
         .skills-title {
@@ -898,6 +776,15 @@
             letter-spacing: 2px;
             border: 2px solid var(--rust);
         }
+
+        .card-content .category-tag {
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+            .card-content .category-tag:last-child {
+                margin-right: 0;
+            }
 
         .modal-title {
             font-family: 'Syne', sans-serif;
@@ -1610,15 +1497,27 @@
     </footer>
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Portfolio Data - EDIT THIS SECTION TO ADD YOUR PROJECTS
         const portfolioData = [
             {
                 id: 1,
+                category: ['tools', 'pipeline'],
+                title: 'DCC Tools Pipeline',
+                shortDescription: 'DCC Tools that are easy to ship, install, and maintain.',
+                fullDescription: 'Creating tools is fun, but making them truly valuable means ensuring they are easy to distribute, simple to install, and effortless to maintain—especially in a studio environment where artists should focus on creating rather than figuring out tools or constantly updating them.',
+                thumbnail: './assets/images/shadypady.png',
+                image: './assets/images/shadypady.png',
+                technologies: 'Python, Maya API, MEL, Blender Python API, Git',
+                role: 'Author',
+                year: '2023',
+                link: '#'
+            },
+            {
+                id: 2,
                 category: 'tools',
-                title: 'Maya Asset Validator',
+                title: 'Maya Automation Editor Framework',
                 shortDescription: 'Automated asset validation tool for Maya ensuring technical compliance before export.',
                 fullDescription: 'A comprehensive Python-based tool for Autodesk Maya that automates the validation of 3D assets against technical requirements. Checks naming conventions, polygon counts, UV layouts, material assignments, and export settings. Reduced QA time by 40% and prevented common pipeline errors.',
-                thumbnail: 'https://via.placeholder.com/400x280/1a1a1a/ff6b4a?text=Maya+Asset+Validator',
+                thumbnail: './assets/images/shadypady.png',
                 image: 'https://via.placeholder.com/900x450/1a1a1a/ff6b4a?text=Maya+Asset+Validator',
                 technologies: 'Python, Maya API, PyQt',
                 role: 'Solo Developer',
@@ -1656,25 +1555,47 @@ def validate_poly_count(mesh, max_count=50000):
                 ]
             },
             {
-                id: 2,
+                id: 3,
                 category: 'tools',
-                title: 'Batch Export Pipeline',
+                title: 'Baking Tools for Maya and Blender',
                 shortDescription: 'Streamlined batch export system for multiple 3D packages with validation.',
                 fullDescription: 'Multi-DCC export pipeline supporting Maya, Blender, and 3DS Max. Features include automated file conversion, texture optimization, LOD generation, and integration with Perforce version control. Handles 100+ assets per batch with full logging and error reporting.',
-                thumbnail: 'https://via.placeholder.com/400x280/1a1a1a/4ecdc4?text=Batch+Export+Tool',
+                thumbnail: './assets/images/shadypady.png',
+                image: 'https://via.placeholder.com/900x450/1a1a1a/4ecdc4?text=Batch+Export+Tool',
+                technologies: 'Python, MEL, Blender Python API',
+                role: 'Author',
+            },
+            {
+                id: 4,
+                category: 'tools',
+                title: 'Asset QA Tool for Maya and Blender',
+                shortDescription: 'Streamlined batch export system for multiple 3D packages with validation.',
+                fullDescription: 'Multi-DCC export pipeline supporting Maya, Blender, and 3DS Max. Features include automated file conversion, texture optimization, LOD generation, and integration with Perforce version control. Handles 100+ assets per batch with full logging and error reporting.',
+                thumbnail: './assets/images/shadypady.png',
+                image: 'https://via.placeholder.com/900x450/1a1a1a/4ecdc4?text=Batch+Export+Tool',
+                technologies: 'Python, MEL, Blender Python API',
+                role: 'Developer',
+            },
+            {
+                id: 5,
+                category: 'tools',
+                title: 'Maya Asset Exporter-Importer',
+                shortDescription: 'Streamlined batch export system for multiple 3D packages with validation.',
+                fullDescription: 'Multi-DCC export pipeline supporting Maya, Blender, and 3DS Max. Features include automated file conversion, texture optimization, LOD generation, and integration with Perforce version control. Handles 100+ assets per batch with full logging and error reporting.',
+                thumbnail: './assets/images/shadypady.png',
                 image: 'https://via.placeholder.com/900x450/1a1a1a/4ecdc4?text=Batch+Export+Tool',
                 technologies: 'Python, MEL, Blender Python API',
                 role: 'Lead Developer',
-                year: '2023',
+                year: '2024',
                 link: '#'
             },
             {
-                id: 3,
+                id: 6,
                 category: 'shaders',
-                title: 'Stylized Water Shader',
+                title: 'Advanced Texture Packing',
                 shortDescription: 'Highly optimized stylized water shader for mobile games with foam and reflections.',
                 fullDescription: 'Custom water shader built for mobile game rendering with animated surface normals, edge foam detection, depth-based color gradients, and dynamic reflections. Optimized for 60 FPS on mobile devices while maintaining visual quality. Features include vertex displacement, caustics simulation, and transparency control.',
-                thumbnail: 'https://via.placeholder.com/400x280/1a1a1a/4ecdc4?text=Water+Shader',
+                thumbnail: './assets/images/shadypady.png',
                 image: 'https://via.placeholder.com/900x450/1a1a1a/4ecdc4?text=Stylized+Water+Shader',
                 technologies: 'HLSL, Shader Graph, Unity',
                 role: 'Shader Artist',
@@ -1705,25 +1626,64 @@ def validate_poly_count(mesh, max_count=50000):
                 ]
             },
             {
-                id: 4,
+                id: 7,
                 category: 'shaders',
-                title: 'Character Toon Shader',
+                title: 'Rim Light Shader',
                 shortDescription: 'Versatile toon shader system with rim lighting and outline control.',
                 fullDescription: 'A complete toon shading solution featuring multi-tone shading, dynamic rim lighting, customizable outlines, and specular highlights. Includes support for multiple light sources, shadow mapping, and color ramping. Used across 50+ characters in production with artist-friendly controls.',
-                thumbnail: 'https://via.placeholder.com/400x280/1a1a1a/ff8e72?text=Toon+Shader',
+                thumbnail: './assets/images/shadypady.png',
                 image: 'https://via.placeholder.com/900x450/1a1a1a/ff8e72?text=Character+Toon+Shader',
-                technologies: 'GLSL, Unreal Material Editor',
+                technologies: 'GLSL (Maya), HLSL (Unity), Unreal Material Editor',
                 role: 'Technical Artist',
                 year: '2023',
                 link: '#'
             },
             {
-                id: 5,
+                id: 8,
+                category: 'shaders',
+                title: 'OpenGL Graphics Application',
+                shortDescription: 'Versatile toon shader system with rim lighting and outline control.',
+                fullDescription: 'A complete toon shading solution featuring multi-tone shading, dynamic rim lighting, customizable outlines, and specular highlights. Includes support for multiple light sources, shadow mapping, and color ramping. Used across 50+ characters in production with artist-friendly controls.',
+                thumbnail: './assets/images/shadypady.png',
+                image: 'https://via.placeholder.com/900x450/1a1a1a/ff8e72?text=Character+Toon+Shader',
+                technologies: 'C++,SDL, GLAD, GLSL, Visual Studio ',
+                role: 'Technical Artist',
+                year: '2023',
+                link: '#'
+            },
+            {
+                id: 9,
+                category: 'shaders',
+                title: 'Perforce Assist Tool for Game Engine',
+                shortDescription: 'Versatile toon shader system with rim lighting and outline control.',
+                fullDescription: 'A complete toon shading solution featuring multi-tone shading, dynamic rim lighting, customizable outlines, and specular highlights. Includes support for multiple light sources, shadow mapping, and color ramping. Used across 50+ characters in production with artist-friendly controls.',
+                thumbnail: './assets/images/shadypady.png',
+                image: 'https://via.placeholder.com/900x450/1a1a1a/ff8e72?text=Character+Toon+Shader',
+                technologies: 'Python, PyQt',
+                role: 'Technical Artist',
+                year: '2023',
+                link: '#'
+            },
+            {
+                id: 10,
+                category: 'shaders',
+                title: 'Maya Launcher',
+                shortDescription: 'Versatile toon shader system with rim lighting and outline control.',
+                fullDescription: 'A complete toon shading solution featuring multi-tone shading, dynamic rim lighting, customizable outlines, and specular highlights. Includes support for multiple light sources, shadow mapping, and color ramping. Used across 50+ characters in production with artist-friendly controls.',
+                thumbnail: './assets/images/shadypady.png',
+                image: 'https://via.placeholder.com/900x450/1a1a1a/ff8e72?text=Character+Toon+Shader',
+                technologies: 'Python, PyQt',
+                role: 'Technical Artist',
+                year: '2023',
+                link: '#'
+            },
+            {
+                id: 11,
                 category: '3d',
                 title: 'Character Model - Warrior',
                 shortDescription: 'Game-ready character model with full PBR textures and animation-ready rig.',
                 fullDescription: 'High-quality character model created for action game production. Features hand-painted PBR textures (4K Base Color, Normal, Roughness, Metallic), optimized mesh topology for animation (18K triangles), and complete rig with facial controls. Includes multiple LOD levels and custom blend shapes for facial expressions.',
-                thumbnail: 'https://via.placeholder.com/400x280/1a1a1a/b794f6?text=Warrior+Character',
+                thumbnail: './assets/images/shadypady.png',
                 image: 'https://via.placeholder.com/900x450/1a1a1a/b794f6?text=Warrior+Character+Model',
                 technologies: 'ZBrush, Maya, Substance Painter',
                 role: '3D Artist',
@@ -1731,55 +1691,68 @@ def validate_poly_count(mesh, max_count=50000):
                 link: '#'
             },
             {
-                id: 6,
-                category: '3d',
-                title: 'Environment Assets Pack',
+                id: 12,
+                category: ['shaders', 'tools'],
+                title: 'Global Season Switcher Environment Tool',
                 shortDescription: 'Modular environment asset pack for fantasy game worlds.',
                 fullDescription: 'Complete modular environment kit containing 80+ assets including rocks, vegetation, architectural elements, and props. All assets feature tileable textures, optimized collision meshes, and consistent art style. Package includes vertex painting support, LOD models, and full documentation for level designers.',
-                thumbnail: 'https://via.placeholder.com/400x280/1a1a1a/a8c5c1?text=Environment+Pack',
+                thumbnail: './assets/images/shadypady.png',
                 image: 'https://via.placeholder.com/900x450/1a1a1a/a8c5c1?text=Environment+Assets+Pack',
-                technologies: 'Blender, Substance Designer, Unreal',
-                role: 'Environment Artist',
+                technologies: '3DS MAX, HLSL, MaxScript',
+                role: 'Author',
                 year: '2023',
                 link: '#'
             },
             {
-                id: 7,
-                category: 'pipeline',
-                title: 'Automated Texture Optimization',
-                shortDescription: 'Smart texture compression and optimization system for game builds.',
-                fullDescription: 'Intelligent texture processing pipeline that automatically compresses and optimizes textures based on platform requirements. Features include format conversion, mipmap generation, resolution scaling, and quality presets. Reduces build sizes by 35% while maintaining visual quality through smart compression algorithms.',
-                thumbnail: 'https://via.placeholder.com/400x280/1a1a1a/ffd93d?text=Texture+Optimizer',
-                image: 'https://via.placeholder.com/900x450/1a1a1a/ffd93d?text=Texture+Optimization+Pipeline',
-                technologies: 'Python, ImageMagick, Custom Tools',
-                role: 'Pipeline Developer',
-                year: '2024',
-                link: '#'
-            },
-            {
-                id: 8,
-                category: 'pipeline',
-                title: 'Asset Naming Convention Enforcer',
-                shortDescription: 'Automated system ensuring consistent asset naming across the project.',
-                fullDescription: 'Git hook-based system that enforces naming conventions for all project assets. Validates file names, folder structures, and metadata before commit. Includes custom configuration for different asset types, automatic renaming suggestions, and integration with project management tools. Eliminated naming inconsistencies across 5 external studios.',
-                thumbnail: 'https://via.placeholder.com/400x280/1a1a1a/ff6b4a?text=Naming+Enforcer',
-                image: 'https://via.placeholder.com/900x450/1a1a1a/ff6b4a?text=Naming+Convention+System',
-                technologies: 'Python, Git Hooks, Perforce Triggers',
-                role: 'Pipeline TD',
+                id: 13,
+                category: 'shaders',
+                title: 'GLSL Normal Map Shader',
+                shortDescription: 'Versatile toon shader system with rim lighting and outline control.',
+                fullDescription: 'A complete toon shading solution featuring multi-tone shading, dynamic rim lighting, customizable outlines, and specular highlights. Includes support for multiple light sources, shadow mapping, and color ramping. Used across 50+ characters in production with artist-friendly controls.',
+                thumbnail: './assets/images/shadypady.png',
+                image: 'https://via.placeholder.com/900x450/1a1a1a/ff8e72?text=Character+Toon+Shader',
+                technologies: 'GLSL, Unreal Material Editor',
+                role: 'Technical Artist',
                 year: '2023',
                 link: '#'
             },
             {
-                id: 9,
-                category: 'other',
-                title: 'VFX Graph Presets',
-                shortDescription: 'Library of reusable VFX graph presets for common particle effects.',
-                fullDescription: 'Comprehensive collection of 30+ Visual Effect Graph presets including explosions, magic spells, environmental effects, and UI particles. Each preset is performance-optimized, fully customizable, and includes detailed documentation. Used in production to accelerate VFX creation by 60%.',
-                thumbnail: 'https://via.placeholder.com/400x280/1a1a1a/4ecdc4?text=VFX+Library',
-                image: 'https://via.placeholder.com/900x450/1a1a1a/4ecdc4?text=VFX+Graph+Presets',
-                technologies: 'Unity VFX Graph, Shader Graph',
-                role: 'VFX Technical Artist',
-                year: '2024',
+                id: 14,
+                category: 'shaders',
+                title: 'GLSL Mipmapping Shader',
+                shortDescription: 'Versatile toon shader system with rim lighting and outline control.',
+                fullDescription: 'A complete toon shading solution featuring multi-tone shading, dynamic rim lighting, customizable outlines, and specular highlights. Includes support for multiple light sources, shadow mapping, and color ramping. Used across 50+ characters in production with artist-friendly controls.',
+                thumbnail: './assets/images/shadypady.png',
+                image: 'https://via.placeholder.com/900x450/1a1a1a/ff8e72?text=Character+Toon+Shader',
+                technologies: 'GLSL, Unreal Material Editor',
+                role: 'Technical Artist',
+                year: '2023',
+                link: '#'
+            },
+            {
+                id: 15,
+                category: 'shaders',
+                title: 'Unreal Cinametic Trailer',
+                shortDescription: 'Versatile toon shader system with rim lighting and outline control.',
+                fullDescription: 'A complete toon shading solution featuring multi-tone shading, dynamic rim lighting, customizable outlines, and specular highlights. Includes support for multiple light sources, shadow mapping, and color ramping. Used across 50+ characters in production with artist-friendly controls.',
+                thumbnail: './assets/images/shadypady.png',
+                image: 'https://via.placeholder.com/900x450/1a1a1a/ff8e72?text=Character+Toon+Shader',
+                technologies: 'GLSL, Unreal Material Editor',
+                role: 'Technical Artist',
+                year: '2023',
+                link: '#'
+            },
+            {
+                id: 16,
+                category: 'shaders',
+                title: 'Unreal Architechture Visualization',
+                shortDescription: 'Versatile toon shader system with rim lighting and outline control.',
+                fullDescription: 'A complete toon shading solution featuring multi-tone shading, dynamic rim lighting, customizable outlines, and specular highlights. Includes support for multiple light sources, shadow mapping, and color ramping. Used across 50+ characters in production with artist-friendly controls.',
+                thumbnail: './assets/images/shadypady.png',
+                image: 'https://via.placeholder.com/900x450/1a1a1a/ff8e72?text=Character+Toon+Shader',
+                technologies: 'GLSL, Unreal Material Editor',
+                role: 'Technical Artist',
+                year: '2023',
                 link: '#'
             }
         ];
@@ -1789,27 +1762,45 @@ def validate_poly_count(mesh, max_count=50000):
             const grid = document.getElementById('portfolioGrid');
             grid.innerHTML = '';
 
-            const filteredData = filter === 'all' 
-                ? portfolioData 
-                : portfolioData.filter(item => item.category === filter);
+            const filteredData = filter === 'all'
+                ? portfolioData
+                : portfolioData.filter(item => {
+                    // Check if item.category is an array
+                    if (Array.isArray(item.category)) {
+                        return item.category.includes(filter);
+                    }
+                    // Fallback for single category (backward compatible)
+                    return item.category === filter;
+                });
 
             filteredData.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'portfolio-item';
-                card.dataset.category = item.category;
+
+                // Set data-category to first category or all categories joined
+                const categoryAttr = Array.isArray(item.category)
+                    ? item.category[0]
+                    : item.category;
+                card.dataset.category = categoryAttr;
+
                 card.onclick = () => openModal(item);
 
+                // Display all categories as tags
+                const categoryTags = Array.isArray(item.category)
+                    ? item.category.map(cat => `<span class="category-tag">${cat}</span>`).join(' ')
+                    : `<span class="category-tag">${item.category}</span>`;
+
                 card.innerHTML = `
-                    <div class="thumbnail-wrapper">
-                        <img src="${item.thumbnail}" alt="${item.title}" class="thumbnail">
-                    </div>
-                    <div class="card-content">
-                        <span class="category-tag">${item.category}</span>
-                        <h3 class="card-title">${item.title}</h3>
-                        <p class="card-description">${item.shortDescription}</p>
-                        <div class="card-technologies">${item.technologies}</div>
-                    </div>
-                `;
+            <div class="thumbnail-wrapper">
+                <img src="${item.thumbnail}" alt="${item.title}" class="thumbnail">
+            </div>
+            <div class="card-content">
+                ${categoryTags}
+                <h3 class="card-title">${item.title}</h3>
+                <p class="card-description">${item.shortDescription}</p>
+                <div class="card-technologies">${item.technologies}</div>
+            </div>
+        `;
 
                 grid.appendChild(card);
             });
@@ -1830,7 +1821,12 @@ def validate_poly_count(mesh, max_count=50000):
         function openModal(item) {
             const modal = document.getElementById('modal');
             document.getElementById('modalImage').src = item.image;
-            document.getElementById('modalCategory').textContent = item.category;
+
+            // Display all categories in modal
+            const categoryText = Array.isArray(item.category)
+                ? item.category.join(' · ')
+                : item.category;
+            document.getElementById('modalCategory').textContent = categoryText;
             document.getElementById('modalTitle').textContent = item.title;
             document.getElementById('modalDescription').textContent = item.fullDescription;
 
