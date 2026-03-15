@@ -1,1926 +1,721 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YCV9R69YSR"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-YCV9R69YSR');
     </script>
-
-    <!-- Begin -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aditya Kumar - Technical Art</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Archivo:wght@300;400;600;700&family=Saira:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/annotation-mono" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            /* Dark retro-tech color palette */
-            --dark-bg: #0d0d0d;
-            --card-bg: #1a1a1a;
-            --warm-black: #f5f1e8;
-            --rust: #ff6b4a;
-            --teal: #4ecdc4;
-            --gold: #ffd93d;
-            --purple: #b794f6;
-            --burnt-orange: #ff8e72;
-            --sage: #a8c5c1;
-            --dark-teal: #3dd9c5;
-            --paper: #141414;
-            --border-color: #2a2a2a;
-        }
-
-        body {
-            font-family: 'Archivo', sans-serif;
-            background: var(--dark-bg);
-            color: var(--warm-black);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-            /* Retro noise texture overlay */
-            body::before {
-                content: '';
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                opacity: 0.015;
-                z-index: -1;
-                background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="noise"><feTurbulence baseFrequency="0.9" numOctaves="3"/></filter><rect width="200" height="200" filter="url(%23noise)"/></svg>');
-            }
-
-        /* CRT scanlines effect */
-        .scanlines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1000;
-            background: linear-gradient( to bottom, transparent 50%, rgba(255, 255, 255, 0.015) 51% );
-            background-size: 100% 4px;
-            animation: scanline 8s linear infinite;
-        }
-
-        @keyframes scanline {
-            0% {
-                background-position: 0 0;
-            }
-
-            100% {
-                background-position: 0 100%;
-            }
-        }
-
-        /* Retro gradient background */
-        .background-art {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: radial-gradient(circle at 20% 30%, rgba(181, 148, 246, 0.12) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(78, 205, 196, 0.12) 0%, transparent 40%), radial-gradient(circle at 50% 50%, rgba(255, 217, 61, 0.08) 0%, transparent 50%);
-        }
-
-        /* Header with retro terminal vibe */
-        header {
-            padding: 80px 40px 60px;
-            text-align: center;
-            position: relative;
-            border-bottom: 3px solid var(--rust);
-            background: var(--paper);
-        }
-
-        .header-deco {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 6px;
-            background: linear-gradient(90deg, var(--rust), var(--gold), var(--teal));
-        }
-
-        .hero {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(3.5rem, 10vw, 7rem);
-            font-weight: 800;
-            letter-spacing: -3px;
-            margin-bottom: 20px;
-            color: var(--warm-black);
-            text-transform: uppercase;
-            position: relative;
-            display: inline-block;
-            animation: glitchText 0.3s ease-in-out 2s;
-        }
-
-        @keyframes glitchText {
-            0%, 100% {
-                transform: translate(0);
-            }
-
-            20% {
-                transform: translate(-2px, 2px);
-            }
-
-            40% {
-                transform: translate(2px, -2px);
-            }
-
-            60% {
-                transform: translate(-2px, -2px);
-            }
-
-            80% {
-                transform: translate(2px, 2px);
-            }
-        }
-
-        /* Retro color blocks behind name */
-        h1::before {
-            content: attr(data-text);
-            position: absolute;
-            left: 4px;
-            top: 4px;
-            z-index: -1;
-            color: var(--rust);
-            opacity: 0.3;
-        }
-
-        h1::after {
-            content: attr(data-text);
-            position: absolute;
-            left: -4px;
-            top: -4px;
-            z-index: -1;
-            color: var(--teal);
-            opacity: 0.3;
-        }
-
-        .subtitle {
-            font-family: 'DM Mono', monospace;
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
-            color: var(--dark-teal);
-            font-weight: 400;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-        }
-
-            .subtitle::before {
-                content: '> ';
-                color: var(--rust);
-            }
-
-        .intro-text {
-            max-width: 700px;
-            margin: 0 auto 30px;
-            font-size: clamp(1rem, 2vw, 1.15rem);
-            line-height: 1.8;
-            color: var(--sage);
-            padding: 0 20px;
-        }
-
-            .intro-text strong {
-                color: var(--rust);
-                font-weight: 600;
-            }
-
-        .social-links {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 40px;
-            flex-wrap: wrap;
-        }
-
-        .social-link {
-            color: var(--warm-black);
-            text-decoration: none;
-            padding: 12px 28px;
-            border: 2px solid var(--border-color);
-            font-family: 'DM Mono', monospace;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s;
-            background: var(--card-bg);
-        }
-
-            .social-link::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: -100%;
-                width: 100%;
-                height: 100%;
-                background: var(--rust);
-                transition: left 0.3s;
-                z-index: -1;
-            }
-
-            .social-link:hover {
-                color: var(--dark-bg);
-                border-color: var(--rust);
-                color: var(--rust);
-            }
-
-                .social-link:hover::before {
-                    left: 0;
-                }
-
-        .skills-section {
-            padding: 80px 40px;
-            background: transparent;
-            border-bottom: 3px solid var(--rust);
-            position: relative;
-            overflow: visible;
-        }
-
-
-        @keyframes skillPoint1 {
-            0%, 100% {
-                opacity: 0;
-                transform: translate(0, 0);
-            }
-
-            50% {
-                opacity: 0.4;
-                transform: translate(30px, -40px);
-            }
-        }
-
-        .skills-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .skills-title {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 50px;
-            color: var(--warm-black);
-            text-transform: uppercase;
-            letter-spacing: -2px;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .skill-category {
-            background: var(--card-bg);
-            border: 3px solid var(--border-color);
-            padding: 30px;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-            .skill-category::before {
-                content: '';
-                position: absolute;
-                top: -6px;
-                left: -6px;
-                right: -6px;
-                bottom: -6px;
-                border: 2px dashed var(--rust);
-                opacity: 0;
-                transition: opacity 0.3s;
-            }
-
-            .skill-category:hover {
-                border-color: var(--rust);
-                transform: translateY(-5px);
-            }
-
-                .skill-category:hover::before {
-                    opacity: 0.5;
-                }
-
-        .skill-category-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--rust);
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-            .skill-category-title::before {
-                content: '//';
-                color: var(--teal);
-                font-family: 'DM Mono', monospace;
-            }
-
-        .skill-list {
-            list-style: none;
-        }
-
-        .skill-item {
-            padding: 10px 0;
-            color: var(--sage);
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-            .skill-item::before {
-                content: '▸';
-                color: var(--gold);
-                font-size: 1.2rem;
-            }
-
-        /* Filter Navigation - Retro buttons */
-        nav {
-            padding: 50px 20px;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            background: rgba(13, 13, 13, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            border-bottom: 2px dashed var(--border-color);
-        }
-
-        .filter-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .filter-btn {
-            padding: 14px 32px;
-            background: var(--card-bg);
-            color: var(--warm-black);
-            border: 2px solid var(--border-color);
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            font-family: 'DM Mono', monospace;
-            text-transform: uppercase;
-            position: relative;
-            transition: all 0.3s;
-            box-shadow: 4px 4px 0 rgba(255, 107, 74, 0.3);
-        }
-
-            .filter-btn:hover {
-                transform: translate(2px, 2px);
-                box-shadow: 2px 2px 0 rgba(255, 107, 74, 0.3);
-                border-color: var(--rust);
-            }
-
-            .filter-btn.active {
-                background: var(--rust);
-                color: var(--dark-bg);
-                border-color: var(--rust);
-                box-shadow: 4px 4px 0 rgba(255, 107, 74, 0.5);
-            }
-
-                .filter-btn.active:hover {
-                    transform: translate(0, 0);
-                }
-
-        /* Portfolio Grid - Asymmetric layout */
-        .portfolio-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 80px 40px;
-        }
-
-        .section-title {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 700;
-            margin-bottom: 50px;
-            text-align: center;
-            color: var(--warm-black);
-            text-transform: uppercase;
-            letter-spacing: -1px;
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 40px;
-        }
-
-        /* Portfolio Card - Retro polaroid style */
-        .portfolio-item {
-            background: var(--card-bg);
-            border: 3px solid var(--border-color);
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            box-shadow: 8px 8px 0 rgba(255, 107, 74, 0.15);
-        }
-
-            .portfolio-item::before {
-                content: '';
-                position: absolute;
-                top: -6px;
-                left: -6px;
-                right: -6px;
-                bottom: -6px;
-                border: 2px dashed var(--rust);
-                opacity: 0;
-                transition: opacity 0.3s;
-                z-index: -1;
-            }
-
-            .portfolio-item:hover {
-                transform: rotate(-1deg) scale(1.02);
-                border-color: var(--rust);
-            }
-
-                .portfolio-item:hover::before {
-                    opacity: 0.5;
-                }
-
-            .portfolio-item:nth-child(even):hover {
-                transform: rotate(1deg) scale(1.02);
-            }
-
-            .portfolio-item.hidden {
-                display: none;
-            }
-
-        .thumbnail-wrapper {
-            position: relative;
-            overflow: hidden;
-            border-bottom: 3px solid var(--border-color);
-        }
-
-        .thumbnail {
-            width: 100%;
-            height: 280px;
-            object-fit: cover;
-            transition: transform 0.4s;
-            filter: saturate(0.9) contrast(1.1);
-        }
-
-        .portfolio-item:hover .thumbnail {
-            transform: scale(1.08);
-        }
-
-        /* Retro corner accents */
-        .thumbnail-wrapper::before,
-        .thumbnail-wrapper::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border: 3px solid var(--gold);
-            z-index: 2;
-        }
-
-        .thumbnail-wrapper::before {
-            top: 10px;
-            left: 10px;
-            border-right: none;
-            border-bottom: none;
-        }
-
-        .thumbnail-wrapper::after {
-            bottom: 10px;
-            right: 10px;
-            border-left: none;
-            border-top: none;
-        }
-
-        .card-content {
-            padding: 28px;
-            background: var(--card-bg);
-        }
-
-        .category-tag {
-            display: inline-block;
-            padding: 6px 16px;
-            background: var(--border-color);
-            color: var(--gold);
-            font-size: 0.7rem;
-            font-weight: 600;
-            font-family: 'DM Mono', monospace;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            border: 2px solid var(--border-color);
-        }
-
-        /* Different colors for different categories */
-        .portfolio-item[data-category="tools"] .category-tag {
-            background: var(--rust);
-            color: var(--dark-bg);
-            border-color: var(--rust);
-        }
-
-        .portfolio-item[data-category="shaders"] .category-tag {
-            background: var(--teal);
-            color: var(--dark-bg);
-            border-color: var(--teal);
-        }
-
-        .portfolio-item[data-category="3d"] .category-tag {
-            background: var(--purple);
-            color: var(--dark-bg);
-            border-color: var(--purple);
-        }
-
-        .portfolio-item[data-category="pipeline"] .category-tag {
-            background: var(--gold);
-            color: var(--dark-bg);
-            border-color: var(--gold);
-        }
-
-        .card-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--warm-black);
-            letter-spacing: -0.5px;
-            line-height: 1.2;
-        }
-
-        .card-description {
-            color: var(--sage);
-            font-size: 0.95rem;
-            line-height: 1.7;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
-
-        .card-technologies {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--gold);
-            padding-top: 12px;
-            border-top: 1px dashed var(--border-color);
-            letter-spacing: 0.5px;
-        }
-
-            .card-technologies::before {
-                content: '⚡ ';
-                color: var(--rust);
-            }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 1000;
-            overflow-y: auto;
-            animation: fadeIn 0.3s;
-        }
-
-            .modal.active {
-                display: block;
-            }
-
-        .modal-wrapper {
-            min-height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-        }
-
-        .modal-content {
-            background: var(--card-bg);
-            max-width: 900px;
-            width: 100%;
-            border: 4px solid var(--rust);
-            position: relative;
-            animation: slideUp 0.4s ease-out;
-            box-shadow: 12px 12px 0 rgba(255, 107, 74, 0.3);
-            margin: auto;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 7px;
-            right: 15px;
-            width: 50px;
-            height: 50px;
-            background: var(--dark-bg);
-            color: var(--warm-black);
-            border: 3px solid var(--warm-black);
-            cursor: pointer;
-            font-size: 1.8rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 101;
-            transition: all 0.3s;
-            font-family: 'DM Mono', monospace;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-        }
-
-            .modal-close:hover {
-                background: var(--warm-black);
-                color: var(--dark-bg);
-                border-color: var(--warm-black);
-                transform: rotate(90deg);
-            }
-
-        .modal-header {
-            border-bottom: 4px solid var(--rust);
-            padding: 20px 30px;
-            background: linear-gradient(135deg, var(--rust), var(--burnt-orange));
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-            .modal-header h3 {
-                font-family: 'DM Mono', monospace;
-                font-size: 0.85rem;
-                color: var(--dark-bg);
-                text-transform: uppercase;
-                letter-spacing: 2px;
-                opacity: 0.9;
-            }
-
-        .modal-image-wrapper {
-            position: relative;
-            border-bottom: 3px solid var(--border-color);
-        }
-
-        .modal-image {
-            width: 100%;
-            height: 450px;
-            object-fit: cover;
-            filter: saturate(0.9) contrast(1.1);
-        }
-
-        /* Retro photo corners */
-        .modal-image-wrapper::before,
-        .modal-image-wrapper::after,
-        .modal-image-wrapper .corner-tl,
-        .modal-image-wrapper .corner-br {
-            content: '';
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            border: 4px solid var(--gold);
-        }
-
-        .modal-image-wrapper::before {
-            top: 15px;
-            left: 15px;
-            border-right: none;
-            border-bottom: none;
-        }
-
-        .modal-image-wrapper::after {
-            top: 15px;
-            right: 15px;
-            border-left: none;
-            border-bottom: none;
-        }
-
-        .corner-tl {
-            position: absolute;
-            bottom: 15px;
-            left: 15px;
-            border-right: none;
-            border-top: none;
-        }
-
-        .corner-br {
-            position: absolute;
-            bottom: 15px;
-            right: 15px;
-            border-left: none;
-            border-top: none;
-        }
-
-        .modal-body {
-            padding: 45px;
-        }
-
-        .modal-category {
-            display: inline-block;
-            padding: 8px 20px;
-            background: var(--rust);
-            color: var(--dark-bg);
-            font-size: 0.8rem;
-            font-weight: 600;
-            font-family: 'DM Mono', monospace;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border: 2px solid var(--rust);
-        }
-
-        .card-content .category-tag {
-            margin-right: 8px;
-            margin-bottom: 8px;
-        }
-
-            .card-content .category-tag:last-child {
-                margin-right: 0;
-            }
-
-        .modal-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin-bottom: 25px;
-            color: var(--warm-black);
-            letter-spacing: -1px;
-            line-height: 1.1;
-        }
-
-        .modal-description {
-            color: var(--sage);
-            font-size: 1.15rem;
-            line-height: 1.9;
-            margin-bottom: 35px;
-            border-left: 4px solid var(--rust);
-            padding-left: 25px;
-        }
-
-        .modal-details {
-            border-top: 2px dashed var(--border-color);
-            padding-top: 30px;
-            display: grid;
-            gap: 20px;
-        }
-
-        .detail-item {
-            display: grid;
-            grid-template-columns: 140px 1fr;
-            gap: 20px;
-            align-items: start;
-        }
-
-        .detail-label {
-            font-family: 'DM Mono', monospace;
-            font-weight: 600;
-            color: var(--rust);
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1.5px;
-        }
-
-        .detail-value {
-            color: var(--warm-black);
-            font-size: 1rem;
-        }
-
-            .detail-value a {
-                color: var(--teal);
-                text-decoration: none;
-                border-bottom: 2px solid var(--teal);
-                transition: all 0.3s;
-            }
-
-                .detail-value a:hover {
-                    color: var(--rust);
-                    border-bottom-color: var(--rust);
-                }
-
-        /* Enhanced Modal Content Blocks */
-        .modal-content-blocks {
-            margin-top: 30px;
-        }
-
-        .content-block {
-            margin-bottom: 30px;
-        }
-
-        .content-block-heading {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--rust);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
-        }
-
-        .content-block-paragraph {
-            color: var(--sage);
-            font-size: 1rem;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-
-        .content-block-image {
-            width: 100%;
-            border: 3px solid var(--border-color);
-            margin: 20px 0;
-            position: relative;
-        }
-
-            .content-block-image img {
-                width: 100%;
-                display: block;
-            }
-
-            .content-block-image::before,
-            .content-block-image::after {
-                content: '';
-                position: absolute;
-                width: 20px;
-                height: 20px;
-                border: 3px solid var(--gold);
-            }
-
-            .content-block-image::before {
-                top: 8px;
-                left: 8px;
-                border-right: none;
-                border-bottom: none;
-            }
-
-            .content-block-image::after {
-                bottom: 8px;
-                right: 8px;
-                border-left: none;
-                border-top: none;
-            }
-
-        .content-block-code {
-            background: var(--dark-bg);
-            border: 2px solid var(--rust);
-            border-left: 4px solid var(--rust);
-            padding: 30px 20px 20px 20px;
-            margin: 20px 0;
-            overflow-x: auto;
-            position: relative;
-        }
-
-            .content-block-code::before {
-                content: 'CODE';
-                position: absolute;
-                top: 0px;
-                left: 0px;
-                background: var(--rust);
-                color: var(--dark-bg);
-                padding: 4px 12px;
-                font-family: 'DM Mono', monospace;
-                font-size: 0.7rem;
-                font-weight: 600;
-                letter-spacing: 1px;
-            }
-
-            .content-block-code pre {
-                margin: 0;
-                font-family: 'DM Mono', monospace;
-                font-size: 0.9rem;
-                color: var(--teal);
-                line-height: 1.6;
-            }
-
-            .content-block-code code {
-                color: var(--teal);
-            }
-
-        /* Footer - Retro terminal style */
-        footer {
-            text-align: center;
-            padding: 60px 20px 40px;
-            color: var(--sage);
-            border-top: 3px solid var(--rust);
-            margin-top: 80px;
-            background: var(--paper);
-            position: relative;
-        }
-
-            footer::before {
-                content: '';
-                position: absolute;
-                top: -6px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 100px;
-                height: 6px;
-                background: linear-gradient(90deg, var(--rust), var(--gold), var(--teal));
-            }
-
-            footer p {
-                font-family: 'DM Mono', monospace;
-                font-size: 0.85rem;
-                letter-spacing: 1px;
-                margin-top: 20px;
-                margin-bottom: 0;
-            }
-
-        .footer-links {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 0;
-        }
-
-        .footer-link {
-            color: var(--teal);
-            text-decoration: none;
-            font-family: 'DM Mono', monospace;
-            font-size: 0.85rem;
-            padding: 8px 16px;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s;
-            letter-spacing: 0.5px;
-        }
-
-            .footer-link:hover {
-                color: var(--rust);
-                border-color: var(--rust);
-                background: rgba(255, 107, 74, 0.05);
-            }
-
-            .footer-link::before {
-                content: '→ ';
-                color: var(--gold);
-            }
-
-        /* Decorative elements - Shader/Linear Algebra themed */
-
-        /* Sine wave distortion overlay - like UV distortion in shaders */
-        .sine-wave {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: -1;
-            opacity: 0.08;
-            background: radial-gradient(circle at 30% 40%, var(--rust) 0%, transparent 2%), radial-gradient(circle at 70% 60%, var(--teal) 0%, transparent 2%), radial-gradient(circle at 50% 30%, var(--gold) 0%, transparent 2%), radial-gradient(circle at 20% 70%, var(--purple) 0%, transparent 2%), radial-gradient(circle at 80% 20%, var(--teal) 0%, transparent 2%), radial-gradient(circle at 40% 80%, var(--rust) 0%, transparent 2%);
-            background-size: 200% 200%;
-            animation: waveDistortion 20s ease-in-out infinite;
-        }
-
-        @keyframes waveDistortion {
-            0%, 100% {
-                background-position: 0% 0%, 100% 100%, 50% 50%, 0% 100%, 100% 0%, 50% 100%;
-                filter: blur(40px);
-            }
-
-            25% {
-                background-position: 30% 20%, 70% 80%, 60% 40%, 10% 90%, 90% 10%, 40% 90%;
-                filter: blur(50px);
-            }
-
-            50% {
-                background-position: 50% 30%, 50% 70%, 70% 60%, 20% 80%, 80% 20%, 30% 80%;
-                filter: blur(45px);
-            }
-
-            75% {
-                background-position: 20% 40%, 80% 60%, 40% 70%, 30% 70%, 70% 30%, 60% 70%;
-                filter: blur(55px);
-            }
-        }
-
-        /* Vertex shader inspired - moving points */
-        .vertex-points {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .vertex-point {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: var(--rust);
-            border-radius: 50%;
-            opacity: 0;
-            animation: vertexFloat 8s ease-in-out infinite;
-            box-shadow: 0 0 10px currentColor;
-        }
-
-            .vertex-point:nth-child(1) {
-                top: 20%;
-                left: 10%;
-                background: var(--rust);
-                animation-delay: 0s;
-                animation-duration: 12s;
-            }
-
-            .vertex-point:nth-child(2) {
-                top: 40%;
-                left: 85%;
-                background: var(--teal);
-                animation-delay: 1s;
-                animation-duration: 10s;
-            }
-
-            .vertex-point:nth-child(3) {
-                top: 65%;
-                left: 25%;
-                background: var(--gold);
-                animation-delay: 2s;
-                animation-duration: 14s;
-            }
-
-            .vertex-point:nth-child(4) {
-                top: 15%;
-                left: 70%;
-                background: var(--purple);
-                animation-delay: 0.5s;
-                animation-duration: 11s;
-            }
-
-            .vertex-point:nth-child(5) {
-                top: 80%;
-                left: 60%;
-                background: var(--teal);
-                animation-delay: 1.5s;
-                animation-duration: 13s;
-            }
-
-            .vertex-point:nth-child(6) {
-                top: 35%;
-                left: 45%;
-                background: var(--rust);
-                animation-delay: 2.5s;
-                animation-duration: 9s;
-            }
-
-            .vertex-point:nth-child(7) {
-                top: 70%;
-                left: 15%;
-                background: var(--gold);
-                animation-delay: 3s;
-                animation-duration: 15s;
-            }
-
-            .vertex-point:nth-child(8) {
-                top: 25%;
-                left: 90%;
-                background: var(--purple);
-                animation-delay: 1.8s;
-                animation-duration: 11s;
-            }
-
-        @keyframes vertexFloat {
-            0%, 100% {
-                opacity: 0;
-                transform: translate(0, 0) scale(1);
-            }
-
-            10% {
-                opacity: 0.4;
-            }
-
-            50% {
-                opacity: 0.6;
-                transform: translate(var(--tx, 20px), var(--ty, -30px)) scale(1.5);
-            }
-
-            90% {
-                opacity: 0.4;
-            }
-        }
-
-        /* Shader code-like flowing lines */
-        .shader-lines {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .shader-line {
-            position: absolute;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--color, var(--teal)), transparent);
-            opacity: 0;
-            animation: lineFlow 15s linear infinite;
-        }
-
-            .shader-line:nth-child(1) {
-                top: 15%;
-                width: 40%;
-                left: -40%;
-                --color: var(--rust);
-                animation-delay: 0s;
-            }
-
-            .shader-line:nth-child(2) {
-                top: 45%;
-                width: 35%;
-                left: -35%;
-                --color: var(--teal);
-                animation-delay: 5s;
-            }
-
-            .shader-line:nth-child(3) {
-                top: 75%;
-                width: 50%;
-                left: -50%;
-                --color: var(--gold);
-                animation-delay: 10s;
-            }
-
-            .shader-line:nth-child(4) {
-                top: 30%;
-                width: 45%;
-                left: -45%;
-                --color: var(--purple);
-                animation-delay: 2s;
-            }
-
-            .shader-line:nth-child(5) {
-                top: 60%;
-                width: 38%;
-                left: -38%;
-                --color: var(--teal);
-                animation-delay: 7s;
-            }
-
-        @keyframes lineFlow {
-            0% {
-                left: -50%;
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 0.3;
-            }
-
-            50% {
-                opacity: 0.15;
-            }
-
-            90% {
-                opacity: 0.2;
-            }
-
-            100% {
-                left: 100%;
-                opacity: 0;
-            }
-        }
-
-        /* Fragment shader inspired gradient orbs */
-        .gradient-orb {
-            position: fixed;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
-            filter: blur(60px);
-            opacity: 0.12;
-            animation: orbPulse 20s ease-in-out infinite;
-        }
-
-        .gradient-orb-1 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, var(--rust), transparent);
-            top: 10%;
-            right: 10%;
-            animation-delay: 0s;
-        }
-
-        .gradient-orb-2 {
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, var(--teal), transparent);
-            bottom: 20%;
-            left: 15%;
-            animation-delay: 7s;
-        }
-
-        .gradient-orb-3 {
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, var(--purple), transparent);
-            top: 50%;
-            left: 50%;
-            animation-delay: 3s;
-        }
-
-        @keyframes orbPulse {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-                opacity: 0.08;
-            }
-
-            33% {
-                transform: translate(30px, -20px) scale(1.2);
-                opacity: 0.15;
-            }
-
-            66% {
-                transform: translate(-20px, 30px) scale(0.9);
-                opacity: 0.12;
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 3rem;
-            }
-
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .filter-buttons {
-                gap: 10px;
-            }
-
-            .filter-btn {
-                padding: 12px 20px;
-                font-size: 0.8rem;
-            }
-
-            .modal-body {
-                padding: 30px 25px;
-            }
-
-            .modal-title {
-                font-size: 2rem;
-            }
-
-            .modal-image {
-                height: 250px;
-            }
-
-            .detail-item {
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
-
-            .social-links {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .social-link {
-                width: 80%;
-                text-align: center;
-            }
-        }
+@import url('https://fonts.cdnfonts.com/css/nexa-pro');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Archivo:wght@300;400;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --bg:#111111; --bg2:#161616; --card-bg:#1c1c1c; --card-bg2:#202020;
+    --border:#2e2e2e; --rust:#c9a84c; --teal:#4ecdc4; --gold:#c9a84c;
+    --purple:#b794f6; --sage:#a8c5c1; --burnt-orange:#c9a84c; --dark-teal:#3dd9c5;
+    --warm-black:#f5f1e8; --cyan:#4ecdc4; --cyan-dim:#3ab5ad; --magenta:#c9a84c;
+    --magenta-dim:#b09040; --green:#a8c5c1; --green-dim:#88a5a1; --text:#f5f1e8;
+    --text-dim:#a8c5c1; --text-muted:#4a4a4a; --accent:#f5f1e8;
+    --accent-warm:#c9a84c; --border-glow:#c9a84c;
+}
+
+body { font-family:'Archivo',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; overflow-x:hidden; }
+
+body::before { content:''; position:fixed; top:0; left:0; width:100%; height:100%; opacity:0.025; z-index:-1;
+    background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="noise"><feTurbulence baseFrequency="0.9" numOctaves="3"/></filter><rect width="200" height="200" filter="url(%23noise)"/></svg>'); }
+
+.scanlines { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:9999;
+    background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,0.008) 2px,rgba(255,255,255,0.008) 4px);
+    animation:scanMove 12s linear infinite; }
+@keyframes scanMove { 0%{background-position:0 0} 100%{background-position:0 100%} }
+
+.background-art { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-2;
+    background: linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px),
+        radial-gradient(ellipse at 20% 20%,rgba(255,255,255,0.03) 0%,transparent 50%),
+        radial-gradient(ellipse at 80% 80%,rgba(255,255,255,0.02) 0%,transparent 50%), var(--bg);
+    background-size:60px 60px,60px 60px,100% 100%,100% 100%,100% 100%; }
+
+.sine-wave { position:fixed; width:100%; height:100%; top:0; left:0; pointer-events:none; z-index:-1;
+    background: radial-gradient(circle at 10% 50%,rgba(255,255,255,0.02) 0%,transparent 30%),
+        radial-gradient(circle at 90% 50%,rgba(255,255,255,0.02) 0%,transparent 30%);
+    animation:ambientShift 15s ease-in-out infinite alternate; }
+@keyframes ambientShift { 0%{opacity:0.6} 100%{opacity:1} }
+
+.vertex-points { position:fixed; width:100%; height:100%; top:0; left:0; pointer-events:none; z-index:-1; }
+.vertex-point { position:absolute; width:2px; height:2px; border-radius:50%; opacity:0; animation:vertexFloat 8s ease-in-out infinite; }
+.vertex-point:nth-child(1){top:20%;left:10%;background:var(--cyan);box-shadow:0 0 6px var(--cyan);animation-duration:12s}
+.vertex-point:nth-child(2){top:40%;left:85%;background:var(--magenta);box-shadow:0 0 6px var(--magenta);animation-delay:1s;animation-duration:10s}
+.vertex-point:nth-child(3){top:65%;left:25%;background:var(--green);box-shadow:0 0 6px var(--green);animation-delay:2s;animation-duration:14s}
+.vertex-point:nth-child(4){top:15%;left:70%;background:var(--cyan);box-shadow:0 0 6px var(--cyan);animation-delay:0.5s;animation-duration:11s}
+.vertex-point:nth-child(5){top:80%;left:60%;background:var(--magenta);box-shadow:0 0 6px var(--magenta);animation-delay:1.5s;animation-duration:13s}
+.vertex-point:nth-child(6){top:35%;left:45%;background:var(--green);box-shadow:0 0 6px var(--green);animation-delay:2.5s;animation-duration:9s}
+.vertex-point:nth-child(7){top:70%;left:15%;background:var(--cyan);box-shadow:0 0 6px var(--cyan);animation-delay:3s;animation-duration:15s}
+.vertex-point:nth-child(8){top:25%;left:90%;background:var(--magenta);box-shadow:0 0 6px var(--magenta);animation-delay:1.8s;animation-duration:11s}
+@keyframes vertexFloat { 0%,100%{opacity:0;transform:translate(0,0) scale(1)} 10%{opacity:0.6} 50%{opacity:1;transform:translate(20px,-30px) scale(2)} 90%{opacity:0.6} }
+
+.shader-lines { position:fixed; width:100%; height:100%; top:0; left:0; pointer-events:none; z-index:-1; overflow:hidden; }
+.shader-line { position:absolute; height:1px; background:linear-gradient(90deg,transparent,var(--color,var(--cyan)),transparent); opacity:0; animation:lineFlow 12s linear infinite; }
+.shader-line:nth-child(1){top:15%;width:40%;left:-40%;--color:var(--cyan);animation-delay:0s}
+.shader-line:nth-child(2){top:45%;width:35%;left:-35%;--color:var(--magenta);animation-delay:4s}
+.shader-line:nth-child(3){top:75%;width:50%;left:-50%;--color:var(--green);animation-delay:8s}
+.shader-line:nth-child(4){top:30%;width:45%;left:-45%;--color:var(--cyan);animation-delay:2s}
+.shader-line:nth-child(5){top:60%;width:38%;left:-38%;--color:var(--magenta);animation-delay:6s}
+@keyframes lineFlow { 0%{left:-50%;opacity:0} 10%{opacity:0.4} 90%{opacity:0.2} 100%{left:110%;opacity:0} }
+
+.gradient-orb { position:fixed; border-radius:50%; pointer-events:none; z-index:-1; filter:blur(80px); animation:orbPulse 20s ease-in-out infinite; }
+.gradient-orb-1{width:400px;height:400px;background:radial-gradient(circle,rgba(255,255,255,0.03),transparent);top:-10%;right:5%}
+.gradient-orb-2{width:300px;height:300px;background:radial-gradient(circle,rgba(200,200,200,0.03),transparent);bottom:10%;left:5%;animation-delay:7s}
+.gradient-orb-3{width:250px;height:250px;background:radial-gradient(circle,rgba(201,168,76,0.04),transparent);top:50%;left:40%;animation-delay:3s}
+@keyframes orbPulse { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(30px,-20px) scale(1.15)} 66%{transform:translate(-20px,30px) scale(0.9)} }
+
+/* HEADER */
+header { padding:100px 40px 70px; text-align:center; position:relative; border-bottom:1px solid var(--border); background:var(--bg2); overflow:hidden; }
+header::before { content:''; position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,#888,var(--accent-warm),#888,transparent); animation:borderGlow 4s ease-in-out infinite; }
+@keyframes borderGlow { 0%,100%{opacity:0.5} 50%{opacity:1} }
+.header-deco { position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#555,var(--accent-warm),#888,var(--accent-warm),#555); background-size:200% 100%; animation:gradientFlow 3s linear infinite; }
+@keyframes gradientFlow { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+.hero { max-width:1000px; margin:0 auto; }
+h1 { font-family:'Saira',sans-serif; font-size:clamp(4rem,11vw,8rem); font-weight:800; letter-spacing:2px; margin-bottom:25px; color:var(--text); text-transform:uppercase; position:relative; display:block; line-height:0.9; }
+h1::before,h1::after { content:none; }
+.subtitle-tags { display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; }
+.subtitle-tag { font-family:'DM Mono',monospace; font-size:0.94rem; font-weight:500; letter-spacing:2.5px; text-transform:uppercase; color:var(--teal); }
+.subtitle-sep { color:var(--text-muted); font-size:1.2rem; font-family:'DM Mono',monospace; }
+.intro-text { max-width:680px; margin:25px auto 0; font-size:clamp(0.95rem,2vw,1.1rem); line-height:1.85; color:var(--text-dim); padding:0 20px; }
+.intro-text strong { color:var(--text); font-weight:600; }
+.social-links { display:flex; gap:16px; justify-content:center; margin-top:25px; flex-wrap:wrap; }
+.social-link { color:var(--text); text-decoration:none; padding:12px 28px; border:1px solid #444; font-family:'DM Mono',monospace; font-size:0.82rem; letter-spacing:2px; text-transform:uppercase; position:relative; overflow:hidden; transition:all 0.3s; background:rgba(0,212,255,0.05); clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); }
+.social-link::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:var(--accent-warm); transition:left 0.3s; z-index:-1; }
+.social-link:hover { color:#111; border-color:var(--accent-warm); }
+.social-link:hover::before { left:0; }
+
+/* SKILLS */
+.skills-section { padding:80px 40px; background:transparent; border-bottom:1px solid var(--border); position:relative; overflow:hidden; }
+.skill-decoration { position:absolute; pointer-events:none; }
+.skill-decoration-1 { top:20px; left:20px; width:40px; height:40px; border-top:1px solid #555; border-left:1px solid #555; opacity:0.6; }
+.skill-decoration-2 { bottom:20px; right:20px; width:40px; height:40px; border-bottom:1px solid #555; border-right:1px solid #555; opacity:0.6; }
+.skill-decoration-3 { top:50%; left:50%; width:60px; height:60px; border:1px solid rgba(0,255,136,0.1); border-radius:50%; transform:translate(-50%,-50%); }
+.skills-container { max-width:1200px; margin:0 auto; position:relative; z-index:1; }
+.skills-title { font-family:'Saira',sans-serif; font-size:clamp(2rem,5vw,3.5rem); font-weight:800; text-align:center; margin-bottom:60px; color:var(--text); text-transform:uppercase; letter-spacing:-2px; }
+.skills-title::after { content:''; display:block; width:80px; height:2px; margin:16px auto 0; background:linear-gradient(90deg,var(--accent-warm),#666); }
+.skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; }
+.skill-category { background:var(--card-bg); border:1px solid var(--border); padding:30px; transition:all 0.3s; position:relative; overflow:hidden; }
+.skill-category-title { font-family:'Saira',sans-serif; font-size:1.2rem; font-weight:700; margin-bottom:20px; color:var(--text); text-transform:uppercase; letter-spacing:0.5px; display:flex; align-items:center; gap:10px; }
+.skill-category-title::before { content:'//'; color:var(--accent-warm); font-family:'DM Mono',monospace; font-size:0.85rem; }
+.skill-list { list-style:none; }
+.skill-item { padding:8px 0; color:var(--text-dim); font-size:0.9rem; display:flex; align-items:center; gap:10px; border-bottom:1px solid rgba(255,255,255,0.03); }
+.skill-item:last-child { border-bottom:none; }
+.skill-item::before { content:'▸'; color:var(--accent-warm); font-size:1rem; flex-shrink:0; }
+.skills-vertex-canvas { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:0.55; }
+
+/* NAV */
+nav { padding:24px 20px; text-align:center; position:sticky; top:0; background:rgba(17,17,17,0.97); backdrop-filter:blur(20px); z-index:500; border-bottom:1px solid var(--border); }
+nav::after { content:''; display:block; position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,#555,transparent); }
+.filter-buttons { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; max-width:900px; margin:0 auto; }
+.filter-btn { padding:12px 28px; background:var(--card-bg); color:var(--text); border:2px solid var(--border); cursor:pointer; font-size:0.82rem; font-weight:600; letter-spacing:2px; font-family:'DM Mono',monospace; text-transform:uppercase; transition:all 0.2s; position:relative; overflow:hidden; box-shadow:4px 4px 0 rgba(0,0,0,0.4); }
+.filter-btn::before { content:''; position:absolute; inset:0; background:rgba(0,212,255,0.08); opacity:0; transition:opacity 0.25s; }
+.filter-btn:hover { color:var(--text); border-color:var(--rust); transform:translate(2px,2px); box-shadow:2px 2px 0 rgba(0,0,0,0.4); }
+.filter-btn:hover::before { opacity:1; }
+.filter-btn.active { background:var(--rust); color:#0d0d0d; border-color:var(--rust); font-weight:700; box-shadow:4px 4px 0 rgba(201,168,76,0.5); transform:none; }
+
+/* PORTFOLIO */
+.portfolio-container { max-width:1400px; margin:0 auto; padding:80px 40px; }
+.section-title { font-family:'Saira',sans-serif; font-size:clamp(2rem,5vw,3rem); font-weight:700; margin-bottom:60px; text-align:center; color:var(--text); text-transform:uppercase; letter-spacing:-1px; }
+.section-title::after { content:''; display:block; width:60px; height:2px; margin:14px auto 0; background:linear-gradient(90deg,var(--cyan),var(--magenta)); }
+.portfolio-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
+.portfolio-item { background:var(--card-bg); border:1px solid var(--border); cursor:pointer; transition:all 0.3s; position:relative; overflow:hidden; }
+.portfolio-item .card-dashed-outline { position:absolute; inset:-7px; border:2px dashed transparent; pointer-events:none; transition:border-color 0.3s,opacity 0.3s; z-index:10; opacity:0; }
+.portfolio-item:hover .card-dashed-outline { border-color:var(--rust); opacity:1; }
+.portfolio-item::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--rust),var(--gold)); transform:scaleX(0); transform-origin:left; transition:transform 0.3s; z-index:2; }
+.portfolio-item::after { content:''; position:absolute; inset:0; box-shadow:inset 0 0 0 1px rgba(0,212,255,0); transition:box-shadow 0.3s; pointer-events:none; z-index:2; }
+.portfolio-item:hover { transform:translateY(-6px); border-color:rgba(201,168,76,0.5); box-shadow:8px 8px 0 rgba(201,168,76,0.2),0 20px 50px rgba(0,0,0,0.7),0 0 40px rgba(255,211,61,0.08); }
+.portfolio-item:hover::before { transform:scaleX(1); }
+.portfolio-item:hover::after { box-shadow:inset 0 0 0 1px rgba(0,212,255,0.2); }
+.thumbnail-wrapper { position:relative; overflow:hidden; border-bottom:1px solid var(--border); }
+.thumbnail-wrapper::before,.thumbnail-wrapper::after { content:''; position:absolute; width:16px; height:16px; z-index:3; }
+.thumbnail-wrapper::before { top:10px; left:10px; border-top:2px solid rgba(255,255,255,0.5); border-left:2px solid rgba(255,255,255,0.5); }
+.thumbnail-wrapper::after { bottom:10px; right:10px; border-bottom:2px solid rgba(201,168,76,0.5); border-right:2px solid rgba(201,168,76,0.5); }
+.thumbnail { width:100%; height:300px; object-fit:cover; transition:transform 0.5s,filter 0.5s; filter:saturate(1.0) contrast(1.05); display:block; }
+.portfolio-item:hover .thumbnail { transform:scale(1.08); filter:saturate(1.15) contrast(1.1) brightness(1.05); }
+.card-content { padding:24px; }
+.category-tag { display:inline-block; padding:5px 14px; font-size:0.65rem; font-weight:700; font-family:'DM Mono',monospace; margin-bottom:6px; margin-right:6px; text-transform:uppercase; letter-spacing:2px; background:var(--border); border:2px solid var(--border); color:var(--text-dim); }
+.portfolio-item[data-category="tools"] .category-tag { background:var(--rust); border-color:var(--rust); color:#111; }
+.portfolio-item[data-category="shaders"] .category-tag { background:var(--teal); border-color:var(--teal); color:#111; }
+.portfolio-item[data-category="3d"] .category-tag { background:var(--purple); border-color:var(--purple); color:#111; }
+.portfolio-item[data-category="pipeline"] .category-tag { background:var(--gold); border-color:var(--gold); color:#111; }
+.portfolio-item[data-category="other"] .category-tag { background:var(--sage); border-color:var(--sage); color:#111; }
+.card-title { font-family:'Saira',sans-serif; font-size:1.4rem; font-weight:700; margin-bottom:10px; margin-top:8px; color:var(--text); letter-spacing:-0.3px; line-height:1.25; }
+.card-description { color:var(--text-dim); font-size:0.9rem; line-height:1.7; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; margin-bottom:14px; }
+.card-technologies { font-family:'DM Mono',monospace; font-size:0.72rem; color:#888; padding-top:12px; border-top:1px solid var(--border); letter-spacing:0.5px; }
+
+/* MODAL */
+.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.92); backdrop-filter:blur(8px); z-index:1000; animation:fadeIn 0.25s; }
+.modal.active { display:block; }
+.modal-wrapper { height:100%; display:flex; align-items:center; justify-content:center; padding:10px 12px; overflow:hidden; }
+.modal-content { background:var(--card-bg2); max-width:1440px; width:96%; max-height:94vh; border:1px solid var(--border); position:relative; animation:slideUp 0.35s ease-out; margin:auto; box-shadow:0 0 80px rgba(0,0,0,0.8),0 0 1px rgba(255,255,255,0.1); display:flex; flex-direction:column; overflow:hidden; }
+.modal-content::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--accent-warm),#888,var(--accent-warm)); }
+@keyframes fadeIn  { from{opacity:0} to{opacity:1} }
+@keyframes slideUp { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+.modal-close { position:absolute; top:12px; right:16px; width:36px; height:36px; background:transparent; color:#ff4444; border:1px solid #ff4444; cursor:pointer; font-size:1.3rem; display:flex; align-items:center; justify-content:center; z-index:101; transition:all 0.25s; font-family:'DM Mono',monospace; }
+.modal-close:hover { background:#ff4444; color:#fff; transform:rotate(90deg); }
+.modal-header { padding:20px 30px; border-bottom:1px solid var(--border); background:#1a1a1a; position:relative; z-index:100; flex-shrink:0; }
+.modal-header h3 { font-family:'DM Mono',monospace; font-size:0.75rem; color:var(--accent-warm); text-transform:uppercase; letter-spacing:3px; }
+.modal-image-wrapper { position:relative; border-bottom:1px solid var(--border); }
+.modal-image { width:100%; height:500px; object-fit:cover; display:block; }
+.modal-image-wrapper::before { content:''; position:absolute; top:12px; left:12px; width:24px; height:24px; border-top:2px solid rgba(255,255,255,0.4); border-left:2px solid rgba(255,255,255,0.4); }
+.modal-image-wrapper::after  { content:''; position:absolute; top:12px; right:12px; width:24px; height:24px; border-top:2px solid rgba(201,168,76,0.4); border-right:2px solid rgba(201,168,76,0.4); }
+.corner-tl { position:absolute; bottom:12px; left:12px; width:24px; height:24px; border-bottom:2px solid rgba(255,255,255,0.4); border-left:2px solid rgba(255,255,255,0.4); }
+.corner-br { position:absolute; bottom:12px; right:12px; width:24px; height:24px; border-bottom:2px solid rgba(201,168,76,0.4); border-right:2px solid rgba(201,168,76,0.4); }
+.modal-body { padding:40px 45px; box-sizing:border-box; overflow-wrap:break-word; word-break:break-word; overflow-y:auto; flex:1; scrollbar-width:thin; scrollbar-color:#444 #1a1a1a; }
+.modal-body::-webkit-scrollbar { width:6px; }
+.modal-body::-webkit-scrollbar-track { background:#1a1a1a; }
+.modal-body::-webkit-scrollbar-thumb { background:#444; border-radius:3px; }
+.modal-body::-webkit-scrollbar-thumb:hover { background:var(--accent-warm); }
+.modal-category { display:inline-block; padding:5px 16px; margin-bottom:18px; margin-top:24px; background:rgba(201,168,76,0.1); color:var(--accent-warm); font-size:0.7rem; font-weight:700; font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:2px; border:1px solid var(--cyan); }
+.modal-title { font-family:'Saira',sans-serif; font-size:2.4rem; font-weight:800; margin-bottom:24px; color:var(--text); letter-spacing:-1px; line-height:1.1; }
+.modal-description { color:var(--text-dim); font-size:1.05rem; line-height:1.9; margin-bottom:32px; border-left:3px solid var(--accent-warm); padding-left:22px; overflow-wrap:break-word; word-break:break-word; }
+.modal-details { border-top:1px solid var(--border); padding-top:28px; display:grid; gap:16px; }
+.detail-item { display:grid; grid-template-columns:130px 1fr; gap:16px; align-items:start; }
+.detail-label { font-family:'DM Mono',monospace; font-weight:600; color:var(--accent-warm); text-transform:uppercase; font-size:0.72rem; letter-spacing:2px; }
+.detail-value { color:var(--text); font-size:0.95rem; }
+.detail-value a { color:#c0c0c0; text-decoration:none; border-bottom:1px solid #555; transition:all 0.25s; }
+.detail-value a:hover { color:var(--cyan); border-bottom-color:var(--cyan); }
+
+/* CONTENT BLOCKS */
+.modal-content-blocks { margin-top:28px; }
+.content-block { margin-bottom:26px; }
+.content-block-heading { font-family:'Saira',sans-serif; font-size:1.3rem; font-weight:700; color:var(--text); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.5px; }
+.content-block-heading::before { content:'// '; color:var(--accent-warm); font-family:'DM Mono',monospace; font-size:0.9em; }
+.content-block-paragraph { color:var(--text-dim); font-size:0.95rem; line-height:1.8; margin-bottom:12px; }
+.content-block-image { width:100%; border:1px solid var(--border); margin:18px 0; position:relative; }
+.content-block-image img { width:100%; display:block; }
+.content-block-image::before { content:''; position:absolute; top:8px; left:8px; width:16px; height:16px; border-top:1px solid #888; border-left:1px solid #888; }
+.content-block-image::after  { content:''; position:absolute; bottom:8px; right:8px; width:16px; height:16px; border-bottom:1px solid #888; border-right:1px solid #888; }
+.content-block-code { background:rgba(0,0,0,0.6); border:1px solid var(--border); border-left:3px solid var(--accent-warm); padding:28px 16px 16px; margin:16px 0; overflow-x:auto; position:relative; max-width:100%; box-sizing:border-box; }
+.content-block-code::before { content:'CODE'; position:absolute; top:0; left:0; background:var(--accent-warm); color:#111; padding:3px 10px; font-family:'DM Mono',monospace; font-size:0.65rem; font-weight:700; letter-spacing:2px; }
+.content-block-code pre { margin:0; font-family:'Annotation Mono','DM Mono',monospace; font-size:0.88rem; color:var(--green); line-height:1.75; white-space:pre-wrap; word-break:break-word; overflow-wrap:break-word; }
+.content-block-code code { color:var(--green); font-family:inherit; }
+
+/* ── VIDEO BLOCK ──────────────────────────────────────────────────────────
+   Matches the aesthetic of image/code blocks — corner ticks, gold label bar.
+   Supports two modes:
+     1. Embedded iframe (when embedSrc is set)  — 16:9 responsive player
+     2. External link button fallback (no embed) — styled CTA with play icon
+   ────────────────────────────────────────────────────────────────────── */
+.content-block-video {
+    position: relative;
+    margin: 20px 0;
+    border: 1px solid var(--border);
+    background: #000;
+    overflow: hidden;
+}
+/* Gold top-left label bar (mirrors .content-block-code::before) */
+.content-block-video .video-label {
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 3;
+    background: var(--accent-warm);
+    color: #111;
+    padding: 3px 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    pointer-events: none;
+    white-space: nowrap;
+}
+/* Corner accent marks (mirrors .content-block-image) */
+.content-block-video .video-corner-tl,
+.content-block-video .video-corner-br {
+    position: absolute;
+    width: 16px; height: 16px;
+    z-index: 4; pointer-events: none;
+}
+.content-block-video .video-corner-tl {
+    top: 28px; left: 8px;          /* below the label bar */
+    border-top: 1px solid #888; border-left: 1px solid #888;
+}
+.content-block-video .video-corner-br {
+    bottom: 8px; right: 8px;
+    border-bottom: 1px solid #888; border-right: 1px solid #888;
+}
+/* 16:9 responsive iframe container */
+.content-block-video .video-embed-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;   /* 16 : 9 */
+}
+.content-block-video .video-embed-wrapper iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+    display: block;
+}
+/* External-link fallback button */
+.content-block-video .video-link-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 32px 20px;
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--text);
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: background 0.25s, color 0.25s;
+    border-top: 1px solid var(--border);
+}
+.content-block-video .video-link-btn:hover {
+    background: rgba(201, 168, 76, 0.1);
+    color: var(--accent-warm);
+}
+.content-block-video .video-link-btn svg {
+    flex-shrink: 0;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+}
+.content-block-video .video-link-btn:hover svg { opacity: 1; }
+
+/* FOOTER */
+.footer-hire { margin-bottom:40px; }
+.footer-hire-title { font-family:'Saira',sans-serif; font-size:clamp(2rem,5vw,3.2rem); font-weight:700; color:var(--text); letter-spacing:-1px; margin-bottom:14px; text-transform:uppercase; }
+.footer-hire-title::after { content:'.'; color:var(--accent-warm); }
+.footer-hire-msg { font-family:'Archivo',sans-serif; font-size:1.05rem; color:var(--text-dim); line-height:1.8; }
+footer { text-align:center; padding:60px 20px 40px; color:var(--text-dim); border-top:1px solid var(--border); margin-top:80px; background:var(--bg2); position:relative; }
+footer::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,#888,var(--accent-warm),#888,transparent); }
+.footer-links { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:0; }
+.footer-link { color:var(--text-dim); text-decoration:none; font-family:'DM Mono',monospace; font-size:0.8rem; padding:8px 18px; border:1px solid var(--border); transition:all 0.25s; letter-spacing:1px; clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%); }
+.footer-link:hover { color:var(--accent-warm); border-color:var(--accent-warm); background:rgba(201,168,76,0.05); }
+.footer-link::before { content:'→ '; color:var(--accent-warm); }
+footer p { font-family:'DM Mono',monospace; font-size:0.78rem; letter-spacing:1px; margin-top:24px; color:var(--text-muted); }
+
+/* RESPONSIVE */
+@media (max-width:768px) {
+    h1 { font-size:3rem; letter-spacing:-2px; }
+    header { padding:60px 20px 50px; }
+    .portfolio-grid { grid-template-columns:1fr; gap:20px; }
+    .filter-btn { padding:9px 14px; font-size:0.72rem; letter-spacing:1px; }
+    .filter-buttons { gap:8px; }
+    .modal-wrapper { padding:0; align-items:flex-start; }
+    .modal-content { max-width:100%; width:100%; max-height:100vh; height:100vh; border-radius:0; border-left:none; border-right:none; }
+    .modal-body { padding:20px 16px; }
+    .modal-title { font-size:1.5rem; letter-spacing:-0.5px; }
+    .modal-image { height:200px; }
+    .modal-image-wrapper::before,.modal-image-wrapper::after,.corner-tl,.corner-br { display:none; }
+    .modal-description { font-size:0.95rem; padding-left:14px; }
+    .modal-header { padding:14px 16px; }
+    .modal-close { top:10px; right:10px; width:32px; height:32px; font-size:1.1rem; }
+    .detail-item { grid-template-columns:1fr; gap:4px; }
+    .social-links { flex-direction:column; align-items:center; }
+    .social-link { width:80%; text-align:center; }
+    .skills-section { padding:60px 20px; }
+    .portfolio-container { padding:60px 20px; }
+    .content-block-code pre { font-size:0.75rem; }
+    .content-block-video .video-link-btn { font-size:0.72rem; padding:24px 12px; }
+}
     </style>
 </head>
 <body>
-    <!-- Retro effects -->
-    <div class="scanlines"></div>
-    <div class="background-art"></div>
-    
-    <!-- Shader-inspired animations -->
-    <div class="sine-wave"></div>
-    
-    <div class="vertex-points">
-        <div class="vertex-point"></div>
-        <div class="vertex-point"></div>
-        <div class="vertex-point"></div>
-        <div class="vertex-point"></div>
-        <div class="vertex-point"></div>
-        <div class="vertex-point"></div>
-        <div class="vertex-point"></div>
-        <div class="vertex-point"></div>
-    </div>
-    
-    <div class="shader-lines">
-        <div class="shader-line"></div>
-        <div class="shader-line"></div>
-        <div class="shader-line"></div>
-        <div class="shader-line"></div>
-        <div class="shader-line"></div>
-    </div>
-    
-    <div class="gradient-orb gradient-orb-1"></div>
-    <div class="gradient-orb gradient-orb-2"></div>
-    <div class="gradient-orb gradient-orb-3"></div>
+<div class="scanlines"></div>
+<div class="background-art"></div>
+<div class="sine-wave"></div>
+<div class="vertex-points">
+    <div class="vertex-point"></div><div class="vertex-point"></div>
+    <div class="vertex-point"></div><div class="vertex-point"></div>
+    <div class="vertex-point"></div><div class="vertex-point"></div>
+    <div class="vertex-point"></div><div class="vertex-point"></div>
+</div>
+<div class="shader-lines">
+    <div class="shader-line"></div><div class="shader-line"></div>
+    <div class="shader-line"></div><div class="shader-line"></div>
+    <div class="shader-line"></div>
+</div>
+<div class="gradient-orb gradient-orb-1"></div>
+<div class="gradient-orb gradient-orb-2"></div>
+<div class="gradient-orb gradient-orb-3"></div>
 
-    <!-- Header -->
-    <header>
-        <div class="header-deco"></div>
-        <div class="hero">
-            <h1 data-text="ADITYA KUMAR">ADITYA KUMAR</h1>
-            <p class="subtitle">Technical Artist · Pipeline Developer · Tool Creator</p>
-            <p class="intro-text">
-                Passionate about bridging the gap between <strong>art and engineering</strong>. 
-                I specialize in building robust pipelines, creating artist-friendly tools, and 
-                optimizing workflows for game development. Currently partnering with 
-                <strong>Supercell</strong> on Brawl Stars, I help external teams deliver 
-                high-quality assets through technical innovation and creative problem-solving.
-            </p>
-            <div class="social-links">
-                <a href="mailto:aditya.techartist@gmail.com" class="social-link">Email</a>
-                <a href="https://linkedin.com/in/ifxadi" target="_blank" class="social-link">LinkedIn</a>
-                <a href="https://github.com/ifxadi" target="_blank" class="social-link">GitHub</a>
+<header>
+    <div class="header-deco"></div>
+    <div class="hero">
+        <h1 data-text="ADITYA KUMAR">ADITYA KUMAR</h1>
+        <div class="subtitle-tags">
+            <span class="subtitle-tag">Technical Artist</span>
+            <span class="subtitle-sep">·</span>
+            <span class="subtitle-tag">Pipeline Developer</span>
+            <span class="subtitle-sep">·</span>
+            <span class="subtitle-tag">Tool Creator</span>
+        </div>
+        <p class="intro-text">
+            Hey there! Welcome to my little space on the internet. I'm Aditya, a Tech Artist based in Mumbai, India, passionate about everything that blends art and technology.
+            I specialize in building robust pipelines, creating artist-friendly tools and shaders, and optimizing workflows for game development. Currently, I'm partnering with <strong>Supercell</strong> on the <i>Brawl Stars</i> extended team, focusing on tools, shader development, and pipeline enhancements, while providing end-to-end support from game asset creation to engine implementation.
+        </p>
+        <div class="social-links">
+            <a href="mailto:aditya.techartist@gmail.com" class="social-link">Email</a>
+            <a href="./resume.html" target="_blank" class="social-link">Resume</a>
+            <a href="https://linkedin.com/in/ifxadi" target="_blank" class="social-link">LinkedIn</a>
+            <a href="https://github.com/ifxadi" target="_blank" class="social-link">GitHub</a>
+        </div>
+    </div>
+</header>
+
+<section class="skills-section">
+    <canvas class="skills-vertex-canvas" id="skillsCanvas"></canvas>
+    <div class="skill-decoration skill-decoration-1"></div>
+    <div class="skill-decoration skill-decoration-2"></div>
+    <div class="skill-decoration skill-decoration-3"></div>
+    <div class="skills-container">
+        <h2 class="skills-title">Skills &amp; Expertise</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3 class="skill-category-title">Technical Art</h3>
+                <ul class="skill-list">
+                    <li class="skill-item">Game-Art Pipeline Development</li>
+                    <li class="skill-item">Tools Programming</li>
+                    <li class="skill-item">Shader Development (GLSL, HLSL, Material Graph)</li>
+                    <li class="skill-item">Asset Optimization</li>
+                    <li class="skill-item">Asset Implementation</li>
+                    <li class="skill-item">Performance, Memory Profiling</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3 class="skill-category-title">Software &amp; Engines</h3>
+                <ul class="skill-list">
+                    <li class="skill-item">Maya, Blender, 3DS Max</li>
+                    <li class="skill-item">Unreal Engine, Unity, Proprietary Tech</li>
+                    <li class="skill-item">Substance Designer/Painter</li>
+                    <li class="skill-item">ZBrush</li>
+                    <li class="skill-item">Marmoset Toolbag</li>
+                    <li class="skill-item">Adobe Suite</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3 class="skill-category-title">Programming</h3>
+                <ul class="skill-list">
+                    <li class="skill-item">Python, Maya API, PyQt</li>
+                    <li class="skill-item">MEL, MaxScript</li>
+                    <li class="skill-item">HLSL, GLSL Shaders</li>
+                    <li class="skill-item">C++, C#</li>
+                    <li class="skill-item">Git, Perforce, SVN</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3 class="skill-category-title">3D Art Generalist</h3>
+                <ul class="skill-list">
+                    <li class="skill-item">Modeling and Texturing</li>
+                    <li class="skill-item">Rigging and Animation</li>
+                    <li class="skill-item">Level Design and Set Dressing</li>
+                    <li class="skill-item">Shading and Lighting</li>
+                    <li class="skill-item">Rendering and Post-composition</li>
+                </ul>
             </div>
         </div>
-    </header>
-
-    <!-- Skills Section -->
-    <section class="skills-section">
-        <div class="skill-decoration skill-decoration-1"></div>
-        <div class="skill-decoration skill-decoration-2"></div>
-        <div class="skill-decoration skill-decoration-3"></div>
-        <div class="skills-container">
-            <h2 class="skills-title">Skills & Expertise</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3 class="skill-category-title">Technical Art</h3>
-                    <ul class="skill-list">
-                        <li class="skill-item">Pipeline Development</li>
-                        <li class="skill-item">Tool Creation (Maya, Blender)</li>
-                        <li class="skill-item">Shader Development (HLSL, GLSL)</li>
-                        <li class="skill-item">Asset Optimization</li>
-                        <li class="skill-item">Performance Profiling</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category">
-                    <h3 class="skill-category-title">Software & Engines</h3>
-                    <ul class="skill-list">
-                        <li class="skill-item">Maya, Blender, 3DS Max</li>
-                        <li class="skill-item">Unreal Engine, Unity</li>
-                        <li class="skill-item">Substance Designer/Painter</li>
-                        <li class="skill-item">ZBrush, Marmoset Toolbag</li>
-                        <li class="skill-item">Photoshop, After Effects</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category">
-                    <h3 class="skill-category-title">Programming</h3>
-                    <ul class="skill-list">
-                        <li class="skill-item">Python (Maya API, PyQt)</li>
-                        <li class="skill-item">C++, C#</li>
-                        <li class="skill-item">MEL, MaxScript, JavaScript</li>
-                        <li class="skill-item">HLSL, GLSL Shaders</li>
-                        <li class="skill-item">Git, Perforce, SVN</li>
-                    </ul>
-                </div>
-                
-                <div class="skill-category">
-                    <h3 class="skill-category-title">Collaboration</h3>
-                    <ul class="skill-list">
-                        <li class="skill-item">External Development Support</li>
-                        <li class="skill-item">Technical Documentation</li>
-                        <li class="skill-item">Artist Training & Mentorship</li>
-                        <li class="skill-item">Cross-Team Communication</li>
-                        <li class="skill-item">Workflow Optimization</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Filter Navigation -->
-    <nav>
-        <div class="filter-buttons">
-            <button class="filter-btn active" data-filter="all">All Work</button>
-            <button class="filter-btn" data-filter="tools">Tools</button>
-            <button class="filter-btn" data-filter="shaders">Shaders</button>
-            <button class="filter-btn" data-filter="3d">3D Work</button>
-            <button class="filter-btn" data-filter="pipeline">Pipeline</button>
-            <button class="filter-btn" data-filter="other">Other</button>
-        </div>
-    </nav>
-
-    <!-- Portfolio Grid -->
-    <div class="portfolio-container">
-        <div class="portfolio-grid" id="portfolioGrid">
-            <!-- Portfolio items will be inserted here by JavaScript -->
-        </div>
     </div>
+</section>
 
-    <!-- Modal -->
-    <div class="modal" id="modal">
-        <div class="modal-wrapper">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>Project Details</h3>
-                    <button class="modal-close" onclick="closeModal()">×</button>
-                </div>
+<nav>
+    <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">All Work</button>
+        <button class="filter-btn" data-filter="tools">Tools</button>
+        <button class="filter-btn" data-filter="shaders">Shaders</button>
+        <button class="filter-btn" data-filter="3d">3D Work</button>
+        <button class="filter-btn" data-filter="pipeline">Pipeline</button>
+        <button class="filter-btn" data-filter="other">Other</button>
+    </div>
+</nav>
+
+<div class="portfolio-container">
+    <h2 class="section-title">Portfolio</h2>
+    <div class="portfolio-grid" id="portfolioGrid"></div>
+</div>
+
+<div class="modal" id="modal">
+    <div class="modal-wrapper">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Project Details</h3>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
                 <div class="modal-image-wrapper">
                     <img class="modal-image" id="modalImage" src="" alt="">
                     <div class="corner-tl"></div>
                     <div class="corner-br"></div>
                 </div>
-                <div class="modal-body">
-                    <span class="modal-category" id="modalCategory"></span>
-                    <h2 class="modal-title" id="modalTitle"></h2>
-                    <p class="modal-description" id="modalDescription"></p>
-                    <div class="modal-details" id="modalDetails">
-                        <!-- Details will be inserted here -->
-                    </div>
-                </div>
+                <span class="modal-category" id="modalCategory"></span>
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <p class="modal-description" id="modalDescription"></p>
+                <div class="modal-details" id="modalDetails"></div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-links">
-            <a href="mailto:aditya.techartist@gmail.com" class="footer-link">Email</a>
-            <a href="https://linkedin.com/in/ifxadi" target="_blank" class="footer-link">LinkedIn</a>
-            <a href="https://github.com/ifxadi" target="_blank" class="footer-link">GitHub</a>
-        </div>
-        <p>© 2026 Aditya Kumar · Technical Art</p>
-    </footer>
+<footer>
+    <div class="footer-hire">
+        <h2 class="footer-hire-title">Hire Me</h2>
+        <p class="footer-hire-msg">Let's work together — I'm open for new adventures.<br>Full-time &amp; contract roles welcome.</p>
+    </div>
+    <div class="footer-links">
+        <a href="mailto:aditya.techartist@gmail.com" class="footer-link">Email</a>
+        <a href="./resume.html" target="_blank" class="footer-link">Resume</a>
+        <a href="https://linkedin.com/in/ifxadi" target="_blank" class="footer-link">LinkedIn</a>
+        <a href="https://github.com/ifxadi" target="_blank" class="footer-link">GitHub</a>
+    </div>
+    <p>© 2026 Aditya Kumar · Technical Art</p>
+</footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        const portfolioData = [
-            {
-                id: 1,
-                category: ['tools', 'pipeline'],
-                title: 'DCC Tools Pipeline',
-                shortDescription: 'DCC Tools that are easy to ship, install, and maintain.',
-                fullDescription: 'Creating tools is fun, but making them truly valuable means ensuring they are easy to distribute, simple to install, and effortless to maintain—especially in a studio environment where artists should focus on creating rather than figuring out tools or constantly updating them.',
-                thumbnail: './assets/images/shadypady.png',
-                image: './assets/images/shadypady.png',
-                technologies: 'Python, Maya API, MEL, Blender Python API, Git',
-                role: 'Author',
-                year: '2023',
-                link: '#'
-            },
-            {
-                id: 2,
-                category: 'tools',
-                title: 'Maya Automation Editor Framework',
-                shortDescription: 'Automated asset validation tool for Maya ensuring technical compliance before export.',
-                fullDescription: 'A comprehensive Python-based tool for Autodesk Maya that automates the validation of 3D assets against technical requirements. Checks naming conventions, polygon counts, UV layouts, material assignments, and export settings. Reduced QA time by 40% and prevented common pipeline errors.',
-                thumbnail: './assets/images/shadypady.png',
-                image: 'https://via.placeholder.com/900x450/1a1a1a/ff6b4a?text=Maya+Asset+Validator',
-                technologies: 'Python, Maya API, PyQt',
-                role: 'Solo Developer',
-                year: '2024',
-                link: 'https://github.com/yourusername/maya-validator',
-                // Optional: Add detailed content blocks
-                contentBlocks: [
-                    {
-                        type: 'heading',
-                        content: 'Key Features'
-                    },
-                    {
-                        type: 'paragraph',
-                        content: 'The validator performs comprehensive checks including polygon count validation, UV set verification, material assignment checks, and naming convention enforcement. It integrates seamlessly into the Maya pipeline and provides real-time feedback to artists.'
-                    },
-                    {
-                        type: 'code',
-                        content: `import maya.cmds as cmds
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="./portfolioData.js"></script>
+<script>
 
-def validate_poly_count(mesh, max_count=50000):
-    """Check if mesh polygon count is within limits"""
-    poly_count = cmds.polyEvaluate(mesh, triangle=True)
-    if poly_count > max_count:
-        return False, f"Polygon count {poly_count} exceeds limit"
-    return True, "Polygon count valid"`
-                    },
-                    {
-                        type: 'heading',
-                        content: 'Impact'
-                    },
-                    {
-                        type: 'paragraph',
-                        content: 'Reduced asset validation time from 15 minutes per asset to under 2 minutes. Caught 95% of common errors before submission, significantly reducing iteration cycles between artists and QA team.'
-                    }
-                ]
-            },
-            {
-                id: 3,
-                category: 'tools',
-                title: 'Baking Tools for Maya and Blender',
-                shortDescription: 'Streamlined batch export system for multiple 3D packages with validation.',
-                fullDescription: 'Multi-DCC export pipeline supporting Maya, Blender, and 3DS Max. Features include automated file conversion, texture optimization, LOD generation, and integration with Perforce version control. Handles 100+ assets per batch with full logging and error reporting.',
-                thumbnail: './assets/images/shadypady.png',
-                image: 'https://via.placeholder.com/900x450/1a1a1a/4ecdc4?text=Batch+Export+Tool',
-                technologies: 'Python, MEL, Blender Python API',
-                role: 'Author',
-            },
-            {
-                id: 4,
-                category: 'tools',
-                title: 'Asset QA Tool for Maya and Blender',
-                shortDescription: 'Streamlined batch export system for multiple 3D packages with validation.',
-                fullDescription: 'Multi-DCC export pipeline supporting Maya, Blender, and 3DS Max. Features include automated file conversion, texture optimization, LOD generation, and integration with Perforce version control. Handles 100+ assets per batch with full logging and error reporting.',
-                thumbnail: './assets/images/shadypady.png',
-                image: 'https://via.placeholder.com/900x450/1a1a1a/4ecdc4?text=Batch+Export+Tool',
-                technologies: 'Python, MEL, Blender Python API',
-                role: 'Developer',
-            },
-            {
-                id: 5,
-                category: 'tools',
-                title: 'Maya Asset Exporter-Importer',
-                shortDescription: 'Streamlined batch export system for multiple 3D packages with validation.',
-                fullDescription: 'Multi-DCC export pipeline supporting Maya, Blender, and 3DS Max. Features include automated file conversion, texture optimization, LOD generation, and integration with Perforce version control. Handles 100+ assets per batch with full logging and error reporting.',
-                thumbnail: './assets/images/shadypady.png',
-                image: 'https://via.placeholder.com/900x450/1a1a1a/4ecdc4?text=Batch+Export+Tool',
-                technologies: 'Python, MEL, Blender Python API',
-                role: 'Lead Developer',
-                year: '2024',
-                link: '#'
-            },
-            {
-                id: 6,
-                category: 'shaders',
-                title: 'Advanced Texture Packing',
-                shortDescription: 'Highly optimized stylized water shader for mobile games with foam and reflections.',
-                fullDescription: 'Custom water shader built for mobile game rendering with animated surface normals, edge foam detection, depth-based color gradients, and dynamic reflections. Optimized for 60 FPS on mobile devices while maintaining visual quality. Features include vertex displacement, caustics simulation, and transparency control.',
-                thumbnail: './assets/images/shadypady.png',
-                image: 'https://via.placeholder.com/900x450/1a1a1a/4ecdc4?text=Stylized+Water+Shader',
-                technologies: 'HLSL, Shader Graph, Unity',
-                role: 'Shader Artist',
-                year: '2024',
-                link: '#',
-                contentBlocks: [
-                    {
-                        type: 'heading',
-                        content: 'Shader Breakdown'
-                    },
-                    {
-                        type: 'paragraph',
-                        content: 'The water shader uses a multi-layered approach combining vertex displacement for wave movement, edge detection for foam, and depth-based color blending for realistic water appearance.'
-                    },
-                    {
-                        type: 'image',
-                        src: 'https://via.placeholder.com/800x400/1a1a1a/4ecdc4?text=Shader+Graph+Example',
-                        alt: 'Water Shader Node Graph'
-                    },
-                    {
-                        type: 'heading',
-                        content: 'Performance Optimization'
-                    },
-                    {
-                        type: 'paragraph',
-                        content: 'Achieved 60 FPS on mid-range mobile devices through careful LOD implementation and instruction count optimization. Used texture atlasing and vertex color channels to minimize texture samples.'
-                    }
-                ]
-            },
-            {
-                id: 7,
-                category: 'shaders',
-                title: 'Rim Light Shader',
-                shortDescription: 'Versatile toon shader system with rim lighting and outline control.',
-                fullDescription: 'A complete toon shading solution featuring multi-tone shading, dynamic rim lighting, customizable outlines, and specular highlights. Includes support for multiple light sources, shadow mapping, and color ramping. Used across 50+ characters in production with artist-friendly controls.',
-                thumbnail: './assets/images/shadypady.png',
-                image: 'https://via.placeholder.com/900x450/1a1a1a/ff8e72?text=Character+Toon+Shader',
-                technologies: 'GLSL (Maya), HLSL (Unity), Unreal Material Editor',
-                role: 'Technical Artist',
-                year: '2023',
-                link: '#'
-            },
-            {
-                id: 8,
-                category: 'shaders',
-                title: 'OpenGL Graphics Application',
-                shortDescription: 'Versatile toon shader system with rim lighting and outline control.',
-                fullDescription: 'A complete toon shading solution featuring multi-tone shading, dynamic rim lighting, customizable outlines, and specular highlights. Includes support for multiple light sources, shadow mapping, and color ramping. Used across 50+ characters in production with artist-friendly controls.',
-                thumbnail: './assets/images/shadypady.png',
-                image: 'https://via.placeholder.com/900x450/1a1a1a/ff8e72?text=Character+Toon+Shader',
-                technologies: 'C++,SDL, GLAD, GLSL, Visual Studio ',
-                role: 'Technical Artist',
-                year: '2023',
-                link: '#'
-            },
-            {
-                id: 9,
-                category: 'shaders',
-                title: 'Perforce Assist Tool for Game Engine',
-                shortDescription: 'Versatile toon shader system with rim lighting and outline control.',
-                fullDescription: 'A complete toon shading solution featuring multi-tone shading, dynamic rim lighting, customizable outlines, and specular highlights. Includes support for multiple light sources, shadow mapping, and color ramping. Used across 50+ characters in production with artist-friendly controls.',
-                thumbnail: './assets/images/shadypady.png',
-                image: 'https://via.placeholder.com/900x450/1a1a1a/ff8e72?text=Character+Toon+Shader',
-                technologies: 'Python, PyQt',
-                role: 'Technical Artist',
-                year: '2023',
-                link: '#'
-            },
-            {
-                id: 10,
-                category: 'shaders',
-                title: 'Maya Launcher',
-                shortDescription: 'Versatile toon shader system with rim lighting and outline control.',
-                fullDescription: 'A complete toon shading solution featuring multi-tone shading, dynamic rim lighting, customizable outlines, and specular highlights. Includes support for multiple light sources, shadow mapping, and color ramping. Used across 50+ characters in production with artist-friendly controls.',
-                thumbnail: './assets/images/shadypady.png',
-                image: 'https://via.placeholder.com/900x450/1a1a1a/ff8e72?text=Character+Toon+Shader',
-                technologies: 'Python, PyQt',
-                role: 'Technical Artist',
-                year: '2023',
-                link: '#'
-            },
-            {
-                id: 11,
-                category: '3d',
-                title: 'Character Model - Warrior',
-                shortDescription: 'Game-ready character model with full PBR textures and animation-ready rig.',
-                fullDescription: 'High-quality character model created for action game production. Features hand-painted PBR textures (4K Base Color, Normal, Roughness, Metallic), optimized mesh topology for animation (18K triangles), and complete rig with facial controls. Includes multiple LOD levels and custom blend shapes for facial expressions.',
-                thumbnail: './assets/images/shadypady.png',
-                image: 'https://via.placeholder.com/900x450/1a1a1a/b794f6?text=Warrior+Character+Model',
-                technologies: 'ZBrush, Maya, Substance Painter',
-                role: '3D Artist',
-                year: '2024',
-                link: '#'
-            },
-            {
-                id: 12,
-                category: ['shaders', 'tools'],
-                title: 'Global Season Switcher Environment Tool',
-                shortDescription: 'Modular environment asset pack for fantasy game worlds.',
-                fullDescription: 'Complete modular environment kit containing 80+ assets including rocks, vegetation, architectural elements, and props. All assets feature tileable textures, optimized collision meshes, and consistent art style. Package includes vertex painting support, LOD models, and full documentation for level designers.',
-                thumbnail: './assets/images/shadypady.png',
-                image: 'https://via.placeholder.com/900x450/1a1a1a/a8c5c1?text=Environment+Assets+Pack',
-                technologies: '3DS MAX, HLSL, MaxScript',
-                role: 'Author',
-                year: '2023',
-                link: '#'
-            },
-            {
-                id: 13,
-                category: 'shaders',
-                title: 'GLSL Normal Map Shader',
-                shortDescription: 'Versatile toon shader system with rim lighting and outline control.',
-                fullDescription: 'A complete toon shading solution featuring multi-tone shading, dynamic rim lighting, customizable outlines, and specular highlights. Includes support for multiple light sources, shadow mapping, and color ramping. Used across 50+ characters in production with artist-friendly controls.',
-                thumbnail: './assets/images/shadypady.png',
-                image: 'https://via.placeholder.com/900x450/1a1a1a/ff8e72?text=Character+Toon+Shader',
-                technologies: 'GLSL, Unreal Material Editor',
-                role: 'Technical Artist',
-                year: '2023',
-                link: '#'
-            },
-            {
-                id: 14,
-                category: 'shaders',
-                title: 'GLSL Mipmapping Shader',
-                shortDescription: 'Versatile toon shader system with rim lighting and outline control.',
-                fullDescription: 'A complete toon shading solution featuring multi-tone shading, dynamic rim lighting, customizable outlines, and specular highlights. Includes support for multiple light sources, shadow mapping, and color ramping. Used across 50+ characters in production with artist-friendly controls.',
-                thumbnail: './assets/images/shadypady.png',
-                image: 'https://via.placeholder.com/900x450/1a1a1a/ff8e72?text=Character+Toon+Shader',
-                technologies: 'GLSL, Unreal Material Editor',
-                role: 'Technical Artist',
-                year: '2023',
-                link: '#'
-            },
-            {
-                id: 15,
-                category: 'shaders',
-                title: 'Unreal Cinametic Trailer',
-                shortDescription: 'Versatile toon shader system with rim lighting and outline control.',
-                fullDescription: 'A complete toon shading solution featuring multi-tone shading, dynamic rim lighting, customizable outlines, and specular highlights. Includes support for multiple light sources, shadow mapping, and color ramping. Used across 50+ characters in production with artist-friendly controls.',
-                thumbnail: './assets/images/shadypady.png',
-                image: 'https://via.placeholder.com/900x450/1a1a1a/ff8e72?text=Character+Toon+Shader',
-                technologies: 'GLSL, Unreal Material Editor',
-                role: 'Technical Artist',
-                year: '2023',
-                link: '#'
-            },
-            {
-                id: 16,
-                category: 'shaders',
-                title: 'Unreal Architechture Visualization',
-                shortDescription: 'Versatile toon shader system with rim lighting and outline control.',
-                fullDescription: 'A complete toon shading solution featuring multi-tone shading, dynamic rim lighting, customizable outlines, and specular highlights. Includes support for multiple light sources, shadow mapping, and color ramping. Used across 50+ characters in production with artist-friendly controls.',
-                thumbnail: './assets/images/shadypady.png',
-                image: 'https://via.placeholder.com/900x450/1a1a1a/ff8e72?text=Character+Toon+Shader',
-                technologies: 'GLSL, Unreal Material Editor',
-                role: 'Technical Artist',
-                year: '2023',
-                link: '#'
-            }
-        ];
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
 
-        // Initialize portfolio
-        function renderPortfolio(filter = 'all') {
-            const grid = document.getElementById('portfolioGrid');
-            grid.innerHTML = '';
+// ── Video block builder ───────────────────────────────────────────────────────
+// Renders either an embedded 16:9 iframe or a styled external-link button.
+// Set block.embedSrc = '' to force link-only mode (private / non-embeddable video).
+    function buildVideoBlock(block) {
+        const caption = block.caption || 'Video';
+        const hasEmbed = block.embedSrc && block.embedSrc.trim() !== '';
+        const safeUrl = escapeHtml(block.url || '#');
+        const safeSrc = hasEmbed ? escapeHtml(block.embedSrc) : '';
+        const safeCap = escapeHtml(caption);
 
-            const filteredData = filter === 'all'
-                ? portfolioData
-                : portfolioData.filter(item => {
-                    // Check if item.category is an array
-                    if (Array.isArray(item.category)) {
-                        return item.category.includes(filter);
-                    }
-                    // Fallback for single category (backward compatible)
-                    return item.category === filter;
-                });
+        const corners = `
+        <span class="video-label">${safeCap}</span>
+        <span class="video-corner-tl"></span>
+        <span class="video-corner-br"></span>`;
 
-            filteredData.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'portfolio-item';
+        if (hasEmbed) {
+            return `
+        <div class="content-block-video">
+            ${corners}
+            <div class="video-embed-wrapper">
+                <iframe
+                    src="${safeSrc}"
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                    loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                ></iframe>
+            </div>
+        </div>`;
+        }
 
-                // Set data-category to first category or all categories joined
-                const categoryAttr = Array.isArray(item.category)
-                    ? item.category[0]
-                    : item.category;
-                card.dataset.category = categoryAttr;
+        return `
+    <div class="content-block-video">
+        ${corners}
+        <a class="video-link-btn" href="${safeUrl}" target="_blank" rel="noopener">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polygon points="10 8 16 12 10 16 10 8"/>
+            </svg>
+            Watch Video&nbsp;&nbsp;—&nbsp;&nbsp;${safeUrl}
+        </a>
+    </div>`;
+    }
 
-                card.onclick = () => openModal(item);
 
-                // Display all categories as tags
-                const categoryTags = Array.isArray(item.category)
-                    ? item.category.map(cat => `<span class="category-tag">${cat}</span>`).join(' ')
-                    : `<span class="category-tag">${item.category}</span>`;
+// ── Render cards ──────────────────────────────────────────────────────────────
+function renderPortfolio(filter = 'all') {
+    const grid = document.getElementById('portfolioGrid');
+    grid.innerHTML = '';
 
-                card.innerHTML = `
+    const data = filter === 'all'
+        ? portfolioData
+        : portfolioData.filter(item =>
+            Array.isArray(item.category)
+                ? item.category.includes(filter)
+                : item.category === filter
+          );
+
+    data.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'portfolio-item';
+        card.dataset.category = Array.isArray(item.category) ? item.category[0] : item.category;
+        card.onclick = () => openModal(item);
+
+        const tags = Array.isArray(item.category)
+            ? item.category.map(c => `<span class="category-tag">${c}</span>`).join(' ')
+            : `<span class="category-tag">${item.category}</span>`;
+
+        card.innerHTML = `
             <div class="thumbnail-wrapper">
                 <img src="${item.thumbnail}" alt="${item.title}" class="thumbnail">
             </div>
             <div class="card-content">
-                ${categoryTags}
+                ${tags}
                 <h3 class="card-title">${item.title}</h3>
                 <p class="card-description">${item.shortDescription}</p>
                 <div class="card-technologies">${item.technologies}</div>
-            </div>
-        `;
+            </div>`;
+        grid.appendChild(card);
+    });
+}
 
-                grid.appendChild(card);
-            });
-        }
+// ── Filter buttons ────────────────────────────────────────────────────────────
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        renderPortfolio(this.dataset.filter);
+    });
+});
 
-        // Filter functionality
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                
-                const filter = this.dataset.filter;
-                renderPortfolio(filter);
-            });
-        });
+// ── Modal open ────────────────────────────────────────────────────────────────
+function openModal(item) {
+    document.getElementById('modalImage').src = item.image;
+    document.getElementById('modalCategory').textContent =
+        Array.isArray(item.category) ? item.category.join(' · ') : item.category;
+    document.getElementById('modalTitle').textContent       = item.title;
+    document.getElementById('modalDescription').textContent = item.fullDescription;
 
-        // Modal functionality
-        function openModal(item) {
-            const modal = document.getElementById('modal');
-            document.getElementById('modalImage').src = item.image;
-
-            // Display all categories in modal
-            const categoryText = Array.isArray(item.category)
-                ? item.category.join(' · ')
-                : item.category;
-            document.getElementById('modalCategory').textContent = categoryText;
-            document.getElementById('modalTitle').textContent = item.title;
-            document.getElementById('modalDescription').textContent = item.fullDescription;
-
-            // Render content blocks if they exist
-            let contentBlocksHtml = '';
-            if (item.contentBlocks && item.contentBlocks.length > 0) {
-                contentBlocksHtml = '<div class="modal-content-blocks">';
-                item.contentBlocks.forEach(block => {
-                    switch(block.type) {
-                        case 'heading':
-                            contentBlocksHtml += `<div class="content-block">
-                                <h3 class="content-block-heading">${block.content}</h3>
-                            </div>`;
-                            break;
-                        case 'paragraph':
-                            contentBlocksHtml += `<div class="content-block">
-                                <p class="content-block-paragraph">${block.content}</p>
-                            </div>`;
-                            break;
-                        case 'code':
-                            contentBlocksHtml += `<div class="content-block">
-                                <div class="content-block-code">
-                                    <pre><code>${escapeHtml(block.content)}</code></pre>
-                                </div>
-                            </div>`;
-                            break;
-                        case 'image':
-                            contentBlocksHtml += `<div class="content-block">
-                                <div class="content-block-image">
-                                    <img src="${block.src}" alt="${block.alt || 'Project image'}">
-                                </div>
-                            </div>`;
-                            break;
-                    }
-                });
-                contentBlocksHtml += '</div>';
-            }
-
-            const detailsHtml = `
-                ${contentBlocksHtml}
-                <div class="detail-item">
-                    <span class="detail-label">Technologies</span>
-                    <span class="detail-value">${item.technologies}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Role</span>
-                    <span class="detail-value">${item.role}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Year</span>
-                    <span class="detail-value">${item.year}</span>
-                </div>
-                ${item.link !== '#' ? `
-                <div class="detail-item">
-                    <span class="detail-label">Project Link</span>
-                    <span class="detail-value"><a href="${item.link}" target="_blank">View on GitHub →</a></span>
-                </div>
-                ` : ''}
-            `;
-
-            document.getElementById('modalDetails').innerHTML = detailsHtml;
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Helper function to escape HTML in code blocks
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('modal');
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal on background click
-        document.getElementById('modal').addEventListener('click', function(e) {
-            if (e.target === this || e.target.classList.contains('modal-wrapper')) {
-                closeModal();
+    let blocksHtml = '';
+    if (item.contentBlocks && item.contentBlocks.length) {
+        blocksHtml = '<div class="modal-content-blocks">';
+        item.contentBlocks.forEach(block => {
+            switch (block.type) {
+                case 'heading':
+                    blocksHtml += `<div class="content-block">
+                        <h3 class="content-block-heading">${block.content}</h3></div>`;
+                    break;
+                case 'paragraph':
+                    blocksHtml += `<div class="content-block">
+                        <p class="content-block-paragraph">${block.content}</p></div>`;
+                    break;
+                case 'code':
+                    blocksHtml += `<div class="content-block">
+                        <div class="content-block-code">
+                            <pre><code>${escapeHtml(block.content)}</code></pre>
+                        </div></div>`;
+                    break;
+                case 'image':
+                    blocksHtml += `<div class="content-block">
+                        <div class="content-block-image">
+                            <img src="${block.src}" alt="${block.alt || ''}">
+                        </div></div>`;
+                    break;
+                case 'video':
+                    blocksHtml += `<div class="content-block">${buildVideoBlock(block)}</div>`;
+                    break;
             }
         });
+        blocksHtml += '</div>';
+    }
 
-        // Close modal on Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
+    document.getElementById('modalDetails').innerHTML = `
+        ${blocksHtml}
+        <div class="detail-item">
+            <span class="detail-label">Technologies</span>
+            <span class="detail-value">${item.technologies}</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Role</span>
+            <span class="detail-value">${item.role}</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Year</span>
+            <span class="detail-value">${item.year || '—'}</span>
+        </div>
+        ${item.link && item.link !== '#' ? `
+        <div class="detail-item">
+            <span class="detail-label">Project Link</span>
+            <span class="detail-value"><a href="${item.link}" target="_blank">View on GitHub →</a></span>
+        </div>` : ''}`;
+
+    document.getElementById('modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    document.getElementById('modal').classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+document.getElementById('modal').addEventListener('click', e => {
+    if (e.target === e.currentTarget || e.target.classList.contains('modal-wrapper')) closeModal();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+renderPortfolio();
+
+// ── Live vertex network (Skills section) ─────────────────────────────────────
+(function () {
+    const canvas = document.getElementById('skillsCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const COLORS = ['#4ecdc4','#c9a84c','#a8c5c1','#b794f6'];
+    const N = 55, DIST = 160;
+    let nodes = [], W, H;
+
+    function resize() {
+        W = canvas.width  = canvas.parentElement.offsetWidth;
+        H = canvas.height = canvas.parentElement.offsetHeight;
+    }
+    function initNodes() {
+        nodes = Array.from({length: N}, () => ({
+            x: Math.random() * W, y: Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5,
+            r: Math.random() * 2 + 1,
+            color: COLORS[Math.floor(Math.random() * COLORS.length)]
+        }));
+    }
+    function draw() {
+        ctx.clearRect(0, 0, W, H);
+        nodes.forEach(n => {
+            n.x += n.vx; n.y += n.vy;
+            if (n.x < 0 || n.x > W) n.vx *= -1;
+            if (n.y < 0 || n.y > H) n.vy *= -1;
         });
-
-        // Initial render
-        renderPortfolio();
-    </script>
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+                const d  = Math.sqrt(dx * dx + dy * dy);
+                if (d < DIST) {
+                    ctx.beginPath();
+                    ctx.moveTo(nodes[i].x, nodes[i].y);
+                    ctx.lineTo(nodes[j].x, nodes[j].y);
+                    ctx.strokeStyle = `rgba(201,168,76,${(1 - d / DIST) * 0.35})`;
+                    ctx.lineWidth = 0.6;
+                    ctx.stroke();
+                }
+            }
+        }
+        nodes.forEach(n => {
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+            ctx.fillStyle  = n.color;
+            ctx.shadowColor = n.color;
+            ctx.shadowBlur  = 6;
+            ctx.fill();
+            ctx.shadowBlur  = 0;
+        });
+        requestAnimationFrame(draw);
+    }
+    window.addEventListener('resize', () => { resize(); initNodes(); });
+    resize(); initNodes(); draw();
+})();
+</script>
 </body>
 </html>
