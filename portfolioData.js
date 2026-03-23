@@ -647,20 +647,259 @@ N = TangentToWorld(Nw, Tw, Bw, tn);              // single TBN transform`
         },
 
         {
-            id: 5,
-            category: 'shaders',
-            title: 'OpenGL Graphics Application',
-            shortDescription: 'Versatile toon shader system with rim lighting and outline control.',
-            fullDescription: 'A complete toon shading solution featuring multi-tone shading, dynamic rim lighting, customizable outlines, and specular highlights. Includes support for multiple light sources, shadow mapping, and color ramping. Used across 50+ characters in production with artist-friendly controls.',
-            thumbnail: './assets/images/shadypady.png',
-            image: 'https://via.placeholder.com/900x450/1a1a1a/ff8e72?text=Character+Toon+Shader',
-            technologies: 'C++,SDL, GLAD, GLSL, Visual Studio ',
-            role: 'Technical Artist',
-            year: '2023',
-            link: '#'
+    id: 4,
+    category: ['graphics', 'tools'],
+    title: 'OpenGL Graphics Application - SDL3 / GLM / GLAD',
+    shortDescription: 'A simple real-time OpenGL graphics application built with SDL3, GLM, and GLAD, featuring a basic shader interpolation demo, textured 3D model rendering, and a bloom post-processing experiment.',
+    fullDescription: 'An OpenGL graphics application developed in C++ using SDL3 for windowing and input, GLAD for OpenGL function loading, and GLM for matrix and vector math. The project explores core real-time rendering concepts through three focused demos: a shader interpolation triangle for attribute and color interpolation, a textured 3D model viewer for mesh and texture rendering, and a bloom lighting scene with multiple colored emissive light sources and post-processing. Together, these experiments helped establish a practical rendering pipeline covering shader setup, vertex attributes, transformations, model loading, texture mapping, lighting, and framebuffer-based post effects.',
+
+    thumbnail: './assets/images/004_openGLApp_Thumb.png',
+    image: './assets/images/004_openGLApp_Thumb.png',
+
+    technologies: 'C++, OpenGL, SDL3, GLAD, GLM, GLSL',
+    role: 'Author',
+    year: '2025',
+    link: 'https://github.com/ifxadi/openGL/',
+
+    contentBlocks: [
+        { type: 'heading', content: 'Overview' },
+        { type: 'paragraph', content: 'This project was built as a compact OpenGL learning and rendering sandbox focused on modern graphics programming fundamentals. It combines simple but important rendering exercises including shader interpolation, textured mesh rendering, transformation handling, and bloom-based post-processing. Implementation were developed with learning support from the book LearnOpenGL and Mike Shah tutorials.' },
+
+        { type: 'heading', content: 'Key Features' },
+        { type: 'paragraph', content: 'SDL3 window creation and input handling · GLAD-based OpenGL initialization · GLM for transform and camera math · GLSL shader compilation and linking · Vertex color interpolation demo · Textured 3D model rendering · Multi-light scene setup · Bloom post-processing using bright-pass extraction and blur.' },
+
+        { type: 'heading', content: 'Shader Interpolation Demo' },
+        { type: 'paragraph', content: 'One of the first experiments in the project was a simple triangle rendered with per-vertex colors, allowing the fragment shader to display smooth color interpolation across the surface. This helped validate the rendering setup, vertex attribute layout, shader compilation, and the full GPU pipeline from vertex processing to rasterized fragment output, as seen in the triangle screenshot.' },
+        {
+            type: 'image',
+            src: './assets/images/004_openGLApp_traingle.png',
+            alt: 'OpenGL Shader Interpolation Triangle'
         },
         {
-            id: 6,
+            type: 'code', content:
+`layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec3 aColor;
+
+out vec3 ourColor;
+
+void main()
+{
+    gl_Position = vec4(aPos, 1.0);
+    ourColor = aColor;
+}`
+        },
+
+        { type: 'heading', content: 'Textured Model Rendering' },
+        { type: 'paragraph', content: 'The application also includes a simple 3D model viewer used to render textured meshes with proper transforms and material response. Assimp was used to import external model data, including mesh structure and texture assignments, helping establish a clean asset-loading workflow for displaying 3D content inside the OpenGL renderer.' },
+        {
+            type: 'image',
+            src: './assets/images/004_openGLApp_AssImp.png',
+            alt: 'OpenGL Textured Model Viewer'
+        },
+        {
+            type: 'code', content:
+`glm::mat4 model = glm::mat4(1.0f);
+model = glm::rotate(model, glm::radians(rotationAngle), glm::vec3(0.0f, 1.0f, 0.0f));
+
+glm::mat4 view = camera.GetViewMatrix();
+glm::mat4 projection = glm::perspective(glm::radians(fov), aspectRatio, 0.1f, 100.0f);
+
+shader.setMat4("model", model);
+shader.setMat4("view", view);
+shader.setMat4("projection", projection);`
+        },
+
+        { type: 'heading', content: 'Bloom Lighting Experiment' },
+        { type: 'paragraph', content: 'A more advanced experiment in the application explores bloom by rendering a scene with bright colored light sources and extracting high-intensity fragments for post-processing. The blurred bright areas are then combined back with the base scene to create a soft glow effect, visible around the red, green, blue, and white light sources in the bloom test image.' },
+        {
+            type: 'image',
+            src: './assets/images/004_openGLApp_Bloom.png',
+            alt: 'OpenGL Bloom Lighting Demo'
+        },
+        {
+            type: 'code', content:
+`vec3 result = sceneColor + bloomStrength * blurColor;
+FragColor = vec4(result, 1.0);`
+        },
+        { type: 'heading', content: 'Environment Cube Mapping' },
+{ type: 'paragraph', content: 'Another rendering experiment in the application focused on environment cube mapping using a skybox and cubemap textures. This demo uses the view direction and surface normal to sample the surrounding environment, allowing the cube to display a reflective material response that visually picks up the mountains, sky, and water from the scene background.' },
+{
+    type: 'image',
+    src: './assets/images/004_openGLApp_EnvMapping.png',
+    alt: 'OpenGL Environment Cube Mapping Demo'
+},
+{
+    type: 'code', content:
+`vec3 I = normalize(WorldPos - cameraPos);
+vec3 R = reflect(I, normalize(Normal));
+vec3 envColor = texture(skybox, R).rgb;`
+},
+
+        { type: 'heading', content: 'Rendering Pipeline' },
+        { type: 'paragraph', content: 'The project follows a straightforward modern OpenGL pipeline: initialize SDL3 and context creation, load OpenGL functions through GLAD, define buffers and vertex attributes, compile GLSL shaders, apply transformations with GLM, render scene geometry, and optionally process the final image through framebuffer-based effects. Keeping the application modular made it easier to test individual rendering features in isolation before combining them into larger scenes.' },
+
+        { type: 'heading', content: 'Learning Outcome' },
+        { type: 'paragraph', content: 'This project served as a practical foundation for understanding real-time rendering workflows in OpenGL. It strengthened core C++ skills, graphics engine development fundamentals, shader programming, scene setup, model rendering, and post-processing, while also creating a reusable technical base for more advanced graphics experiments in future projects.' }
+    ]
+},
+
+        {
+    id: 6,
+    category: ['shaders', 'pipeline'],
+    title: 'Advanced Texture Packing - Packed PBR / Normal Reconstruction',
+    shortDescription: 'An optimized texture packing workflow that stores Diffuse in RGB, PBR data in RGB, and packs normal XY into alpha channels, reconstructing normal Z in the shader to reduce texture memory and sampling cost.',
+    fullDescription: 'An advanced texture packing workflow designed to reduce texture memory usage and simplify material sampling in real-time rendering. The system stores Diffuse in RGB, Metallic / Roughness / Ambient Occlusion in the RGB channels of a second texture, and packs the X and Y components of the tangent-space normal into the alpha channels of the Diffuse and PBR textures. The Z component of the normal is reconstructed in the shader using the Pythagorean relation, allowing the material to preserve normal detail while removing the need for a separate full normal texture. A matching export preset was also created in Substance to automate output into this packed format and keep the authoring pipeline consistent.',
+
+    thumbnail: './assets/images/005_advPacking_thumb.png',
+    image: './assets/images/005_advPacking_thumb.png',
+
+    technologies: 'Unreal Engine Material Editor, HLSL, Substance Painter, Packed Textures, PBR, Shader Optimization',
+    role: 'Author',
+    year: '2026',
+    link: '#',
+
+    contentBlocks: [
+        { type: 'heading', content: 'Key Features' },
+        { type: 'paragraph', content: 'Diffuse stored in RGB · Metallic / Roughness / AO packed into RGB of a second texture · Normal X and Y stored in alpha channels · Normal Z reconstructed in shader · Substance export preset for packed texture output · Reduced texture memory footprint · Fewer texture reads for real-time materials.' },
+
+        {
+            type: 'image',
+            src: './assets/images/005_advPacking_node.png',
+            alt: 'Advanced Texture Packing Material Graph'
+        },
+
+        { type: 'heading', content: 'Packing Layout' },
+        { type: 'paragraph', content: 'The workflow uses two packed textures instead of a more typical three-texture setup. The first texture stores Diffuse in RGB and Normal X in Alpha, while the second stores Metallic, Roughness, and Ambient Occlusion in RGB and Normal Y in Alpha, making it possible to preserve both surface colour and PBR response while compressing the normal map data into existing channels.' },
+        {
+            type: 'code', content:
+`Texture A:
+RGB = Diffuse
+A   = Normal X
+
+Texture B:
+R   = Metallic
+G   = Roughness
+B   = Ambient Occlusion
+A   = Normal Y`
+        },
+
+        { type: 'heading', content: 'Normal Reconstruction' },
+        { type: 'paragraph', content: 'Because only the X and Y channels of the tangent-space normal are stored, the Z component is reconstructed directly in the shader. This uses the unit-length property of normal vectors, deriving the missing component with the Pythagorean relation so the final normal can still be used for standard lighting evaluation.' },
+        {
+            type: 'image',
+            src: './assets/images/005_advPacking_nrml.png',
+            alt: 'Advanced Texture Packing Material Graph'
+        },
+        {
+            type: 'code', content:
+`float2 normalXY = float2(InX, InY) * 2.0 - 1.0;
+float normalZ = sqrt(saturate(1.0 - dot(normalXY, normalXY)));
+return float3(normalXY, normalZ);`
+        },
+
+        { type: 'heading', content: 'Material Setup' },
+        { type: 'paragraph', content: 'The material graph combines the packed channels into a compact shader input layout. Diffuse is passed into base color, the packed PBR channels are routed into metallic, roughness, and ambient occlusion, and the custom shader logic reconstructs the tangent-space normal before feeding it into the normal input, as shown in the attached node setup.' },
+
+        { type: 'heading', content: 'Substance Export Preset' },
+        { type: 'paragraph', content: 'To support the runtime shader layout, a custom export preset was created in Substance so textures could be authored and exported directly in the packed format. This removed repetitive manual channel packing work and ensured consistency between texture authoring and the in-engine shader implementation.' },
+
+        { type: 'heading', content: 'Optimization Outcome' },
+        { type: 'paragraph', content: 'The main goal of the workflow was to improve runtime efficiency by reducing texture memory use and simplifying sampling. By packing the data more aggressively and reconstructing the missing normal component in shader code, the material setup removed the need for one dedicated texture while lowering the overall sampling cost for the asset.' }
+    ]
+},
+        
+        {
+    id: 7,
+    category: ['3d'],
+    title: 'Armor Bust - 3D Model/Texture/Render',
+    shortDescription: 'A stylized character bust modeled and textured using ZBrush, Maya, and Substance 3D Painter.',
+    fullDescription: 'A stylized character bust modeled and textured using ZBrush, Maya, and Substance 3D Painter. Rendered using Vray',
+
+    thumbnail: './assets/images/006_model1_thumb.png',
+    image: './assets/images/006_model1_thumb.png',
+
+    technologies: 'ZBrush, Maya, Substance 3D Painter, 3D Modeling, Sculpting, Hard-Surface Modeling, Texturing',
+    role: 'Artist',
+    year: '2020',
+    link: '#',
+
+    contentBlocks: [
+        { type: 'heading', content: 'Overview' },
+        { type: 'paragraph', content: 'An old 3D asset I built. The goal was to create a compact but visually striking armored bust with strong shape language, readable panel structure, and a polished presentation render.' },
+
+        {
+            type: 'image',
+            src: './assets/images/006_mod_1.png',
+            alt: 'Stylized Sci-Fi Armor Bust'
+        },
+        {
+            type: 'image',
+            src: './assets/images/006_mod_2.png',
+            alt: 'Stylized Sci-Fi Armor Bust'
+        },
+        {
+            type: 'image',
+            src: './assets/images/006_mod_3.png',
+            alt: 'Stylized Sci-Fi Armor Bust'
+        },
+
+        { type: 'heading', content: 'Modeling' },
+        { type: 'paragraph', content: 'The asset was developed through a workflow combining sculptural form exploration and controlled hard-surface cleanup. ZBrush was used to shape the overall design and refine major forms, while Maya was used to organize the model, clean supporting geometry, Unrwapping UVs, and prepare the asset for texturing.' },
+
+        { type: 'heading', content: 'Texturing' },
+        { type: 'paragraph', content: 'Substance 3D Painter was used for baking, texturing and exporting the final PBR maps.' },
+
+        { type: 'heading', content: 'Rendering' },
+        { type: 'paragraph', content: 'Rendered with the Vray rendering plugin in Maya' },
+    ]
+},
+        {
+            id: 8,
+            category: ['3d'],
+            title: 'Raullate Table - 3D Model/Texture/Render',
+            shortDescription: 'A game-ready Raullate table modeled and textured using Maya, and Substance 3D Painter.',
+            fullDescription: 'Another old 3D asset I built for Unity VR project. Modeled and textured using Maya, and Substance 3D Painter. Rendered using Vray for team presetation.',
+
+            thumbnail: './assets/images/006_roullate_thumb.png',
+            image: './assets/images/006_roullate_thumb.png',
+
+            technologies: 'Maya, Substance 3D Painter, 3D Modeling, Sculpting, Hard-Surface Modeling, Texturing',
+            role: 'Artist',
+            year: '2020',
+            link: '#',
+
+            contentBlocks: [
+
+                { type: 'heading', content: 'Overview' },
+                {
+                    type: 'image',
+                    src: './assets/images/006_roullate_1.png',
+                    alt: 'Raullate table1'
+                },
+                {
+                    type: 'image',
+                    src: './assets/images/006_roullate_2.png',
+                    alt: 'Raullate table2'
+                },
+                {
+                    type: 'image',
+                    src: './assets/images/006_roullate_3.png',
+                    alt: 'Raullate table3'
+                },
+
+                { type: 'heading', content: 'Modeling' },
+                { type: 'paragraph', content: 'The model and UVs was developed in Maya and prepared the asset for texturing.' },
+
+                { type: 'heading', content: 'Texturing' },
+                { type: 'paragraph', content: 'Substance 3D Painter was used for baking, texturing and exporting the final PBR maps.' },
+
+                { type: 'heading', content: 'Rendering' },
+                { type: 'paragraph', content: 'Rendered with the Vray rendering plugin in Maya for presentation.' },
+            ]
+        },
+
+        {
+            id: 9,
             category: 'tools',
             title: 'Asset QA Tool for Maya and Blender',
             shortDescription: 'Streamlined batch export system for multiple 3D packages with validation.',
@@ -670,133 +909,198 @@ N = TangentToWorld(Nw, Tw, Bw, tn);              // single TBN transform`
             technologies: 'Python, MEL, Blender Python API',
             role: 'Developer',
         },
-        {
-            id: 7,
-            category: 'shaders',
-            title: 'Advanced Texture Packing',
-            shortDescription: 'Highly optimized stylized water shader for mobile games with foam and reflections.',
-            fullDescription: 'Custom water shader built for mobile game rendering with animated surface normals, edge foam detection, depth-based color gradients, and dynamic reflections. Optimized for 60 FPS on mobile devices while maintaining visual quality. Features include vertex displacement, caustics simulation, and transparency control.',
-            thumbnail: './assets/images/shadypady.png',
-            image: 'https://via.placeholder.com/900x450/1a1a1a/4ecdc4?text=Stylized+Water+Shader',
-            technologies: 'HLSL, Shader Graph, Unity',
-            role: 'Shader Artist',
-            year: '2024',
-            link: '#',
-            contentBlocks: [
-                {
-                    type: 'heading',
-                    content: 'Shader Breakdown'
-                },
-                {
-                    type: 'paragraph',
-                    content: 'The water shader uses a multi-layered approach combining vertex displacement for wave movement, edge detection for foam, and depth-based color blending for realistic water appearance.'
-                },
-                {
-                    type: 'image',
-                    src: 'https://via.placeholder.com/800x400/1a1a1a/4ecdc4?text=Shader+Graph+Example',
-                    alt: 'Water Shader Node Graph'
-                },
-                {
-                    type: 'heading',
-                    content: 'Performance Optimization'
-                },
-                {
-                    type: 'paragraph',
-                    content: 'Achieved 60 FPS on mid-range mobile devices through careful LOD implementation and instruction count optimization. Used texture atlasing and vertex color channels to minimize texture samples.'
-                }
-            ]
-        },
         
         {
-            id: 8,
-            category: '3d',
-            title: 'Character Model - Warrior',
-            shortDescription: 'Game-ready character model with full PBR textures and animation-ready rig.',
-            fullDescription: 'High-quality character model created for action game production. Features hand-painted PBR textures (4K Base Color, Normal, Roughness, Metallic), optimized mesh topology for animation (18K triangles), and complete rig with facial controls. Includes multiple LOD levels and custom blend shapes for facial expressions.',
-            thumbnail: './assets/images/shadypady.png',
-            image: 'https://via.placeholder.com/900x450/1a1a1a/b794f6?text=Warrior+Character+Model',
-            technologies: 'ZBrush, Maya, Substance Painter',
-            role: '3D Artist',
-            year: '2024',
-            link: '#'
-        },
-        
+    id: 10,
+    category: ['shaders'],
+    title: 'Maya GLSL Mipmapping - UV Bleeding Debug Shader',
+    shortDescription: 'A real-time GLSL debug shader for Maya Viewport 2.0 designed to expose potential UV bleeding and texture seam issues.',
+    fullDescription: 'A real-time GLSL debug shader created for Maya Viewport 2.0 to help identify potential UV bleeding issues before final export or engine integration. The shader is designed for close-range texture inspection, exaggerating UV island boundaries, texel transitions, and edge conditions that can reveal mip bleed and padding problems. The goal was to build a lightweight artist-facing diagnostic material that could be assigned quickly during look development and asset validation, making it easier to catch texture layout problems early in the workflow.',
+
+    thumbnail: './assets/images/008_mip_thumb.png',
+    image: './assets/images/008_mip_thumb.png',
+
+    technologies: 'GLSL, OGSFX, Maya Viewport 2.0',
+    role: 'Author',
+    year: '2023',
+    link: '#',
+
+    contentBlocks: [
+        { type: 'heading', content: 'Key Features' },
+        { type: 'paragraph', content: 'Real-time UV bleeding inspection in Maya Viewport 2.0 · Seam and padding visualization · Debug-focused GLSL shader workflow · Fast material assignment for asset validation · Useful during look development and export checks · Lightweight viewport diagnostic tool.' },
+
         {
-            id: 9,
-            category: 'shaders',
-            title: 'GLSL Mipmapping Shader',
-            shortDescription: 'Versatile toon shader system with rim lighting and outline control.',
-            fullDescription: 'A complete toon shading solution featuring multi-tone shading, dynamic rim lighting, customizable outlines, and specular highlights. Includes support for multiple light sources, shadow mapping, and color ramping. Used across 50+ characters in production with artist-friendly controls.',
-            thumbnail: './assets/images/shadypady.png',
-            image: 'https://via.placeholder.com/900x450/1a1a1a/ff8e72?text=Character+Toon+Shader',
-            technologies: 'GLSL, Unreal Material Editor',
-            role: 'Technical Artist',
-            year: '2023',
-            link: '#'
+            type: 'image',
+            src: './assets/images/010_mipmappimg_demo.gif',
+            alt: 'Maya GLSL UV Bleeding Debug Shader'
         },
 
-    // ── id:10  Unreal Cinematic Trailer ────────────────────────────────────
+        { type: 'heading', content: 'Purpose' },
+        { type: 'paragraph', content: 'The shader was built as a diagnostic tool to reveal major UV bleading issues by forcing the miplevel using the GLSL function textureLod. This is especially useful for catching UV padding issues, seam contamination, and texture bleeding that can become visible in mip transitions.' },
+        {
+            type: 'code', content:
+`color += textureLod(_MainTex, pure_sample_loc, mipLevel).rgb;`
+        },
+
+        { type: 'heading', content: 'Viewport Workflow' },
+        { type: 'paragraph', content: 'The shader is intended to be assigned temporarily during asset review inside Maya, allowing the artist to move in close and inspect problematic areas interactively. This makes it useful as a quick validation pass between UV layout, texturing, and final export, without needing to rely only on offline inspection or downstream engine testing.' },
+
+        { type: 'heading', content: 'Practical Use' },
+        { type: 'paragraph', content: 'In production-style workflows, small UV padding problems often go unnoticed until lighting, mipmapping, or texture compression makes them visible. A dedicated debug shader helps surface those risks earlier, making it easier to decide whether an asset needs more padding, cleaner shell separation, or texture rebaking before it moves further down the pipeline.' },
+
+    ]
+},
+
     {
-        id: 10,
-        category: 'shaders',
-        title: 'Unreal Cinematic Trailer',
-        shortDescription: 'Cinematic environment and lighting production in Unreal Engine — real-time rendering pipeline for a full trailer sequence.',
-        fullDescription: 'A cinematic trailer produced entirely in Unreal Engine 5, leveraging Lumen global illumination, Nanite geometry, and Movie Render Queue to achieve film-quality visuals. The project covers environment assembly, shader authoring, lighting design, Sequencer animation, and final compositing — built as an end-to-end real-time pipeline.',
-        thumbnail: './assets/images/shadypady.png',
-        image: 'https://via.placeholder.com/900x450/1a1a1a/ff8e72?text=Unreal+Cinematic+Trailer',
-        technologies: 'Unreal Engine 5, Lumen, Nanite, Sequencer, HLSL, Material Graph, Movie Render Queue',
-        role: 'Technical Artist', year: '2024', link: '#',
-        contentBlocks: [
+    id: 11,
+    category: 'misc',
+    title: 'The other side of the Universe - Unreal Cinematic Trailer',
+    shortDescription: 'A cinematic trailer design project combining Unreal Engine, Maya, After Effects, and Premiere for scene design, animation, rendering, post, and final edit.',
+    fullDescription: 'I’ve always been captivated by cinematic game trailers—especially those from Assassin’s Creed—so I set out to create my own, built around an original imaginative story. This project explores cinematic staging, mood, and visual storytelling through a real-time production pipeline. The trailer was developed using a hybrid DCC workflow: scene setup and set design in Unreal Engine, animation in Maya, and final lighting, FX, simulation, shaders, and rendering in Unreal. Rendered passes were refined in After Effects, with sound design and final editing completed in Premiere, resulting in a fully polished presentation piece.',
+
+    thumbnail: './assets/images/011_trailer_thumb.png',
+    image: './assets/images/011_trailer_thumb.png',
+
+    technologies: 'Unreal Engine 5, Maya, Sequencer, Niagara, Material Graph, After Effects, Premiere Pro, Movie Render Queue',
+    role: 'Author',
+    year: '2022',
+    link: '#',
+
+    contentBlocks: [
+        {
+            type: 'heading',
+            content: 'Trailer'
+        },
+        {
+            type: 'video',
+            url: 'https://www.youtube.com/watch?v=0eoprp_G71g/',
+            embedSrc: 'https://www.youtube.com/embed/0eoprp_G71g',
+            caption: 'Full Trailer'
+        },
+        { type: 'heading', content: 'Workflow' },
+        { type: 'code', content: ' · Scene setup and set design done in Unreal Engine\n · Rig and Animation done in Maya\n · Lighting, FX, simulations, shaders, and rendering done in Unreal Engine\n · Compositing and some post effects done in After Effects\n · Sound design and editing done in Premiere\n' },
+        {
+            type: 'heading',
+            content: 'Production Pipeline'
+        },
+        {
+            type: 'paragraph',
+            content: 'The production pipeline used Unreal Engine as the main hub for scene building, visual development, and final rendering, while Maya supported animation creation outside the engine. This setup allowed the project to combine the flexibility of DCC animation workflows with the speed and visual control of real-time cinematic rendering.'
+        },
+        {
+            type: 'heading',
+            content: 'Lighting & Final Look'
+        },
+        {
+            type: 'paragraph',
+            content: 'Lighting, shader work, FX, and simulation passes were developed directly inside Unreal Engine to shape the final visual tone of the trailer. This made it possible to unify the scene look and rendering workflow in one environment before sending the output into post-production for finishing touches.'
+        },
+        {
+            type: 'heading',
+            content: 'Post Production'
+        },
+        {
+            type: 'paragraph',
+            content: 'After rendering, the trailer was taken into After Effects for compositing and additional post-processing, then into Premiere for sound design, timing, and final editorial assembly. This final stage helped bring together the rendered visuals, motion pacing, and audio treatment into a complete cinematic presentation.'
+        },
+        {type: 'heading', content: 'Credits'},
+ 
+            { type: 'code', content: ' · Dary Palasky - Character 3D Model\n · Must Save Jane - Watch Me Burn (Music)\n · Replica Studios - Generated Voice\n · MOHAMEDHUSSIEN - Hull Spaceship 3D Model\n' },
+    ]
+},
+    {
+    id: 12,
+    category: ['misc'],
+    title: 'Unreal Arch Viz - Interior Visualization',
+    shortDescription: 'An architectural visualization project built with AutoCAD, 3ds Max, and Unreal Engine, combining layout planning, environment assembly, material development, cinematic cameras, and final rendering in real time.',
+    fullDescription: 'A real-time architectural visualization project focused on building and presenting an interior space through a connected DCC-to-engine workflow. The production pipeline began with a 2D floor layout in AutoCAD, followed by environment modeling in 3ds Max, scene transfer through Unreal-Max Live Link, and final look development inside Unreal Engine. Materials, camera animation, lighting, and final rendering were all handled in-engine, using Lumen for dynamic global illumination and Movie Render Queue for polished output.',
+
+    thumbnail: './assets/images/012/012_thumb.png',
+    image: './assets/images/012/012_thumb.png',
+
+    technologies: 'Unreal Engine, 3ds Max, AutoCAD, Lumen, Movie Render Queue, Live Link, ArchViz',
+    role: 'Artist',
+    year: '2023',
+    link: '#',
+
+    contentBlocks: [
+        { type: 'heading', content: 'Workflow' },
+        { type: 'code', content: ' · 2D Layout made in AutoCAD\n · Layout modeled in 3ds Max\n · 3D furniture assets downloaded from the internet\n · Scene connected through Unreal-Max Live Link\n · All materials and camera animation done in Unreal\n · Lighting and rendering done using Lumen and Movie Render Queue.\n' },
+
             {
-                type: 'heading',
-                content: 'Trailer'
-            },
-            {
-                type: 'paragraph',
-                content: 'The full cinematic sequence rendered in real-time inside Unreal Engine 5. Lumen drives all indirect lighting and reflections dynamically, while Nanite manages high-poly environment geometry without manual LOD authoring.'
-            },
-            {
-                // ─────────────────────────────────────────────────────────────────
-                // VIDEO BLOCK — replace YOUR_VIDEO_ID with your actual YouTube or
-                // Vimeo ID, then update both `url` and `embedSrc` accordingly.
-                //
-                // YouTube  → embedSrc: 'https://www.youtube.com/embed/YOUR_VIDEO_ID'
-                // Vimeo    → embedSrc: 'https://player.vimeo.com/video/YOUR_VIDEO_ID'
-                //
-                // To show only a clickable external link instead of an inline
-                // iframe (e.g. for a private or non-embeddable video), set
-                // embedSrc to an empty string '' and the block will render a
-                // styled button that opens the url in a new tab.
-                // ─────────────────────────────────────────────────────────────────
                 type: 'video',
-                url: 'https://www.youtube.com/watch?v=0eoprp_G71g/',
-                embedSrc: 'https://www.youtube.com/embed/0eoprp_G71g',
-                caption: 'Unreal Cinematic Trailer'
+                url: 'https://youtu.be/PUH7ts2_0bs?si=xWCjyrP6163od89v',
+                embedSrc: 'https://www.youtube.com/embed/PUH7ts2_0bs?si=yUaHHdclxVp3h0mL',
+                caption: 'Full Unreal Arch Viz'
             },
-            {
-                type: 'heading',
-                content: 'Pipeline Overview'
-            },
-            {
-                type: 'paragraph',
-                content: 'Environment assets were assembled and lit using Unreal\'s World Partition system, allowing large-scale streaming without manual volume placement. Custom material functions handle surface variation, distance blending, and macro detail layering — all driven by a shared master material that keeps instruction count consistent across the scene.'
-            },
-            {
-                type: 'heading',
-                content: 'Lighting & Rendering'
-            },
-            {
-                type: 'paragraph',
-                content: 'Lumen\'s software ray tracing mode drives the GI, with hardware ray tracing enabled for reflective surfaces. Sky atmosphere and volumetric clouds are fully dynamic, allowing time-of-day animation directly in Sequencer. Final frames were captured via Movie Render Queue with path tracer anti-aliasing for clean motion blur and sub-pixel detail.'
-            },
-            {
-                type: 'heading',
-                content: 'Sequencer & Post'
-            },
-            {
-                type: 'paragraph',
-                content: 'Camera animation, environmental event timing, and material parameter curves are all keyframed in Sequencer. Post-process volumes per shot control bloom, chromatic aberration, and colour grading LUTs — keeping the per-shot look fully art-directable without leaving the engine.'
-            }
-        ]
-    }
+        { type: 'heading', content: 'Pipeline and detailed overview' },
+        { type: 'paragraph', content: 'The project workflow began with a 2D architectural plan and continued through modeling, scene assembly, and final rendering across connected tools. Live Link supported a flexible iteration process between 3ds Max and Unreal, while Unreal Engine handled the final materials, camera animation, lighting, and rendering within a unified real-time presentation pipeline.' },
+
+        {
+            type: 'image',
+            src: './assets/images/012/4BHK_Detailed Overview 1 of 13.png',
+            alt: 'Raullate table3'
+        },
+        {
+            type: 'image',
+            src: './assets/images/012/4BHK_Detailed Overview 2 of 13.png',
+            alt: 'Raullate table3'
+        },
+        {
+            type: 'image',
+            src: './assets/images/012/4BHK_Detailed Overview 3 of 13.png',
+            alt: 'Raullate table3'
+        },
+        {
+            type: 'image',
+            src: './assets/images/012/4BHK_Detailed Overview 4 of 13.png',
+            alt: 'Raullate table3'
+        },
+        {
+            type: 'image',
+            src: './assets/images/012/4BHK_Detailed Overview 5 of 13.png',
+            alt: 'Raullate table3'
+        },
+        {
+            type: 'image',
+            src: './assets/images/012/4BHK_Detailed Overview 6 of 13.png',
+            alt: 'Raullate table3'
+        },
+        {
+            type: 'image',
+            src: './assets/images/012/4BHK_Detailed Overview 7 of 13.png',
+            alt: 'Raullate table3'
+        },
+        {
+            type: 'image',
+            src: './assets/images/012/4BHK_Detailed Overview 8 of 13.png',
+            alt: 'Raullate table3'
+        },
+        {
+            type: 'image',
+            src: './assets/images/012/4BHK_Detailed Overview 9 of 13.png',
+            alt: 'Raullate table3'
+        },
+        {
+            type: 'image',
+            src: './assets/images/012/4BHK_Detailed Overview 10 of 13.png',
+            alt: 'Raullate table3'
+        },
+        {
+            type: 'image',
+            src: './assets/images/012/4BHK_Detailed Overview 11 of 13.png',
+            alt: 'Raullate table3'
+        },
+        {
+            type: 'image',
+            src: './assets/images/012/4BHK_Detailed Overview 12 of 13.png',
+            alt: 'Raullate table3'
+        },
+        {
+            type: 'image',
+            src: './assets/images/012/4BHK_Detailed Overview 12 of 13.png',
+            alt: 'Raullate table3'
+        }
+    ]
+}
 ];
