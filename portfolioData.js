@@ -24,27 +24,36 @@ const portfolioData = [
                     type: 'heading',
                     content: 'Pipeline Structure'
                 },
+                //{ type: 'canvas', variant: 'tools', labels: ['Python', 'PyQt', 'Maya', 'API', 'JSON', 'Git'] },
+                //{ type: 'canvas', variant: 'toolpipeline' },
+
                 {
-                    type: 'code',
-                    content: `
-                                     Artists in Maya / Blender runs One-Click Installation
-                                               from a Centralized Shared Drive
-                                                            │
-                                                            ▼
-                              Tool Developers → Build Features or Fix Bugs → Push to Git Dev Branch
-                                                            │
-                                                            ▼
-                                      PR (Dev → Release) → PR Approved on Release Branch
-                                                            │
-                                                            ▼
-                                Trigger Pull of Latest Release Code to Centralized Shared Drive
-                                                            │
-                                                            ▼
-                                          Tools Auto-Update on Artist Machines
-                                                            │
-                                                            ▼
-                                     Changelog Popup Appears when Maya / Blender Opens
-`
+                    type: 'canvas',
+                    variant: 'toolpipeline',
+                    config: {
+                        nodes: [
+                            { label: 'Artists',      sub: 'Maya / Blender' },
+                            { label: 'Shared Drive', sub: 'Centralized Source' },
+                            { label: 'Developers',   sub: 'Git Dev Branch' },
+                            { label: 'Pull Request', sub: 'Dev → Release' },
+                            { label: 'Sync Drive',   sub: 'Pull Latest Code' },
+                            { label: 'Auto-Update',  sub: 'Artist Machines' },
+                            { label: 'Changelog',    sub: 'On Next Open' },
+                        ],
+                        edges: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,0]],
+                        stepLabels: [
+                            'Artists install tools from Shared Drive',
+                            'Devs pull latest from Shared Drive',
+                            'New feature pushed to Git Dev Branch',
+                            'PR raised: Dev → Release Branch',
+                            'Release synced back to Shared Drive',
+                            'Tools auto-update on artist machines',
+                            'Changelog popup on next Maya open',
+                        ],
+                        accent:   '#c9a84c',
+                        teal:     '#4ecdc4',
+                        particle: '#ffd93d',
+                    }
                 },
                 {
                     type: 'heading',
@@ -465,6 +474,11 @@ bl.addWidget(self._section_lighting())
                     type: 'image',
                     src: './assets/images/002_blingPhongLightAttr.png',
                     alt: 'LightAttr'
+                },
+                {
+                    type: 'image',
+                    src: './assets/images/002_blingPhongLights.png',
+                    alt: 'LightTyps'
                 },
                 {
                     type: 'code', content:
@@ -899,16 +913,62 @@ return float3(normalXY, normalZ);`
         },
 
         {
-            id: 9,
-            category: 'tools',
-            title: 'Asset QA Tool for Maya and Blender',
-            shortDescription: 'Streamlined batch export system for multiple 3D packages with validation.',
-            fullDescription: 'Multi-DCC export pipeline supporting Maya, Blender, and 3DS Max. Features include automated file conversion, texture optimization, LOD generation, and integration with Perforce version control. Handles 100+ assets per batch with full logging and error reporting.',
-            thumbnail: './assets/images/shadypady.png',
-            image: 'https://via.placeholder.com/900x450/1a1a1a/4ecdc4?text=Batch+Export+Tool',
-            technologies: 'Python, MEL, Blender Python API',
-            role: 'Developer',
+    id: 9,
+    category: 'misc',
+    title: 'Biped Character Rig - Game Ready',
+    shortDescription: 'A production-ready character rig built with animator-friendly controls, deformation support, and a demo including both manual rig animation and mocap retargeting tests.',
+    fullDescription: 'A production-focused character rig built for clean deformation, animator-friendly controls, and engine-ready export workflows.',
+
+    thumbnail: './assets/images/009_rig_thumb.png',
+    image: './assets/images/009_rig_thumb.png',
+
+    technologies: 'Maya, Character Rigging, Skinning, Animation, Mocap Retargeting',
+    role: 'Technical Artist / Rigger',
+    year: '2022',
+    link: '#',
+
+    contentBlocks: [
+        {
+            type: 'heading',
+            content: 'Rig Demo'
         },
+        {
+            type: 'video',
+            url: 'https://youtu.be/SNyRDEWqu5U',
+            embedSrc: 'https://www.youtube.com/embed/SNyRDEWqu5U',
+            caption: 'Rig Demo'
+        },
+        {
+            type: 'heading',
+            content: 'Key Features'
+        },
+        {
+            type: 'code',
+            content: ' · Organized hierarchy with clean EngineExportJoints  \n · IK/FK setup for limbs\n · Bendy and Stretchy Limbs\n · Space switching\n · Stable deformation support\n · Body and limb posing controls\n · Animation-ready rig usability\n · Mocap retarget compatibility testing.'
+        },
+        {
+            type: 'heading',
+            content: 'Rig Setup'
+        },
+        {
+            type: 'paragraph',
+            content: 'The rig was built manually from scratch to cover the essential control requirements needed for character animation in a production-style workflow. Emphasis was placed on usability, predictable transformations, and keeping the control system clear enough for efficient posing and animation blocking.'
+        },
+        {
+            type: 'heading',
+            content: 'Mocap Animation Testing'
+        },
+        {
+            type: 'paragraph',
+            content: 'To validate the setup beyond static poses, the rig was tested both through direct animation controls and through a mocap retargeting pass. This helped evaluate whether the hierarchy, joint behavior, and deformation setup could hold up under broader motion conditions instead of only controlled key poses.'
+        },
+        {
+            type: 'image',
+            src: './assets/images/009_rigMocap_demo.gif',
+            alt: 'RigMocap'
+        },
+    ]
+},
         
         {
     id: 10,

@@ -206,12 +206,7 @@ nav::after { content:''; display:block; position:absolute; bottom:0; left:0; rig
 .content-block-code pre { margin:0; font-family:'Annotation Mono','DM Mono',monospace; font-size:0.88rem; color:var(--green); line-height:1.75; white-space:pre-wrap; word-break:break-word; overflow-wrap:break-word; }
 .content-block-code code { color:var(--green); font-family:inherit; }
 
-/* ── VIDEO BLOCK ──────────────────────────────────────────────────────────
-   Matches the aesthetic of image/code blocks — corner ticks, gold label bar.
-   Supports two modes:
-     1. Embedded iframe (when embedSrc is set)  — 16:9 responsive player
-     2. External link button fallback (no embed) — styled CTA with play icon
-   ────────────────────────────────────────────────────────────────────── */
+/* VIDEO BLOCK */
 .content-block-video {
     position: relative;
     margin: 20px 0;
@@ -219,7 +214,6 @@ nav::after { content:''; display:block; position:absolute; bottom:0; left:0; rig
     background: #000;
     overflow: hidden;
 }
-/* Gold top-left label bar (mirrors .content-block-code::before) */
 .content-block-video .video-label {
     position: absolute;
     top: 0; left: 0;
@@ -234,7 +228,6 @@ nav::after { content:''; display:block; position:absolute; bottom:0; left:0; rig
     pointer-events: none;
     white-space: nowrap;
 }
-/* Corner accent marks (mirrors .content-block-image) */
 .content-block-video .video-corner-tl,
 .content-block-video .video-corner-br {
     position: absolute;
@@ -242,18 +235,17 @@ nav::after { content:''; display:block; position:absolute; bottom:0; left:0; rig
     z-index: 4; pointer-events: none;
 }
 .content-block-video .video-corner-tl {
-    top: 28px; left: 8px;          /* below the label bar */
+    top: 28px; left: 8px;
     border-top: 1px solid #888; border-left: 1px solid #888;
 }
 .content-block-video .video-corner-br {
     bottom: 8px; right: 8px;
     border-bottom: 1px solid #888; border-right: 1px solid #888;
 }
-/* 16:9 responsive iframe container */
 .content-block-video .video-embed-wrapper {
     position: relative;
     width: 100%;
-    padding-top: 56.25%;   /* 16 : 9 */
+    padding-top: 56.25%;
 }
 .content-block-video .video-embed-wrapper iframe {
     position: absolute;
@@ -262,7 +254,6 @@ nav::after { content:''; display:block; position:absolute; bottom:0; left:0; rig
     border: none;
     display: block;
 }
-/* External-link fallback button */
 .content-block-video .video-link-btn {
     display: flex;
     align-items: center;
@@ -289,6 +280,23 @@ nav::after { content:''; display:block; position:absolute; bottom:0; left:0; rig
     transition: opacity 0.2s;
 }
 .content-block-video .video-link-btn:hover svg { opacity: 1; }
+
+/* CANVAS BLOCK */
+    .content-block-canvas-wrap {
+        position: relative;
+        margin: 18px 0;
+        overflow: hidden;
+    }
+.content-block-canvas {
+    display: block;
+    width: 100%;
+    height: 280px;
+}
+/* Paragraphs immediately after a canvas wrap are centered + slightly larger */
+.content-block-canvas-wrap + .content-block .content-block-paragraph {
+    font-size: 1.045rem;
+    text-align: center;
+}
 
 /* FOOTER */
 .footer-hire { margin-bottom:40px; }
@@ -482,7 +490,7 @@ footer p { font-family:'DM Mono',monospace; font-size:0.78rem; letter-spacing:1p
 <script src="./portfolioData.js"></script>
 <script>
 
-// ── Helpers ──────────────────────────────────────────────────────────────────
+// ── Helpers ───────────────────────────────────────────────────────────────────
 function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
@@ -490,41 +498,38 @@ function escapeHtml(text) {
 }
 
 // ── Video block builder ───────────────────────────────────────────────────────
-// Renders either an embedded 16:9 iframe or a styled external-link button.
-// Set block.embedSrc = '' to force link-only mode (private / non-embeddable video).
-    function buildVideoBlock(block) {
-        const caption = block.caption || 'Video';
-        const hasEmbed = block.embedSrc && block.embedSrc.trim() !== '';
-        const safeUrl = escapeHtml(block.url || '#');
-        const safeSrc = hasEmbed ? escapeHtml(block.embedSrc) : '';
-        const safeCap = escapeHtml(caption);
+function buildVideoBlock(block) {
+    const caption  = block.caption || 'Video';
+    const hasEmbed = block.embedSrc && block.embedSrc.trim() !== '';
+    const safeUrl  = escapeHtml(block.url || '#');
+    const safeCap  = escapeHtml(caption);
 
-        const corners = `
+    const corners = `
         <span class="video-label">${safeCap}</span>
         <span class="video-corner-tl"></span>
         <span class="video-corner-br"></span>`;
 
-        if (hasEmbed) {
-            return `
+    if (hasEmbed) {
+        return `
         <div class="content-block-video">
             ${corners}
             <div class="video-embed-wrapper">
                 <iframe
-                    src="${safeSrc}"
-                    title="YouTube video player"
+                    src="${block.embedSrc.trim()}"
+                    title="${safeCap}"
+                    frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen
-                    loading="lazy"
                     referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen
                 ></iframe>
             </div>
         </div>`;
-        }
+    }
 
-        return `
+    return `
     <div class="content-block-video">
         ${corners}
-        <a class="video-link-btn" href="${safeUrl}" target="_blank" rel="noopener">
+        <a class="video-link-btn" href="${safeUrl}" target="_blank" rel="noopener noreferrer">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
                  stroke="currentColor" stroke-width="1.6"
                  stroke-linecap="round" stroke-linejoin="round">
@@ -534,14 +539,305 @@ function escapeHtml(text) {
             Watch Video&nbsp;&nbsp;—&nbsp;&nbsp;${safeUrl}
         </a>
     </div>`;
-    }
+}
+
+// ── Canvas block builder ──────────────────────────────────────────────────────
+function buildCanvasBlock(block) {
+    const id      = 'cv_' + Math.random().toString(36).slice(2, 9);
+    const variant = block.variant || 'pipeline';
+    const labels  = JSON.stringify(block.labels || null);
+    const config  = JSON.stringify(block.config  || null);
+    return `
+    <div class="content-block-canvas-wrap" data-variant="${variant}">
+        <canvas
+            id="${id}"
+            class="content-block-canvas"
+            data-variant="${variant}"
+            data-labels='${labels}'
+            data-config='${config}'
+        ></canvas>
+    </div>`;
+}
+
+// ── Canvas animation definitions ──────────────────────────────────────────────
+const canvasDefs = {
+
+    pipeline: function(canvas, labels) {
+        const ctx  = canvas.getContext('2d');
+        const tags = labels || ['CI/CD','JSON','GIT','API','VCS','MEL'];
+        let t = 0, raf;
+        canvas.width  = canvas.offsetWidth || 400;
+        canvas.height = 280;
+        function draw() {
+            ctx.fillStyle = '#0d0d0d';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            const cols = Math.floor(canvas.width / 60) + 2, rows = 6;
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    const x = c * 60 + (r % 2) * 30, y = r * 50 + 10;
+                    const phase = Math.sin(t * 0.04 + c * 0.5 + r * 0.8);
+                    const alpha = 0.2 + 0.5 * Math.max(0, phase);
+                    ctx.strokeStyle = `rgba(255,107,74,${alpha})`;
+                    ctx.lineWidth   = 1.5;
+                    ctx.strokeRect(x, y, 40, 30);
+                    if (c < cols - 1) {
+                        ctx.beginPath();
+                        ctx.moveTo(x + 40, y + 15);
+                        ctx.lineTo(x + 60, y + 15);
+                        ctx.strokeStyle = `rgba(78,205,196,${alpha * 0.8})`;
+                        ctx.stroke();
+                    }
+                    ctx.fillStyle = `rgba(255,217,61,${alpha})`;
+                    ctx.font      = '7px DM Mono,monospace';
+                    ctx.fillText(tags[Math.abs(r * cols + c) % tags.length], x + 6, y + 19);
+                }
+            }
+            const lineY = (t * 1.2) % (canvas.height + 20) - 10;
+            const grad  = ctx.createLinearGradient(0, lineY - 4, 0, lineY + 4);
+            grad.addColorStop(0,   'transparent');
+            grad.addColorStop(0.5, 'rgba(255,107,74,0.6)');
+            grad.addColorStop(1,   'transparent');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, lineY - 4, canvas.width, 8);
+            t++;
+            raf = requestAnimationFrame(draw);
+        }
+        canvas._stopAnim = () => cancelAnimationFrame(raf);
+        draw();
+    },
+
+    shader: function(canvas, labels) {
+        const ctx = canvas.getContext('2d');
+        let t = 0, raf;
+        canvas.width  = canvas.offsetWidth || 400;
+        canvas.height = 280;
+        function draw() {
+            ctx.fillStyle = '#0d0d0d';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            for (let x = 0; x < canvas.width; x += 4) {
+                for (let y = 0; y < canvas.height; y += 4) {
+                    const nx   = x / canvas.width, ny = y / canvas.height;
+                    const wave = Math.sin(nx * 8 + t * 0.05) * Math.cos(ny * 6 - t * 0.03) * Math.sin((nx + ny) * 4 + t * 0.02);
+                    const r    = Math.floor(128 + wave * 127),
+                          g    = Math.floor(200 + wave * 55),
+                          b    = Math.floor(180 + wave * 75);
+                    ctx.fillStyle = `rgb(${r},${g},${b})`;
+                    ctx.fillRect(x, y, 4, 4);
+                }
+            }
+            ctx.fillStyle = 'rgba(13,13,13,0.55)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            t++;
+            raf = requestAnimationFrame(draw);
+        }
+        canvas._stopAnim = () => cancelAnimationFrame(raf);
+        draw();
+    },
+
+    tools: function(canvas, labels) {
+        const ctx = canvas.getContext('2d');
+        let t = 0, raf;
+        canvas.width  = canvas.offsetWidth || 400;
+        canvas.height = 280;
+        const defaultLabels = ['Maya','Git','Blender','PyQt','JSON','MEL'];
+        const nodeLabels    = (labels && labels.length >= 6) ? labels : defaultLabels;
+        const nodes = [
+            { x:0.2,  y:0.3,  l: nodeLabels[0] },
+            { x:0.5,  y:0.15, l: nodeLabels[1] },
+            { x:0.8,  y:0.3,  l: nodeLabels[2] },
+            { x:0.15, y:0.65, l: nodeLabels[3] },
+            { x:0.5,  y:0.75, l: nodeLabels[4] },
+            { x:0.85, y:0.65, l: nodeLabels[5] }
+        ];
+        const edges = [[0,1],[1,2],[0,3],[1,4],[2,5],[3,4],[4,5]];
+        function draw() {
+            ctx.fillStyle = '#0d0d0d';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            edges.forEach(([a, b]) => {
+                const na    = nodes[a], nb = nodes[b];
+                const pulse = 0.3 + 0.4 * Math.abs(Math.sin(t * 0.03 + a));
+                ctx.beginPath();
+                ctx.moveTo(na.x * canvas.width, na.y * canvas.height);
+                ctx.lineTo(nb.x * canvas.width, nb.y * canvas.height);
+                ctx.strokeStyle = `rgba(78,205,196,${pulse})`;
+                ctx.lineWidth   = 1.5;
+                ctx.stroke();
+            });
+            nodes.forEach((n, i) => {
+                const px   = n.x * canvas.width, py = n.y * canvas.height;
+                const r    = 18 + 4 * Math.sin(t * 0.04 + i);
+                const glow = 0.4 + 0.4 * Math.sin(t * 0.04 + i);
+                ctx.beginPath();
+                ctx.arc(px, py, r, 0, Math.PI * 2);
+                ctx.fillStyle   = `rgba(255,107,74,${glow})`;
+                ctx.fill();
+                ctx.strokeStyle = '#ffd93d';
+                ctx.lineWidth   = 2;
+                ctx.stroke();
+                ctx.fillStyle  = '#f5f1e8';
+                ctx.font       = 'bold 10px DM Mono,monospace';
+                ctx.textAlign  = 'center';
+                ctx.fillText(n.l, px, py + 4);
+            });
+            t++;
+            raf = requestAnimationFrame(draw);
+        }
+        canvas._stopAnim = () => cancelAnimationFrame(raf);
+        draw();
+    },
+
+    toolpipeline: function(canvas, labels, config) {
+        const ctx = canvas.getContext('2d');
+        let t = 0, raf;
+        canvas.width  = canvas.offsetWidth || 400;
+        canvas.height = 280;
+        const W = canvas.width, H = canvas.height;
+
+        const nodes = (config && config.nodes) || [
+            { label: 'Artists',      sub: 'Maya / Blender'    },
+            { label: 'Shared Drive', sub: 'Centralized Source' },
+            { label: 'Developers',   sub: 'Git Dev Branch'     },
+            { label: 'Pull Request', sub: 'Dev → Release'      },
+            { label: 'Sync Drive',   sub: 'Pull Latest Code'   },
+            { label: 'Auto-Update',  sub: 'Artist Machines'    },
+            { label: 'Changelog',    sub: 'On Next Open'       },
+        ];
+        const edges = (config && config.edges) ||
+            nodes.map((_, i) => [i, (i + 1) % nodes.length]);
+        const stepLabels = (config && config.stepLabels) ||
+            edges.map(([a, b]) => `${nodes[a].label} → ${nodes[b].label}`);
+        const accent   = (config && config.accent)   || '#c9a84c';
+        const particle = (config && config.particle) || '#ffd93d';
+
+        const N     = nodes.length;
+        const BOX_W = W * 0.62;
+        const BOX_H = 28;
+        const GAP   = (H - 24 - N * BOX_H) / (N - 1);
+        const LEFT  = (W - BOX_W) / 2;
+
+        function nodeY(i)  { return 12 + i * (BOX_H + GAP); }
+        function nodeCX()  { return W / 2; }
+
+        const glow = new Array(N).fill(0);
+
+        function drawNode(i, g) {
+            const x     = LEFT, y = nodeY(i);
+            const isLit = g > 0.05;
+            ctx.fillStyle   = isLit ? 'rgba(201,168,76,0.07)' : 'rgba(24,24,24,0.95)';
+            ctx.fillRect(x, y, BOX_W, BOX_H);
+            ctx.strokeStyle = isLit ? `rgba(201,168,76,${0.3 + g * 0.7})` : '#2a2a2a';
+            ctx.lineWidth   = isLit ? 1.5 : 1;
+            ctx.strokeRect(x, y, BOX_W, BOX_H);
+            ctx.fillStyle   = `rgba(201,168,76,${g})`;
+            ctx.fillRect(x, y, 2, BOX_H);
+            // Label — centered
+            ctx.textAlign = 'center';
+            ctx.font = 'bold 14px DM Mono,monospace';
+            ctx.fillStyle = isLit ? accent : '#e0ddd6';
+            ctx.fillText(nodes[i].label, x + BOX_W / 2, y + BOX_H * 0.42);
+
+            // Sub-label — centered, truncated if needed
+            ctx.font = '8px DM Mono,monospace';
+            ctx.fillStyle = isLit ? `rgba(78,205,196,${0.6 + g * 0.4})` : '#5a7a78';
+            const maxW = BOX_W - 16;
+            let sub = nodes[i].sub;
+            while (ctx.measureText(sub).width > maxW && sub.length > 4) sub = sub.slice(0, -1);
+            if (sub !== nodes[i].sub) sub += '…';
+            ctx.fillText(sub, x + BOX_W / 2, y + BOX_H * 0.78);
+
+            ctx.fillStyle   = isLit ? `rgba(201,168,76,${g})` : 'rgba(255,255,255,0.06)';
+            ctx.fillRect(x + BOX_W - 22, y + (BOX_H - 14) / 2, 18, 14);
+            ctx.font        = 'bold 7px DM Mono,monospace';
+            ctx.textAlign   = 'center';
+            ctx.fillStyle   = isLit ? '#111' : '#444';
+            ctx.fillText(String(i + 1).padStart(2, '0'), x + BOX_W - 13, y + BOX_H * 0.62);
+        }
+
+        function drawConnector(fromI, toI, alpha) {
+            const x  = nodeCX();
+            const y1 = nodeY(fromI) + BOX_H;
+            const y2 = nodeY(toI);
+            ctx.beginPath();
+            ctx.moveTo(x, y1);
+            ctx.lineTo(x, y2);
+            ctx.strokeStyle = `rgba(78,205,196,${alpha})`;
+            ctx.lineWidth   = 1;
+            ctx.setLineDash([3, 3]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.beginPath();
+            ctx.moveTo(x,     y2);
+            ctx.lineTo(x - 4, y2 - 6);
+            ctx.lineTo(x + 4, y2 - 6);
+            ctx.closePath();
+            ctx.fillStyle = `rgba(78,205,196,${alpha})`;
+            ctx.fill();
+        }
+
+        const STEP_FRAMES = 55;
+
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+            ctx.fillStyle = '#0d0d0d';
+            ctx.fillRect(0, 0, W, H);
+
+            const frame    = t % (edges.length * STEP_FRAMES);
+            const edgeIdx  = Math.floor(frame / STEP_FRAMES);
+            const progress = (frame % STEP_FRAMES) / STEP_FRAMES;
+            const [fromI, toI] = edges[edgeIdx];
+
+            for (let i = 0; i < N; i++) glow[i] = Math.max(0, glow[i] - 0.02);
+            glow[fromI] = Math.max(glow[fromI], 1 - progress * 0.4);
+            glow[toI]   = Math.max(glow[toI],   progress);
+
+            edges.forEach(([a, b], ei) => {
+                if (b !== a + 1) return;
+                const isActive = ei === edgeIdx;
+                drawConnector(a, b, isActive ? 0.5 + 0.3 * Math.sin(t * 0.08) : 0.12);
+            });
+
+            nodes.forEach((_, i) => drawNode(i, glow[i]));
+
+            if (toI === fromI + 1) {
+                const y1 = nodeY(fromI) + BOX_H;
+                const y2 = nodeY(toI);
+                const py = y1 + (y2 - y1) * progress;
+                const px = nodeCX();
+                const grad = ctx.createRadialGradient(px, py, 0, px, py, 8);
+                grad.addColorStop(0,   'rgba(255,217,61,0.95)');
+                grad.addColorStop(0.5, 'rgba(255,217,61,0.2)');
+                grad.addColorStop(1,   'rgba(255,217,61,0)');
+                ctx.fillStyle = grad;
+                ctx.beginPath();
+                ctx.arc(px, py, 8, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+                ctx.fillStyle = particle;
+                ctx.fill();
+            }
+
+            ctx.fillStyle = 'rgba(13,13,13,0.85)';
+            ctx.fillRect(0, H - 16, W, 16);
+            ctx.fillStyle = `rgba(201,168,76,${0.45 + 0.35 * Math.sin(t * 0.06)})`;
+            ctx.font      = '6.5px DM Mono,monospace';
+            ctx.textAlign = 'center';
+            ctx.fillText(stepLabels[edgeIdx] || '', W / 2, H - 5);
+
+            t++;
+            raf = requestAnimationFrame(draw);
+        }
+        canvas._stopAnim = () => cancelAnimationFrame(raf);
+        draw();
+    },
+
+}; // end canvasDefs
 
 
 // ── Render cards ──────────────────────────────────────────────────────────────
 function renderPortfolio(filter = 'all') {
     const grid = document.getElementById('portfolioGrid');
     grid.innerHTML = '';
-
     const data = filter === 'all'
         ? portfolioData
         : portfolioData.filter(item =>
@@ -549,17 +845,14 @@ function renderPortfolio(filter = 'all') {
                 ? item.category.includes(filter)
                 : item.category === filter
           );
-
     data.forEach(item => {
         const card = document.createElement('div');
-        card.className = 'portfolio-item';
+        card.className      = 'portfolio-item';
         card.dataset.category = Array.isArray(item.category) ? item.category[0] : item.category;
-        card.onclick = () => openModal(item);
-
+        card.onclick        = () => openModal(item);
         const tags = Array.isArray(item.category)
             ? item.category.map(c => `<span class="category-tag">${c}</span>`).join(' ')
             : `<span class="category-tag">${item.category}</span>`;
-
         card.innerHTML = `
             <div class="thumbnail-wrapper">
                 <img src="${item.thumbnail}" alt="${item.title}" class="thumbnail">
@@ -585,7 +878,7 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 
 // ── Modal open ────────────────────────────────────────────────────────────────
 function openModal(item) {
-    document.getElementById('modalImage').src = item.image;
+    document.getElementById('modalImage').src        = item.image;
     document.getElementById('modalCategory').textContent =
         Array.isArray(item.category) ? item.category.join(' · ') : item.category;
     document.getElementById('modalTitle').textContent       = item.title;
@@ -619,6 +912,9 @@ function openModal(item) {
                 case 'video':
                     blocksHtml += `<div class="content-block">${buildVideoBlock(block)}</div>`;
                     break;
+                case 'canvas':
+                    blocksHtml += `<div class="content-block">${buildCanvasBlock(block)}</div>`;
+                    break;
             }
         });
         blocksHtml += '</div>';
@@ -644,11 +940,30 @@ function openModal(item) {
             <span class="detail-value"><a href="${item.link}" target="_blank">View on GitHub →</a></span>
         </div>` : ''}`;
 
+    // Stop any running canvas animations from a previous modal open
+    document.querySelectorAll('.content-block-canvas').forEach(c => {
+        if (c._stopAnim) c._stopAnim();
+    });
+
     document.getElementById('modal').classList.add('active');
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden'; // ← single, correct location
+
+    // Init new canvas blocks once the DOM has updated
+    requestAnimationFrame(() => {
+        document.querySelectorAll('.content-block-canvas').forEach(canvas => {
+            const variant = canvas.dataset.variant;
+            const labels  = JSON.parse(canvas.dataset.labels);
+            const config  = JSON.parse(canvas.dataset.config);
+            if (canvasDefs[variant]) canvasDefs[variant](canvas, labels, config);
+        });
+    });
 }
 
 function closeModal() {
+    // Stop all canvas animations when modal closes
+    document.querySelectorAll('.content-block-canvas').forEach(c => {
+        if (c._stopAnim) c._stopAnim();
+    });
     document.getElementById('modal').classList.remove('active');
     document.body.style.overflow = 'auto';
 }
@@ -664,20 +979,19 @@ renderPortfolio();
 (function () {
     const canvas = document.getElementById('skillsCanvas');
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx    = canvas.getContext('2d');
     const COLORS = ['#4ecdc4','#c9a84c','#a8c5c1','#b794f6'];
     const N = 55, DIST = 160;
     let nodes = [], W, H;
-
     function resize() {
         W = canvas.width  = canvas.parentElement.offsetWidth;
         H = canvas.height = canvas.parentElement.offsetHeight;
     }
     function initNodes() {
-        nodes = Array.from({length: N}, () => ({
+        nodes = Array.from({ length: N }, () => ({
             x: Math.random() * W, y: Math.random() * H,
             vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5,
-            r: Math.random() * 2 + 1,
+            r:  Math.random() * 2 + 1,
             color: COLORS[Math.floor(Math.random() * COLORS.length)]
         }));
     }
@@ -697,7 +1011,7 @@ renderPortfolio();
                     ctx.moveTo(nodes[i].x, nodes[i].y);
                     ctx.lineTo(nodes[j].x, nodes[j].y);
                     ctx.strokeStyle = `rgba(201,168,76,${(1 - d / DIST) * 0.35})`;
-                    ctx.lineWidth = 0.6;
+                    ctx.lineWidth   = 0.6;
                     ctx.stroke();
                 }
             }
@@ -705,7 +1019,7 @@ renderPortfolio();
         nodes.forEach(n => {
             ctx.beginPath();
             ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-            ctx.fillStyle  = n.color;
+            ctx.fillStyle   = n.color;
             ctx.shadowColor = n.color;
             ctx.shadowBlur  = 6;
             ctx.fill();
@@ -716,6 +1030,7 @@ renderPortfolio();
     window.addEventListener('resize', () => { resize(); initNodes(); });
     resize(); initNodes(); draw();
 })();
+
 </script>
 </body>
 </html>
