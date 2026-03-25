@@ -686,143 +686,180 @@ const canvasDefs = {
         draw();
     },
 
-    toolpipeline: function(canvas, labels, config) {
+    toolpipeline: function (canvas, labels, config) {
         const ctx = canvas.getContext('2d');
         let t = 0, raf;
-        canvas.width  = canvas.offsetWidth || 400;
-        canvas.height = 280;
+
+        canvas.width = canvas.offsetWidth || 400;
+        canvas.height = 620;
+        canvas.style.height = '620px';
+
         const W = canvas.width, H = canvas.height;
 
         const nodes = (config && config.nodes) || [
-            { label: 'Artists',      sub: 'Maya / Blender'    },
+            { label: 'Artists', sub: 'Maya / Blender' },
             { label: 'Shared Drive', sub: 'Centralized Source' },
-            { label: 'Developers',   sub: 'Git Dev Branch'     },
-            { label: 'Pull Request', sub: 'Dev → Release'      },
-            { label: 'Sync Drive',   sub: 'Pull Latest Code'   },
-            { label: 'Auto-Update',  sub: 'Artist Machines'    },
-            { label: 'Changelog',    sub: 'On Next Open'       },
+            { label: 'Developers', sub: 'Git Dev Branch' },
+            { label: 'Pull Request', sub: 'Dev → Release' },
+            { label: 'Sync Drive', sub: 'Pull Latest Code' },
+            { label: 'Auto-Update', sub: 'Artist Machines' },
+            { label: 'Changelog', sub: 'On Next Open' },
         ];
         const edges = (config && config.edges) ||
             nodes.map((_, i) => [i, (i + 1) % nodes.length]);
         const stepLabels = (config && config.stepLabels) ||
             edges.map(([a, b]) => `${nodes[a].label} → ${nodes[b].label}`);
-        const accent   = (config && config.accent)   || '#c9a84c';
+        const accent = (config && config.accent) || '#c9a84c';
         const particle = (config && config.particle) || '#ffd93d';
 
-        const N     = nodes.length;
-        const BOX_W = W * 0.62;
-        const BOX_H = 28;
-        const GAP   = (H - 24 - N * BOX_H) / (N - 1);
-        const LEFT  = (W - BOX_W) / 2;
+        const N = nodes.length;
+        const BOX_W = W * 0.44;   // narrower
+        const BOX_H = 52;         // taller
+        const PAD_T = 28;
+        const PAD_B = 60;
+        const TOTAL_H = H - PAD_T - PAD_B;
+        const GAP = (TOTAL_H - N * BOX_H) / (N - 1);
+        const LEFT = (W - BOX_W) / 2;
 
-        function nodeY(i)  { return 12 + i * (BOX_H + GAP); }
-        function nodeCX()  { return W / 2; }
+        function nodeY(i) { return PAD_T + i * (BOX_H + GAP); }
+        function nodeCX() { return W / 2; }
 
         const glow = new Array(N).fill(0);
 
         function drawNode(i, g) {
-            const x     = LEFT, y = nodeY(i);
+            const x = LEFT;
+            const y = nodeY(i);
             const isLit = g > 0.05;
-            ctx.fillStyle   = isLit ? 'rgba(201,168,76,0.07)' : 'rgba(24,24,24,0.95)';
+
+            // Box fill
+            ctx.fillStyle = isLit ? 'rgba(201,168,76,0.09)' : 'rgba(22,22,22,0.98)';
             ctx.fillRect(x, y, BOX_W, BOX_H);
-            ctx.strokeStyle = isLit ? `rgba(201,168,76,${0.3 + g * 0.7})` : '#2a2a2a';
-            ctx.lineWidth   = isLit ? 1.5 : 1;
+
+            // Border
+            ctx.strokeStyle = isLit ? `rgba(201,168,76,${0.25 + g * 0.75})` : '#2a2a2a';
+            ctx.lineWidth = isLit ? 1.5 : 1;
             ctx.strokeRect(x, y, BOX_W, BOX_H);
-            ctx.fillStyle   = `rgba(201,168,76,${g})`;
+
+            // Left accent bar
+            ctx.fillStyle = `rgba(201,168,76,${g * 0.9})`;
             ctx.fillRect(x, y, 2, BOX_H);
-            // Label — centered
+
+            // Step number badge — right side
+            const BADGE_W = 26, BADGE_H = 18;
+            const bx = x + BOX_W - BADGE_W - 8;
+            const by = y + (BOX_H - BADGE_H) / 2;
+            ctx.fillStyle = isLit ? `rgba(201,168,76,${0.15 + g * 0.7})` : 'rgba(255,255,255,0.04)';
+            ctx.fillRect(bx, by, BADGE_W, BADGE_H);
+            ctx.font = 'bold 10px DM Mono,monospace';
             ctx.textAlign = 'center';
-            ctx.font = 'bold 14px DM Mono,monospace';
-            ctx.fillStyle = isLit ? accent : '#e0ddd6';
-            ctx.fillText(nodes[i].label, x + BOX_W / 2, y + BOX_H * 0.42);
+            ctx.fillStyle = isLit ? accent : '#444';
+            ctx.fillText(String(i + 1).padStart(2, '0'), bx + BADGE_W / 2, by + BADGE_H * 0.72);
 
-            // Sub-label — centered, truncated if needed
-            ctx.font = '8px DM Mono,monospace';
-            ctx.fillStyle = isLit ? `rgba(78,205,196,${0.6 + g * 0.4})` : '#5a7a78';
-            const maxW = BOX_W - 16;
+            // Text area between left bar and badge
+            const textLeft = x + 12;
+            const textRight = bx - 6;
+            const availW = textRight - textLeft;
+            const textCX = textLeft + availW / 2;
+
+            // Label
+            ctx.textAlign = 'center';
+            ctx.font = 'bold 13px DM Mono,monospace';
+            ctx.fillStyle = isLit ? accent : '#d8d5cc';
+            ctx.fillText(nodes[i].label, textCX, y + BOX_H * 0.40);
+
+            // Sub-label
+            ctx.font = '10.5px DM Mono,monospace';
+            ctx.fillStyle = isLit ? `rgba(78,205,196,${0.55 + g * 0.45})` : '#4a6a68';
             let sub = nodes[i].sub;
-            while (ctx.measureText(sub).width > maxW && sub.length > 4) sub = sub.slice(0, -1);
+            while (ctx.measureText(sub).width > availW && sub.length > 4) sub = sub.slice(0, -1);
             if (sub !== nodes[i].sub) sub += '…';
-            ctx.fillText(sub, x + BOX_W / 2, y + BOX_H * 0.78);
-
-            ctx.fillStyle   = isLit ? `rgba(201,168,76,${g})` : 'rgba(255,255,255,0.06)';
-            ctx.fillRect(x + BOX_W - 22, y + (BOX_H - 14) / 2, 18, 14);
-            ctx.font        = 'bold 7px DM Mono,monospace';
-            ctx.textAlign   = 'center';
-            ctx.fillStyle   = isLit ? '#111' : '#444';
-            ctx.fillText(String(i + 1).padStart(2, '0'), x + BOX_W - 13, y + BOX_H * 0.62);
+            ctx.fillText(sub, textCX, y + BOX_H * 0.72);
         }
 
         function drawConnector(fromI, toI, alpha) {
-            const x  = nodeCX();
+            const x = nodeCX();
             const y1 = nodeY(fromI) + BOX_H;
             const y2 = nodeY(toI);
+
             ctx.beginPath();
             ctx.moveTo(x, y1);
             ctx.lineTo(x, y2);
             ctx.strokeStyle = `rgba(78,205,196,${alpha})`;
-            ctx.lineWidth   = 1;
-            ctx.setLineDash([3, 3]);
+            ctx.lineWidth = 1.2;
+            ctx.setLineDash([4, 5]);
             ctx.stroke();
             ctx.setLineDash([]);
+
+            // Arrowhead
+            const AH = 8;
             ctx.beginPath();
-            ctx.moveTo(x,     y2);
-            ctx.lineTo(x - 4, y2 - 6);
-            ctx.lineTo(x + 4, y2 - 6);
+            ctx.moveTo(x, y2);
+            ctx.lineTo(x - AH, y2 - AH * 1.3);
+            ctx.lineTo(x + AH, y2 - AH * 1.3);
             ctx.closePath();
             ctx.fillStyle = `rgba(78,205,196,${alpha})`;
             ctx.fill();
         }
 
-        const STEP_FRAMES = 55;
+        const STEP_FRAMES = 240;
 
         function draw() {
             ctx.clearRect(0, 0, W, H);
             ctx.fillStyle = '#0d0d0d';
             ctx.fillRect(0, 0, W, H);
 
-            const frame    = t % (edges.length * STEP_FRAMES);
-            const edgeIdx  = Math.floor(frame / STEP_FRAMES);
+            const frame = t % (edges.length * STEP_FRAMES);
+            const edgeIdx = Math.floor(frame / STEP_FRAMES);
             const progress = (frame % STEP_FRAMES) / STEP_FRAMES;
             const [fromI, toI] = edges[edgeIdx];
 
-            for (let i = 0; i < N; i++) glow[i] = Math.max(0, glow[i] - 0.02);
-            glow[fromI] = Math.max(glow[fromI], 1 - progress * 0.4);
-            glow[toI]   = Math.max(glow[toI],   progress);
+            for (let i = 0; i < N; i++) glow[i] = 0;
+            glow[fromI] = 1;
 
+            // Connectors behind nodes
             edges.forEach(([a, b], ei) => {
                 if (b !== a + 1) return;
                 const isActive = ei === edgeIdx;
-                drawConnector(a, b, isActive ? 0.5 + 0.3 * Math.sin(t * 0.08) : 0.12);
+                drawConnector(a, b, isActive ? 0.55 + 0.3 * Math.sin(t * 0.08) : 0.10);
             });
 
+            // Nodes
             nodes.forEach((_, i) => drawNode(i, glow[i]));
 
+            // Travelling particle
             if (toI === fromI + 1) {
                 const y1 = nodeY(fromI) + BOX_H;
                 const y2 = nodeY(toI);
                 const py = y1 + (y2 - y1) * progress;
                 const px = nodeCX();
-                const grad = ctx.createRadialGradient(px, py, 0, px, py, 8);
-                grad.addColorStop(0,   'rgba(255,217,61,0.95)');
-                grad.addColorStop(0.5, 'rgba(255,217,61,0.2)');
-                grad.addColorStop(1,   'rgba(255,217,61,0)');
+
+                const grad = ctx.createRadialGradient(px, py, 0, px, py, 12);
+                grad.addColorStop(0, 'rgba(255,217,61,0.95)');
+                grad.addColorStop(0.5, 'rgba(255,217,61,0.25)');
+                grad.addColorStop(1, 'rgba(255,217,61,0)');
                 ctx.fillStyle = grad;
                 ctx.beginPath();
-                ctx.arc(px, py, 8, 0, Math.PI * 2);
+                ctx.arc(px, py, 12, 0, Math.PI * 2);
                 ctx.fill();
+
                 ctx.beginPath();
-                ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+                ctx.arc(px, py, 3.5, 0, Math.PI * 2);
                 ctx.fillStyle = particle;
                 ctx.fill();
             }
 
-            ctx.fillStyle = 'rgba(13,13,13,0.85)';
-            ctx.fillRect(0, H - 16, W, 16);
-            ctx.fillStyle = `rgba(201,168,76,${0.45 + 0.35 * Math.sin(t * 0.06)})`;
-            ctx.font      = '6.5px DM Mono,monospace';
+            // Bottom step label strip
+            const STRIP_H = 52;
+            ctx.fillStyle = 'rgba(10,10,10,0.92)';
+            ctx.fillRect(0, H - STRIP_H, W, STRIP_H);
+            ctx.fillStyle = 'rgba(201,168,76,1)';
+            ctx.font = '18px DM Mono,monospace';
             ctx.textAlign = 'center';
-            ctx.fillText(stepLabels[edgeIdx] || '', W / 2, H - 5);
+            // Fade label in/out with progress so it never pops abruptly
+            const labelAlpha = progress < 0.1 ? progress * 10 : progress > 0.85 ? (1 - progress) * 6.6 : 1;
+            ctx.globalAlpha = labelAlpha;
+            ctx.fillText(stepLabels[edgeIdx] || '', W / 2, H - STRIP_H / 2 + 6);
+            ctx.globalAlpha = 1;
 
             t++;
             raf = requestAnimationFrame(draw);
