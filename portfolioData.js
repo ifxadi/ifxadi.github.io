@@ -112,346 +112,110 @@ const portfolioData = [
                 }
             ]
         },
+
         {
             id: 2,
-            category: ['tools', 'pipeline'],
-            title: 'Maya Pipeline Manager Framework',
-            shortDescription: 'Maya tool to configure project, paths, source control, automation and QA from a single UI.',
-            fullDescription: 'Managing project paths, source control, scene defaults, auto-linking rules and QA validation across a team means a lot of manual, error-prone setup every time a new shot or project starts. Pipeline Editor solves this by consolidating every project-level decision into one Maya tool, persisting the entire configuration as a versioned JSON file that can be committed to Perforce or Git and shared across the studio.',
-            thumbnail: './assets/images/001_pipelineSetupThumb.png',
-            image: './assets/images/001_pipelineSetupThumb.png',
-            technologies: 'Python, PySide, Maya CMDS, JSON, Perforce, Git',
+            category: ['shaders', 'tools'],
+            title: 'Seasons System - GLSL / HLSL - Maya & 3DS Max',
+            shortDescription: 'A real-time Season System for Maya and 3DS Max viewports — swap and blend between Summer, Fall, and Snow with per-season textures, tints, and a companion Tool for switching seasons globally for all assets.',
+            fullDescription: 'A real-time Season System implemented as hardware shaders for Maya (GLSL/OGSFX) and 3DS Max (HLSL). The system drives three distinct seasons — Summer, Fall, and Snow — each carrying independent diffuse and normal map slots, colour tint multipliers, and specular scale overrides. A SeasonBlend float uniform cross-fades between adjacent seasons in tangent space before TBN transformation, enabling smooth animated transitions. The companion Qt tool controls SeasonSelect and SeasonBlend uniforms live across all compatible shader nodes in the scene, and can optionalty bake multi-season transitions directly to keyframes.',
+            thumbnail: './assets/images/003_SeasonSwitch_thumb.png',
+            image: './assets/images/003_SeasonSwitch_thumb.png',
+            technologies: 'GLSL, OGSFX, HLSL, Maya Viewport 2.0, 3DS Max Viewport, PySide2, PySide6, Maya Python API, OpenGL, DirectX',
             role: 'Author',
-            year: '2024',
+            year: '2026',
             link: '#',
             contentBlocks: [
+                { type: 'heading', content: 'Key Features' },
+                { type: 'paragraph', content: 'Per-season diffuse & normal map slots (Summer / Fall / Snow) · Tangent-space normal blending before TBN transform · Per-season colour tint & specular scale · SeasonBlend float for smooth cross-fades · Graceful texture fallback chain · Companion tool for switching seasons globally for all supported scene assets and keyframe baking.' },
+
                 {
-                    type: 'heading',
-                    content: 'Key Features'
+                    type: 'image',
+                    src: './assets/images/003_blinPhong_SeasonSwitcher.gif',
+                    alt: 'SeasonSwitcher'
+                },
+
+                
+
+                { type: 'heading', content: 'Season Uniforms' },
+                { type: 'paragraph', content: 'SeasonSelect (int 0–2) picks the active season. SeasonBlend (float 0→1) cross-fades toward the next season in the cycle — Summer → Fall → Snow → Summer. Both are fully exposed as editable sliders in the host application\'s material editor and are the only two uniforms the companion tool needs to identify and control a compatible shader node.' },
+                {
+                    type: 'code', content:
+                        `// Season resolve — identical logic in both GLSL and HLSL
+int   seasonA = clamp(SeasonSelect, 0, 2);
+int   seasonB = (seasonA + 1 > 2) ? 0 : seasonA + 1;   // wraps Snow → Summer
+float blend   = clamp(SeasonBlend, 0.0, 1.0);`
+                },
+
+                {
+                    type: 'image',
+                    src: './assets/images/003_blinPhong_SeasonSwitcherAttrBlend.gif',
+                    alt: 'SeasonSwitcherUI'
+                },
+
+                { type: 'heading', content: 'Per-Season Textures' },
+                { type: 'paragraph', content: 'Each season has its own diffuse map and tangent-space normal map slot with independent enable toggles. If a season-specific map is not assigned, the shader falls back to the shared base map, then to a flat colour or flat normal — so the surface always renders correctly with partially filled texture slots.' },
+                {
+                    type: 'image',
+                    src: './assets/images/003_SeasonSwitch_textures.png',
+                    alt: 'SeasonSwitcherUI'
                 },
                 {
-                    type: 'paragraph',
-                    content: 'Collapsible settings sections — Perforce & Git integration — JSON config persistence — Auto scene cleanup — Auto texture & rig linking — QA validation with report export'
-                },
-                {
-                    type: 'heading',
-                    content: 'UI Framework'
-                },
-                {
-                    type: 'paragraph',
-                    content: 'The UI is built on PySide2 (with a silent PyQt5 fallback) and runs natively inside Maya 2022 by parenting to the Maya main window via <i><b>shiboken2.wrapInstance</b></i>. Every visual element is a custom subclass of a base <i><b>QWidget</b></i> — panels draw their own corner ticks and accent bars via <i><b>paintEvent</b></i>, section headers are painted amber rule lines, and checkboxes use a custom diamond indicator drawn with <i><b>QPolygon</b></i>. Nothing relies on Qt stylesheets for structural layout, keeping the rendering consistent across OS themes.'
-                },
-                {
-                    type: 'code',
-                    content: `# Launching inside Maya — parent to the Maya main window
-import maya.OpenMayaUI as omui
-from shiboken2 import wrapInstance
-from PySide2 import QtWidgets
-
-def show_in_maya():
-    ptr      = omui.MQtUtil.mainWindow()
-    maya_win = wrapInstance(int(ptr), QtWidgets.QWidget)
-    win      = PipelineSetupEditor(maya_win)
-    win.show()
-    return win`
-                },
-                {
-                    type: 'paragraph',
-                    content: 'Each settings section is a <i><b>CollapsibleSection</b></i> — a thin wrapper that owns a <i><b>CategoryHeader</b></i> (the clickable title bar) and a content <i><b>QWidget</b></i>. Clicking the header toggles <i><b>content.setVisible()</b></i>, which makes the window resize naturally. Individual settings are <i><b>SettingsRow</b></i> widgets: a fixed-width label column on the left and any control widget on the right, matching the Unreal Engine project settings layout.'
-                },
-                {
-                    type: 'code',
-                    content: `# CollapsibleSection — the building block for every settings group
-class CollapsibleSection(QtWidgets.QWidget):
-    def __init__(self, title, parent=None):
-        super().__init__(parent)
-        layout = QtWidgets.QVBoxLayout(self)
-        layout.setContentsMargins(0, 0, 0, 0)
-        layout.setSpacing(0)
-
-        self.header         = CategoryHeader(title)
-        self.content        = QtWidgets.QWidget()
-        self.content_layout = QtWidgets.QVBoxLayout(self.content)
-        self.content_layout.setContentsMargins(0, 0, 0, 2)
-        self.content_layout.setSpacing(0)
-
-        layout.addWidget(self.header)
-        layout.addWidget(self.content)
-
-    def _on_collapse(self, collapsed):
-        self.content.setVisible(not collapsed)
-
-    def add_row(self, widget):
-        self.content_layout.addWidget(widget)
-
-
-# SettingsRow — label left, control right (Unreal-style)
-class SettingsRow(QtWidgets.QWidget):
-    def __init__(self, label, control=None, alt=False, parent=None):
-        super().__init__(parent)
-        self._alt = alt
-        self.setFixedHeight(28)
-        h = QtWidgets.QHBoxLayout(self)
-        h.setContentsMargins(8, 0, 8, 0)
-
-        lbl = QtWidgets.QLabel(label)
-        lbl.setFixedWidth(260)
-        h.addWidget(lbl)
-        if control:
-            h.addWidget(control)
-        h.addStretch()
-
-    def paintEvent(self, e):          # alternating row tint
-        p = QPainter(self)
-        p.fillRect(self.rect(), QColor("#1e1e1e" if self._alt else "#1a1a1a"))
-        p.end()`
-                },
-                {
-                    type: 'heading',
-                    content: 'Core Functionality'
-                },
-                {
-                    type: 'paragraph',
-                    content: 'The tool has four core methods that wire the UI to the file system and Maya. <i><b>_load_config()</b></i> reads the JSON and calls each widget\'s setter. <i><b>_collect_config()</b></i> does the reverse — reads every widget and builds a fresh dict. <i><b>_save_config()</b></i> writes that dict to disk. <i><b>_apply_all()</b></i> saves first, then iterates <i><b>AUTOMATION_REGISTRY</b></i> and executes every handler whose config flag is true.'
-                },
-                {
-                    type: 'code',
-                    content: `# Config round-trip — load JSON into widgets
-def _load_config(self):
-    path = self._config_path()
-    if not os.path.exists(path):
-        return
-    with open(path, "r") as f:
-        cfg = json.load(f)
-
-    scene = cfg.get("scene", {})
-    self.chk_color.setChecked(scene.get("color_management", True))
-    self.combo_policy.setCurrentText(scene.get("color_policy", "ACES 1.0"))
-    self.chk_virus.setChecked(scene.get("remove_vaccine", True))
-    # ... repeat for every section
-
-
-# Collect widgets back into a dict
-def _collect_config(self):
-    return {
-        "project": {
-            "vcs_mode":    self._vcs_mode(),
-            "custom_root": self.path_field.edit.text(),
-            "p4_server":   self.p4_server.text(),
-            "p4_user":     self.p4_user.text(),
-        },
-        "scene": {
-            "color_management": self.chk_color.isChecked(),
-            "color_policy":     self.combo_policy.currentText(),
-            "remove_vaccine":   self.chk_virus.isChecked(),
-            "default_unit":     self.combo_unit.currentText().lower(),
-            "autosave_interval":self.spin_autosave.value(),
-        },
-        # ... other sections
+                    type: 'code', content:
+                        `vec3 SampleSeasonDiffuse(int s, vec2 uv) {
+    if (s == 0) {
+        if (UseSummerDiffuse)  return srgbToLinear(texture(SummerDiffuseSampler, uv).rgb);
+        if (UseDiffuseMap)     return srgbToLinear(texture(DiffuseMapSampler,    uv).rgb);
+        return vec3(1.0);      // flat white fallback
     }
-
-
-# Save + run all enabled automations
-def _apply_all(self):
-    cfg = self._collect_config()
-    self._save_config(cfg)
-
-    for flag_path, handler in AUTOMATION_REGISTRY.items():
-        section, key = flag_path.split(".")
-        if cfg.get(section, {}).get(key):
-            handler(cfg)`
-                },
-                {
-                    type: 'paragraph',
-                    content: 'Automations themselves are plain functions that receive the full config dict and call Maya commands. They live outside the UI class, which keeps them unit-testable without a running Maya window.'
-                },
-                {
-                    type: 'code',
-                    content: `# Example automation handlers
-def _auto_set_color_management(cfg):
-    policy = cfg["scene"]["color_policy"]
-    cmds.colorManagementPrefs(e=True, cmEnabled=True)
-    cmds.colorManagementPrefs(e=True, renderingSpaceName=policy)
-
-def _auto_remove_vaccine(cfg):
-    for node in cmds.ls(type="script") or []:
-        if "vaccine" in node.lower():
-            cmds.delete(node)
-
-def _auto_set_fps(cfg):
-    fps_map = {24: "film", 25: "pal", 30: "ntsc", 60: "ntscf"}
-    unit = fps_map.get(cfg["animation"]["fps"], "ntsc")
-    cmds.currentUnit(time=unit)
-    cmds.playbackOptions(
-        min=cfg["animation"]["range_start"],
-        max=cfg["animation"]["range_end"]
-    )
-
-
-# Registry — key is "section.flag", value is the handler
-AUTOMATION_REGISTRY = {
-    "scene.color_management": _auto_set_color_management,
-    "scene.remove_vaccine":   _auto_remove_vaccine,
-    "animation.auto_fps":     _auto_set_fps,
+    // ... same pattern for Fall (s==1) and Snow (s==2)
 }`
                 },
+
+                { type: 'heading', content: 'Season Tint & Specular' },
+                { type: 'paragraph', content: 'Each season carries a colour tint multiplied on top of the diffuse result and a specular scale float. Snow defaults to a high specular to simulate icy gloss, Fall to a low matte value for dry foliage, and Summer to neutral. Both the tint and specular scale are lerped by SeasonBlend so colour response and surface sheen transition simultaneously.' },
                 {
-                    type: 'heading',
-                    content: 'Config Storage'
+                    type: 'image',
+                    src: './assets/images/003_SeasonSwitch_attrs.png',
+                    alt: 'SeasonSwitcherUI'
                 },
                 {
-                    type: 'paragraph',
-                    content: 'All settings persist to <i><b>.pipeline/pipeline_config.json</b></i> inside the project root. The file is human-readable, diff-friendly, and safe to commit to Perforce or Git. Shipping a pre-filled config in the tools repo means new artists get the full studio setup on first launch — no manual input.'
+                    type: 'code', content:
+                        `vec3  seasonTint      = mix(GetSeasonTint(seasonA),      GetSeasonTint(seasonB),      blend);
+float seasonSpecScale = mix(GetSeasonSpecScale(seasonA), GetSeasonSpecScale(seasonB), blend);
+
+vec3 baseColor = DiffuseColor * seasonTint * seasonDiff;
+vec3 specColor = SpecularColor * seasonSpecScale;`
                 },
+
+                { type: 'heading', content: 'Normal Blending' },
+                { type: 'paragraph', content: 'Season normals are decoded and blended while still in tangent space, then passed through a single TBN transform to world space. Blending before the transform avoids the artefact of interpolating already-rotated world-space vectors, keeping surface detail transitions smooth.' },
                 {
-                    type: 'code',
-                    content: `// .pipeline/pipeline_config.json
-{
-  "project": {
-    "vcs_mode":      "perforce",
-    "custom_root":   "C:/projects/myshow",
-    "p4_server":     "ssl:perforce.studio.com:1666",
-    "p4_user":       "artist_name",
-    "p4_workspace":  "artist_name_maya_ws",
-    "git_remote":    "https://github.com/studio/project.git",
-    "git_branch":    "main"
-  },
-  "scene": {
-    "color_management":  true,
-    "color_policy":      "ACES 1.0",
-    "remove_vaccine":    true,
-    "default_unit":      "centimeter",
-    "up_axis":           "Y",
-    "autosave_interval": 10
-  },
-  "linking": {
-    "auto_textures":     false,
-    "auto_rig":          false,
-    "texture_path":      "//server/textures",
-    "rig_path":          "//server/rigs",
-    "missing_behaviour": "warn"
-  },
-  "animation": {
-    "fps":              30,
-    "range_start":      1001,
-    "range_end":        1100,
-    "tangent_default":  "auto"
-  },
-  "render": {
-    "renderer":    "arnold",
-    "resolution":  [1920, 1080],
-    "output_path": "//server/renders/<scene>/<layer>/",
-    "format":      "exr_multilayer",
-    "auto_aovs":   true
-  },
-  "qa": {
-    "auto_model_qa":   false,
-    "auto_rig_qa":     false,
-    "max_influences":  4,
-    "check_naming":    true,
-    "flag_ngons":      true,
-    "report_path":     "//server/qa_reports/"
-  }
-}`
+                    type: 'code', content:
+                        `vec3 tnA = SampleSeasonNormal(seasonA, texUV);   // decoded tangent-space
+vec3 tnB = SampleSeasonNormal(seasonB, texUV);
+vec3 tn  = normalize(mix(tnA, tnB, blend));       // blend in tangent space
+N = TangentToWorld(Nw, Tw, Bw, tn);              // single TBN transform`
                 },
+
+                { type: 'heading', content: 'Python Companion Tool for Global Control' },
+                { type: 'paragraph', content: 'A Maya Python Qt tool scans the scene for all GLSLShader nodes that expose SeasonSelect and SeasonBlend, and lists them in a live material table. Three toggle buttons apply a hard season switch for all the supported assets across the scene, while a blend slider scrubs the cross-fade across every compatible node in real time.' },
                 {
-                    type: 'heading',
-                    content: 'Extending the Tool'
+                    type: 'image',
+                    src: './assets/images/003_blinPhong_SeasonSwitcherBlend.gif',
+                    alt: 'SeasonSwitcher'
                 },
+
+                { type: 'heading', content: 'Similar Logic implemented with 3DS Max DirectX shader' },
+                { type: 'paragraph', content: 'The 3DS Max version is written in HLSL and using the DirectX shader plugin, using the same Season Select / Season Blend uniform contract so both can be driven by the same artistic workflow. Season slot layout, tint multipliers, and blend logic are identical across both implementations.' },
                 {
-                    type: 'paragraph',
-                    content: 'Adding a new setting, a new section, or a new automation all follow the same three-step pattern and never require touching existing code.'
-                },
-                {
-                    type: 'code',
-                    content: `# ── 1. Add a new setting to an existing section ──────────────
-# In _section_scene_settings(), add a row:
-self.chk_flip_normals = make_checkbox(False)
-sec.add_row(SettingsRow("Auto Flip Normals on Import", self.chk_flip_normals, alt=True))
-
-# In _collect_config(), add the key under "scene":
-"scene": {
-    ...
-    "flip_normals_on_import": self.chk_flip_normals.isChecked(),
-}
-
-# Register the handler:
-AUTOMATION_REGISTRY["scene.flip_normals_on_import"] = _auto_flip_normals
-
-
-# ── 2. Add a brand new section ────────────────────────────────
-def _section_lighting(self):
-    sec = CollapsibleSection("▼  Lighting Defaults")
-    self.combo_skydom = make_combo("AiSkyDomeLight", "IBL Sphere", width=160)
-    sec.add_row(SettingsRow("Default Sky Light Type", self.combo_skydom, alt=False))
-    self.chk_exposure = make_checkbox(True)
-    sec.add_row(SettingsRow("Auto Set Exposure", self.chk_exposure, alt=True))
-    return sec
-
-# Then in __init__, add to the scroll body:
-bl.addWidget(self._section_lighting())
-
-# And mirror as a new top-level key in _collect_config():
-"lighting": {
-    "sky_light_type": self.combo_skydom.currentText(),
-    "auto_exposure":  self.chk_exposure.isChecked(),
-}`
-                },
-                {
-                    type: 'heading',
-                    content: 'QA System'
-                },
-                {
-                    type: 'paragraph',
-                    content: 'The QA section runs validation checks as standalone functions and writes a JSON report to the configured output path. Each check returns a list of failed nodes, making the output scriptable and easy to pipe into a review dashboard or Slack notification.'
-                },
-                {
-                    type: 'code',
-                    content: `def run_model_qa(cfg) -> dict:
-    results = {"passed": [], "failed": {}}
-    qa = cfg["qa"]
-
-    # Check freeze transforms
-    if qa.get("check_naming"):
-        pattern = re.compile(r'^[a-zA-Z][a-zA-Z0-9_]*_(GEO|JNT|CTRL|GRP)$')
-        bad = [n for n in cmds.ls(dag=True, long=False)
-               if not pattern.match(n)]
-        if bad:
-            results["failed"]["naming"] = bad
-        else:
-            results["passed"].append("naming")
-
-    # Check for N-gons
-    if qa.get("flag_ngons"):
-        ngons = []
-        for mesh in cmds.ls(type="mesh"):
-            it = maya.api.MItMeshPolygon(
-                maya.api.MGlobal.getSelectionListByName(mesh).getDagPath(0))
-            while not it.isDone():
-                if it.polygonVertexCount() > 4:
-                    ngons.append(f"{mesh}.f[{it.index()}]")
-                it.next()
-        if ngons:
-            results["failed"]["ngons"] = ngons
-
-    # Write report
-    report_path = os.path.join(cfg["qa"]["report_path"],
-                               f"qa_{cmds.file(q=True, sn=True, shn=True)}.json")
-    with open(report_path, "w") as f:
-        json.dump(results, f, indent=2)
-
-    return results`
-                },
-                {
-                    type: 'heading',
-                    content: 'Impact'
-                },
-                {
-                    type: 'paragraph',
-                    content: 'Project setup time per artist dropped from several manual steps scattered across Maya, the file system and source control to a single Apply All click. The JSON config gave the team a shared, auditable record of every project decision, reduced onboarding friction for new artists, and made it trivial to roll back to a known-good configuration when issues arose in production.'
+                    type: 'image',
+                    src: './assets/images/003_blinPhong_SeasonSwitcherMAX.gif',
+                    alt: 'SeasonSystem_Platforms'
                 }
             ]
         },
+        
         {
             id: 3,
             category: ['shaders'],
@@ -559,106 +323,144 @@ tn.y *= InvertNormalGreen ? -1.0 : 1.0;` },
         },
         {
             id: 4,
-            category: ['shaders', 'tools'],
-            title: 'Maya & 3DS Max - Season System - GLSL / HLSL',
-            shortDescription: 'A real-time Season System for Maya and 3DS Max viewports — swap and blend between Summer, Fall, and Snow with per-season textures, tints, and a companion Tool for switching seasons globally for all assets.',
-            fullDescription: 'A real-time Season System implemented as hardware shaders for Maya (GLSL/OGSFX) and 3DS Max (HLSL). The system drives three distinct seasons — Summer, Fall, and Snow — each carrying independent diffuse and normal map slots, colour tint multipliers, and specular scale overrides. A SeasonBlend float uniform cross-fades between adjacent seasons in tangent space before TBN transformation, enabling smooth animated transitions. The companion Qt tool controls SeasonSelect and SeasonBlend uniforms live across all compatible shader nodes in the scene, and can optionalty bake multi-season transitions directly to keyframes.',
-            thumbnail: './assets/images/003_SeasonSwitch_thumb.png',
-            image: './assets/images/003_SeasonSwitch_thumb.png',
-            technologies: 'GLSL, OGSFX, HLSL, Maya Viewport 2.0, 3DS Max Viewport, PySide2, PySide6, Maya Python API, OpenGL, DirectX',
+            category: ['tools', 'pipeline'],
+            title: 'ProjectReady — Pipeline Automation Tool',
+            shortDescription: 'Maya tool to configure project, paths, source control, automation and scene defaults from a single UI.',
+            fullDescription: 'Managing project paths, source control, scene defaults, auto-linking rules and QA validation across a team means a lot of manual, error-prone setup every time a new scene or project starts. ProjectReady solves this by consolidating every project-level decision into one Maya tool, persisting the entire configuration as a JSON file that can be shared across the studio.',
+            thumbnail: './assets/images/001_pipelineSetupThumb.png',
+            image: './assets/images/001_pipelineSetupThumb.png',
+            technologies: 'Python, PySide, Maya CMDS, JSON, Perforce, Git',
             role: 'Author',
-            year: '2026',
+            year: '2024',
             link: '#',
             contentBlocks: [
-                { type: 'heading', content: 'Key Features' },
-                { type: 'paragraph', content: 'Per-season diffuse & normal map slots (Summer / Fall / Snow) · Tangent-space normal blending before TBN transform · Per-season colour tint & specular scale · SeasonBlend float for smooth cross-fades · Graceful texture fallback chain · Companion tool for switching seasons globally for all supported scene assets and keyframe baking.' },
-
+                {
+                    type: 'heading',
+                    content: 'Key Features'
+                },
+                {
+                    type: 'paragraph',
+                    content: 'Collapsible settings sections for organised and scalable UI · Integrated Perforce & Git workflows for seamless version control · JSON-based configuration persistence with user overrides · Automated scene cleanup to remove unknown nodes and fix common errors · Intelligent auto-linking for textures, rigs, and external dependencies · Context-aware QA validation with report generation and export for pipeline compliance'
+                },
+                {
+                    type: 'heading',
+                    content: 'Project Settings & Source Control Automation'
+                },
+                {
+                    type: 'paragraph',
+                    content: 'What issue most studios face: fragmented project setups, inconsistent file structures, and unreliable source control practices often lead to broken paths, missing assets, and conflicting file versions. Artists may unknowingly overwrite each other’s work, while technical teams spend valuable time resolving avoidable integration issues instead of building tools or features. Without a unified system, even simple tasks like syncing a project or validating assets become error-prone and slow. This tool addresses those challenges by centralising project configuration, enforcing consistent directory structures, and tightly integrating source control workflows directly into the DCC environment. Automation plays a key role by handling repetitive actions such as syncing latest files, auto-checkout on edit, validating paths, and preparing assets for submission. By reducing manual intervention and standardising processes, the system improves reliability, minimises human error, and allows teams to focus on creative and technical work rather than pipeline maintenance.'
+                },
                 {
                     type: 'image',
-                    src: './assets/images/003_blinPhong_SeasonSwitcher.gif',
-                    alt: 'SeasonSwitcher'
+                    src: './assets/images/001_srcControll.png',
+                    alt: 'Project Settings Source Control Automation UI'
                 },
-
+                {
+                    type: 'heading',
+                    content: 'Scene Settings & Automation'
+                },
+                {
+                    type: 'paragraph',
+                    content: 'What we often face is inconsistent scene setups across artists and files often result in scale mismatches, incorrect axis orientation, color space, rendering inconsistencies, and hidden technical debt such as unknown nodes or corrupted data. These issues accumulate silently and only surface later in production, causing delays, broken exports, or unexpected behaviour in shaders and tools. This system introduces automated scene validation and correction at key interaction points such as file open, import, and publish. Core settings like color spaces, scene units, and up axis are enforced to match pipeline standards, while cleanup routines automatically remove unknown nodes, fix common scene errors, and strip unnecessary namespaces. Optional safeguards such as virus/script cleanup and import sanitisation ensure scenes remain stable and secure. By embedding these checks into the workflow, the tool guarantees consistency across all scenes, reduces manual cleanup, and prevents costly downstream issues in rendering, lighting, and asset integration.'
+                },
+                {
+                    type: 'image',
+                    src: './assets/images/001_SceneSetup.png',
+                    alt: 'Scene Settings Automation UI'
+                },
                 
-
-                { type: 'heading', content: 'Season Uniforms' },
-                { type: 'paragraph', content: 'SeasonSelect (int 0–2) picks the active season. SeasonBlend (float 0→1) cross-fades toward the next season in the cycle — Summer → Fall → Snow → Summer. Both are fully exposed as editable sliders in the host application\'s material editor and are the only two uniforms the companion tool needs to identify and control a compatible shader node.' },
                 {
-                    type: 'code', content:
-                        `// Season resolve — identical logic in both GLSL and HLSL
-int   seasonA = clamp(SeasonSelect, 0, 2);
-int   seasonB = (seasonA + 1 > 2) ? 0 : seasonA + 1;   // wraps Snow → Summer
-float blend   = clamp(SeasonBlend, 0.0, 1.0);`
+                    type: 'heading',
+                    content: 'Auto Linking scene assets'
                 },
-
+                {
+                    type: 'paragraph',
+                    content: 'We usually face broken file paths and missing dependencies are one of the most common and time-consuming problems in production pipelines. When scenes are shared across machines, departments, or locations, absolute paths often fail, resulting in missing textures, shaders, rigs, or audio files. Artists are then forced to manually relink assets, which is repetitive, error-prone, and can lead to incorrect versions being used. This system introduces automated file resolution that intelligently searches for missing dependencies using defined root paths and fallback strategies. On scene open, the tool attempts to relink textures, shaders, rigs, cameras, and audio files by scanning the project directory or custom search paths. Relative path fallback ensures portability between different environments, while configurable behaviours (such as warnings vs silent fixes) give control over how missing files are handled. By automating relinking and standardising path resolution, the tool significantly reduces downtime, prevents broken scenes, and ensures assets remain consistently connected across the entire pipeline.'
+                },
                 {
                     type: 'image',
-                    src: './assets/images/003_blinPhong_SeasonSwitcherAttrBlend.gif',
-                    alt: 'SeasonSwitcherUI'
+                    src: './assets/images/001_srcaAutoLink.png',
+                    alt: 'Auto Linking File Resolution UI'
                 },
 
-                { type: 'heading', content: 'Per-Season Textures' },
-                { type: 'paragraph', content: 'Each season has its own diffuse map and tangent-space normal map slot with independent enable toggles. If a season-specific map is not assigned, the shader falls back to the shared base map, then to a flat colour or flat normal — so the surface always renders correctly with partially filled texture slots.' },
+                {
+                    type: 'heading',
+                    content: 'Animation Defaults'
+                },
+                {
+                    type: 'paragraph',
+                    content: 'Animation workflows often suffer from inconsistent playback settings, mismatched frame rates, and incorrect interpolation modes between scenes and artists. These inconsistencies can lead to timing issues, broken motion during export, and additional cleanup work when integrating animation into game engines or rendering pipelines. This system standardises core animation defaults such as FPS, playback speed, and timeline ranges, ensuring that all scenes adhere to the same temporal structure. Optional automation features configure HUD overlays for animators, enable ghosting previews for motion clarity, and enforce stable interpolation modes like quaternion rotation to prevent gimbal issues. Additionally, automatic baking on export guarantees that procedural or constrained animations are converted into reliable keyframes, making them portable across tools and engines. By embedding these defaults and automations directly into the workflow, the tool ensures predictable playback, consistent animation data, and smoother downstream integration.'
+                },
                 {
                     type: 'image',
-                    src: './assets/images/003_SeasonSwitch_textures.png',
-                    alt: 'SeasonSwitcherUI'
-                },
-                {
-                    type: 'code', content:
-                        `vec3 SampleSeasonDiffuse(int s, vec2 uv) {
-    if (s == 0) {
-        if (UseSummerDiffuse)  return srgbToLinear(texture(SummerDiffuseSampler, uv).rgb);
-        if (UseDiffuseMap)     return srgbToLinear(texture(DiffuseMapSampler,    uv).rgb);
-        return vec3(1.0);      // flat white fallback
-    }
-    // ... same pattern for Fall (s==1) and Snow (s==2)
-}`
+                    src: './assets/images/001_srcaAnim.png',
+                    alt: 'Animation Defaults UI'
                 },
 
-                { type: 'heading', content: 'Season Tint & Specular' },
-                { type: 'paragraph', content: 'Each season carries a colour tint multiplied on top of the diffuse result and a specular scale float. Snow defaults to a high specular to simulate icy gloss, Fall to a low matte value for dry foliage, and Summer to neutral. Both the tint and specular scale are lerped by SeasonBlend so colour response and surface sheen transition simultaneously.' },
+                {
+                    type: 'paragraph',
+                    content: 'The UI is built on PySide2 (with a silent PyQt5 fallback) and runs natively inside Maya 2022 by parenting to the Maya main window via <i><b>shiboken2.wrapInstance</b></i>. Every visual element is a custom subclass of a base <i><b>QWidget</b></i> — panels draw their own corner ticks and accent bars via <i><b>paintEvent</b></i>, section headers are painted amber rule lines, and checkboxes use a custom diamond indicator drawn with <i><b>QPolygon</b></i>. Nothing relies on Qt stylesheets for structural layout, keeping the rendering consistent across OS themes.'
+                },
+                {
+                    type: 'heading',
+                    content: 'QA · Automated Validation'
+                },
+                {
+                    type: 'paragraph',
+                    content: 'Quality assurance is often inconsistent and delayed in production pipelines, relying heavily on manual checks or late-stage validation. This system introduces automated QA driven by file detection and naming conventions, allowing scenes and assets to be validated as soon as they are opened, imported, or prepared for publish. Files are automatically classified based on their naming patterns (e.g. anim_, env_, char_), triggering context-aware validation rules tailored to each asset type. The system performs scene-wide analysis including hierarchy checks, missing references, naming compliance, scale validation, animation integrity, and shader/texture verification. Results are surfaced immediately with actionable feedback, enabling artists to fix issues early rather than during integration or review stages. By embedding QA directly into the workflow, the tool ensures higher data integrity, reduces back-and-forth between departments, and maintains consistent asset quality across the entire project.'
+                },
                 {
                     type: 'image',
-                    src: './assets/images/003_SeasonSwitch_attrs.png',
-                    alt: 'SeasonSwitcherUI'
+                    src: './assets/images/001_srcaQA.png',
+                    alt: 'QA Automation Validation UI'
                 },
                 {
-                    type: 'code', content:
-                        `vec3  seasonTint      = mix(GetSeasonTint(seasonA),      GetSeasonTint(seasonB),      blend);
-float seasonSpecScale = mix(GetSeasonSpecScale(seasonA), GetSeasonSpecScale(seasonB), blend);
-
-vec3 baseColor = DiffuseColor * seasonTint * seasonDiff;
-vec3 specColor = SpecularColor * seasonSpecScale;`
+                    type: 'heading',
+                    content: 'Core Functionality'
                 },
-
-                { type: 'heading', content: 'Normal Blending' },
-                { type: 'paragraph', content: 'Season normals are decoded and blended while still in tangent space, then passed through a single TBN transform to world space. Blending before the transform avoids the artefact of interpolating already-rotated world-space vectors, keeping surface detail transitions smooth.' },
                 {
-                    type: 'code', content:
-                        `vec3 tnA = SampleSeasonNormal(seasonA, texUV);   // decoded tangent-space
-vec3 tnB = SampleSeasonNormal(seasonB, texUV);
-vec3 tn  = normalize(mix(tnA, tnB, blend));       // blend in tangent space
-N = TangentToWorld(Nw, Tw, Bw, tn);              // single TBN transform`
+                    type: 'paragraph',
+                    content: 'The system is built around a lightweight but robust architecture that bridges UI controls, persistent configuration, and Maya runtime behaviour. User preferences and automation states are stored using a combination of JSON configuration files and Maya preferences, ensuring both portability and user-specific overrides. Automation is driven by Maya scene events using cmds.scriptJob (e.g. SceneOpened, NewSceneOpened, SceneSaved), allowing tasks such as validation, cleanup, relinking, and setup to trigger automatically at the correct points in the workflow. This event-driven approach removes the need for manual execution and ensures consistent scene state across artists and sessions.'
                 },
-
-                { type: 'heading', content: 'Maya Companion Tool for Global Switching' },
-                { type: 'paragraph', content: 'A Maya Python Qt tool scans the scene for all GLSLShader nodes that expose SeasonSelect and SeasonBlend, and lists them in a live material table. Three toggle buttons apply a hard season switch for all the supported assets across the scene, while a blend slider scrubs the cross-fade across every compatible node in real time.' },
                 {
-                    type: 'image',
-                    src: './assets/images/003_blinPhong_SeasonSwitcherBlend.gif',
-                    alt: 'SeasonSwitcher'
+                    type: 'paragraph',
+                    content: 'At its core, the tool relies on four primary methods that wire everything together. _load_config() reads the JSON configuration and propagates values into the UI by calling each widget’s setter. _collect_config() performs the inverse operation, querying all UI elements to build a fresh configuration dictionary. _save_config() persists this data to disk, ensuring changes are retained across sessions. Finally, _apply_all() acts as the execution layer — saving the current state and iterating through the AUTOMATION_REGISTRY to trigger all enabled automation handlers. This modular design allows new automation features to be added easily by registering them without modifying the core execution flow.'
                 },
-
-                { type: 'heading', content: 'Similar Logic implemented with 3DS Max DirectX shader' },
-                { type: 'paragraph', content: 'The 3DS Max version is written in HLSL and using the DirectX shader plugin, using the same Season Select / Season Blend uniform contract so both can be driven by the same artistic workflow. Season slot layout, tint multipliers, and blend logic are identical across both implementations.' },
                 {
-                    type: 'image',
-                    src: './assets/images/003_blinPhong_SeasonSwitcherMAX.gif',
-                    alt: 'SeasonSystem_Platforms'
-                }
+                    type: 'code',
+                    content:
+                `# Register scene event callbacks
+cmds.scriptJob(event=["SceneOpened", on_scene_open])
+cmds.scriptJob(event=["NewSceneOpened", on_new_scene])
+cmds.scriptJob(event=["SceneSaved", on_scene_saved])
+
+def _apply_all():
+    config = _collect_config()
+    _save_config(config)
+
+    for name, handler in AUTOMATION_REGISTRY.items():
+        if config.get(name):
+            handler()`
+                },
+                {
+                    type: 'heading',
+                    content: 'Impact'
+                },
+                {
+                type: 'paragraph',
+                content: 'This tool fundamentally improves production reliability by standardising how scenes are created, validated, and maintained across the entire pipeline. By consolidating project settings, scene configuration, source control integration, and automation into a single system, it removes a wide range of common failure points such as broken paths, inconsistent units, missing assets, and invalid scene data. Artists no longer need to remember complex setup steps or manually run cleanup scripts, as the system ensures that every scene adheres to studio standards automatically.'
+                },
+                {
+                    type: 'paragraph',
+                    content: 'The introduction of event-driven automation and integrated QA significantly reduces technical debt by catching issues early—at scene open, import, or export—rather than during later stages of production. This leads to fewer bugs, cleaner data, and more predictable results when assets move between departments or into game engines and render pipelines. Source control automation further enhances collaboration by reducing conflicts and ensuring files are always up to date and properly tracked.'
+                },
+                {
+                    type: 'paragraph',
+                    content: 'Overall, the tool shifts the workflow from reactive problem-solving to proactive validation and consistency. It reduces repetitive manual work, minimises human error, and accelerates onboarding for new team members. The result is a more scalable, maintainable pipeline where both artists and technical teams can focus on creative output and feature development rather than troubleshooting avoidable issues.'
+                },
             ]
         },
+        
 
         {
     id: 4,
