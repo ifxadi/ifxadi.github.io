@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aditya Kumar – Technical Artist Resume</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --accent: #1a6b8a;
+            --text: #1a1a1a;
+            --muted: #4a4a4a;
+            --line: #c8d6dc;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #dde3e7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 16px 50px;
+            min-height: 100vh;
+        }
+
+        /* Print button */
+        .print-btn {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            margin-bottom: 16px;
+            background: #4a4a4a;
+            color: #fff;
+            border: none;
+            padding: 9px 22px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+            transition: background 0.15s;
+        }
+
+            .print-btn:hover {
+                background: #135570;
+            }
+
+            .print-btn svg {
+                flex-shrink: 0;
+            }
+
+        .page {
+            width: 8.5in;
+            background: #fff;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+            padding: 0.52in 0.65in 0.48in 0.65in;
+            /* base font scaled to 90% of original 9pt */
+            font-size: 8.1pt;
+            line-height: 1.52;
+            color: var(--text);
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding-bottom: 0.04in;
+            border-bottom: 1.5px solid var(--line);
+        }
+
+            .header h1 {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 22pt;
+                font-weight: 700;
+                letter-spacing: 0.08em;
+                color: var(--text);
+            }
+
+            .header .contact {
+                margin-top: 3px;
+                /* 8pt × 0.9 */
+                font-size: 8.0pt;
+                color: var(--muted);
+            }
+
+                .header .contact a {
+                    color: var(--accent);
+                    text-decoration: none;
+                }
+
+        /* Sections */
+        .section {
+            display: table;
+            width: 100%;
+            padding: 0.115in 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+            .section:last-child {
+                border-bottom: none;
+            }
+
+        .label {
+            display: table-cell;
+            width: 1.05in;
+            padding-right: 0.18in;
+            text-align: right;
+            vertical-align: top;
+            /* 6.5pt × 0.9 */
+            font-size: 5.85pt;
+            font-weight: bold;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--accent);
+            padding-top: 1px;
+            line-height: 1.3;
+        }
+
+        .body {
+            display: table-cell;
+            vertical-align: top;
+            /* 8.6pt × 0.9 */
+            font-size: 7.74pt;
+            line-height: 1.52;
+        }
+
+        ul.skills, ul.bullets {
+            padding-left: 1.1em;
+            list-style: disc;
+        }
+
+            ul.skills li, ul.bullets li {
+                margin-bottom: 1px;
+            }
+
+        .job {
+            margin-bottom: 0.1in;
+        }
+
+            .job:last-child {
+                margin-bottom: 0;
+            }
+
+        .job-header {
+            font-weight: bold;
+            /* 8.8pt × 0.9 */
+            font-size: 7.92pt;
+            color: var(--text);
+        }
+
+        .job-date {
+            /* 7.8pt × 0.9 */
+            font-size: 7.02pt;
+            color: var(--muted);
+            margin-bottom: 3px;
+        }
+
+        .job-prose {
+            margin-bottom: 3px;
+        }
+
+        .edu-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .edu-degree {
+            font-weight: bold;
+            /* 8.6pt × 0.9 */
+            font-size: 7.74pt;
+        }
+
+        .edu-school {
+            /* 8pt × 0.9 */
+            font-size: 7.2pt;
+            color: var(--muted);
+        }
+
+        .edu-year {
+            /* 7.8pt × 0.9 */
+            font-size: 7.02pt;
+            color: var(--muted);
+            white-space: nowrap;
+            margin-left: 8px;
+        }
+
+        /* Print */
+        @media print {
+            html, body {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                background: #fff;
+                display: block;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .print-btn {
+                display: none;
+            }
+
+            .page {
+                width: 100%;
+                box-shadow: none;
+                padding: 0.48in 0.60in 0.44in 0.60in;
+            }
+
+            @page {
+                size: 8.5in 10.4in;
+                margin: 0;
+            }
+
+            a {
+                color: var(--accent) !important;
+                text-decoration: underline !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="print-btn" onclick="window.print()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 6 2 18 2 18 9" />
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+            <rect x="6" y="14" width="12" height="8" />
+        </svg>
+        Save as PDF
+    </button>
+
+    <div class="page">
+
+        <!-- Header -->
+        <div class="header">
+            <h1>Aditya Kumar</h1>
+            <div class="contact">
+                Mumbai, India &nbsp;&middot;&nbsp;
+                <a href="mailto:aditya.techartist@gmail.com">aditya.techartist@gmail.com</a> &nbsp;&middot;&nbsp;
+                <strong>Portfolio:</strong>
+                <a href="https://ifxadi.github.io">ifxadi.github.io</a>  &nbsp;&middot;&nbsp;
+    <a href="https://linkedin.com/in/ifxadi">linkedin.com/in/ifxadi</a> &nbsp;&middot;&nbsp;
+    (+91) 7544805419
+
+</div>
+        </div>
+
+        <!-- Summary -->
+        <div class="section">
+            <div class="label">Summary</div>
+            <div class="body">
+                Senior Technical Artist with a strong background in the game asset pipeline, tools programming, 3D art creation, optimization, rigging, shader development, and in-engine implementation. Known for delivering efficient and scalable solutions with a sharp artistic eye and strong attention to detail. Proactive and solution-oriented, with a passion for continuous learning and exploring emerging technologies. Core tech interests me and I’m currently deepening my knowledge in graphics programming and OpenGL.
+            </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="section">
+            <div class="label">Skills &amp; Abilities</div>
+            <div class="body">
+                <ul class="skills">
+                    <li>Game Asset Pipeline and Tools Development &mdash; Maya, Blender, 3DS Max, Photoshop, Substance, Unreal, Unity and Proprietary Tech</li>
+                    <li>Programming languages: Python, MEL, MaxScript, C++, and C#; Shader authoring with HLSL, GLSL, and node-based graphs</li>
+                    <li>Real-time rendering optimization: Asset optimization, LOD systems, draw call batching, memory and shader optimization, GPU profiling</li>
+                    <li>Art Generalist &mdash; Hands-on Visual development experience with Modeling, Texturing, Shading, Rigging, Skinning, Animation, Lighting and Rendering</li>
+                    <li>Version control Automation with Perforce, Git and SVN; CI/CD for art assets and In-house tools.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Relevant Experience -->
+        <div class="section">
+            <div class="label">Relevant Experience</div>
+            <div class="body">
+
+                <div class="job">
+                    <div class="job-header">Senior Technical Artist &mdash; Modma Studios X Supercell </div>
+                    <div class="job-date">September 2023 &ndash; Present</div>
+                    <p class="job-prose">Working on LiveOps Game <strong>Brawl Stars</strong> External development Art team &mdash; responsible for making Artist's job as efficient as possible with Automation tools, Assets Validators, optimized workflows, mentorship and end-to-end pipeline support from DCC to Engine implementation. Had an opportunity to work with some epic collabs like <strong>Disney Toy Story, Spongebob, Subway Surfers, Stranger Things, UNO and more.</strong></p>
+                    <ul class="bullets">
+                        <li>Owned Studio's Tech-Art pipeline; Authoring Tools, workflows, assets and shaders while considering performance, Engine requirements and limitations.</li>
+                        <li>Designed, implemented and maintained a robust CI/CD tooling pipeline for DCCs and in-house tools that is efficient and friendly for both artists and developers.</li>
+                        <li>Worked as a Generalist on Modeling, Rigging, Animation, realtime lighting, rendering, VFX and UI.</li>
+                        <li>Got invited to the Supercell Headquarters, Helsinki for tech meetings where I addressed potential Game engine issues, proposed tools, features and pipeline improvements.</li>
+                        <li>Assisted and mentored artists with Pipeline Migration to Perforce and Blender; By training, day-to-day support, Automation tools, and documentations.</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-header">Technical Artist and 3D Generalist &mdash; Impactional Games</div>
+                    <div class="job-date">August 2021 &ndash; August 2022</div>
+                    <ul class="bullets">
+                        <li>Developed an optimized asset pipeline for a prototype game project, focusing on delivering optimized Unity-ready 3D and 2D assets.</li>
+                        <li>Produced models, textures, shaders, rigs, and animations for characters and environments.</li>
+                        <li>Built Python and MEL scripts, and a pipeline specific rigging system to ensure smooth integration of assets into the game engine.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Other Experience -->
+        <div class="section">
+            <div class="label">Other Experience</div>
+            <div class="body">
+                <div class="job">
+                    <div class="job-header">Motion Graphics Animator &mdash; Trillbit</div>
+                    <div class="job-date">May 2022 &ndash; April 2023</div>
+                    <p class="job-prose">Conceptualized and produced promotional animated videos, handling end-to-end asset creation, rigging, and animation.</p>
+                    <div class="job-header">Indie Android OS Developer</div>
+                    <div class="job-date">2016 &ndash; 2019</div>
+                    <p class="job-prose">Worked as an indie Android OS developer delivering custom OS upgrades for devices no longer supported by OEMs, serving a community of over 100,000 users. Performed low-level porting and optimization of Android and kernel source code to run the latest versions on low-end hardware, and maintained regular weekly/monthly releases with bug fixes and security patches, contributing to multiple public source repositories and XDA build threads.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Education -->
+        <div class="section">
+            <div class="label">Education</div>
+            <div class="body">
+                <div class="edu-row">
+                    <div>
+                        <div class="edu-degree">Bachelors in Animation &amp; Design</div>
+                        <div class="edu-school">St. Xaviers College &mdash; Ranchi, India</div>
+                    </div>
+                    <div class="edu-year">2023</div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- .page -->
+
+</body>
+</html>

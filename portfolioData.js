@@ -396,11 +396,6 @@ tn.y *= InvertNormalGreen ? -1.0 : 1.0;` },
                     src: './assets/images/001_srcaAnim.png',
                     alt: 'Animation Defaults UI'
                 },
-
-                {
-                    type: 'paragraph',
-                    content: 'The UI is built on PySide2 (with a silent PyQt5 fallback) and runs natively inside Maya 2022 by parenting to the Maya main window via <i><b>shiboken2.wrapInstance</b></i>. Every visual element is a custom subclass of a base <i><b>QWidget</b></i> — panels draw their own corner ticks and accent bars via <i><b>paintEvent</b></i>, section headers are painted amber rule lines, and checkboxes use a custom diamond indicator drawn with <i><b>QPolygon</b></i>. Nothing relies on Qt stylesheets for structural layout, keeping the rendering consistent across OS themes.'
-                },
                 {
                     type: 'heading',
                     content: 'QA · Automated Validation'
@@ -433,14 +428,7 @@ tn.y *= InvertNormalGreen ? -1.0 : 1.0;` },
 cmds.scriptJob(event=["SceneOpened", on_scene_open])
 cmds.scriptJob(event=["NewSceneOpened", on_new_scene])
 cmds.scriptJob(event=["SceneSaved", on_scene_saved])
-
-def _apply_all():
-    config = _collect_config()
-    _save_config(config)
-
-    for name, handler in AUTOMATION_REGISTRY.items():
-        if config.get(name):
-            handler()`
+`
                 },
                 {
                     type: 'heading',
@@ -449,10 +437,6 @@ def _apply_all():
                 {
                 type: 'paragraph',
                 content: 'This tool fundamentally improves production reliability by standardising how scenes are created, validated, and maintained across the entire pipeline. By consolidating project settings, scene configuration, source control integration, and automation into a single system, it removes a wide range of common failure points such as broken paths, inconsistent units, missing assets, and invalid scene data. Artists no longer need to remember complex setup steps or manually run cleanup scripts, as the system ensures that every scene adheres to studio standards automatically.'
-                },
-                {
-                    type: 'paragraph',
-                    content: 'The introduction of event-driven automation and integrated QA significantly reduces technical debt by catching issues early—at scene open, import, or export—rather than during later stages of production. This leads to fewer bugs, cleaner data, and more predictable results when assets move between departments or into game engines and render pipelines. Source control automation further enhances collaboration by reducing conflicts and ensuring files are always up to date and properly tracked.'
                 },
                 {
                     type: 'paragraph',
