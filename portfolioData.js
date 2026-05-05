@@ -1,6 +1,77 @@
 const portfolioData = [
             {
-            id: 1,
+    id: 1,
+    category: ['engine', 'rendering', 'tools'],
+    title: 'Earendel – Graphics Engine & Editor',
+    shortDescription: 'Custom OpenGL engine with real-time PBR shading, multi-light shadows, and an in-editor workflow.',
+    fullDescription: 'Earendel Engine is a custom OpenGL-based real-time renderer and editor. It was built as a sandbox for OpenGL experiments. And further extended with  Editor functionalities like Scene and material editor, Prefabs, Content Browser and more.',
+    thumbnail: './assets/images/012_Earendel_01.png',
+    image: './assets/images/012_Earendel_01.png',
+    technologies: 'C++, OpenGL, GLSL, ImGui, SDL, JSON',
+    role: 'Author',
+    year: '2026',
+    link: 'https://www.youtube.com/watch?v=GYHmQCKvRzM',
+    contentBlocks: [
+        {
+            type: 'heading',
+            content: 'Rendering Features'
+        },
+        {
+            type: 'paragraph',
+            content: 'The renderer implements a physically-based metallic/roughness workflow with editable light objects, image-based lighting, and a small post-process stack. Everything is exposed as parameters so lookdev can be done directly in the viewport without recompiling shaders.'
+        },
+
+        {
+            type: 'code',
+            content:
+                `- PBR metallic/roughness BRDF with support for base color, normal, metallic, roughness, occlusion, and emissive maps
+- Editable light objects (directional, point, spot) with per-light color, intensity, range, and shadow toggles
+- Image-Based Lighting (IBL) from HDR environment maps for soft ambient and specular contribution
+- Multiple shadowed lights with a dedicated shadow depth pass and tunable light-space matrices
+- Postprocess pass stack including Bloom, Screen Space Reflections (SSR), and Screen Space Ambient Occlusion (SSAO)
+- MSAA and FXAA`
+            
+        },
+        {
+            type: 'image',
+            src: './assets/images/012_Earendel_01.png',
+            alt: 'Earendel Engine PBR lighting and shadowed scene'
+        },
+        {
+            type: 'heading',
+            content: 'Editor Features'
+        },
+        {
+            type: 'paragraph',
+            content: 'The engine has a lightweight editor that helps with building scenes, tweak and store materials, and author reusable prefabs. Material parameters are parsed from shader @param blocks so the UI stays in sync with the GLSL code automatically.'
+        },
+        {
+            type: 'code',
+            content: 
+                `- Scene editor with hierarchy view, transform gizmos, and multi-selection translate / rotate / scale
+- Realtime material editor directly driven by shader @param metadata (floats, bools, colors, textures)
+- Content Browser to navigate and manage assets
+- Prefab system for instancing reusable objects with shared or overridden materials and transforms
+- Viewport controls for camera navigation, grid and gizmo visibility, wireframe mode, and render debug toggles
+- JSON-based storage for scenes, materials, and shader configs to keep assets diff-friendly in version control`
+        },
+        {
+            type: 'image',
+            src: './assets/images/012_Earendel_02.png',
+            alt: 'Earendel Engine scene editor and material inspector'
+        },
+        {
+            type: 'video',
+            url: 'https://www.youtube.com/watch?v=GYHmQCKvRzM',
+            embedSrc: 'https://www.youtube.com/embed/GYHmQCKvRzM',
+            caption: 'Earendel Engine Preview'
+        }
+    ]
+},
+
+
+            {
+            id: 2,
             category: ['tools', 'pipeline'],
             title: 'DCC Tooling Pipeline',
             shortDescription: 'DCC Tools CI/CD Pipeline: Easy to ship, install, and maintain.',
@@ -114,7 +185,7 @@ const portfolioData = [
         },
 
         {
-            id: 2,
+            id: 3,
             category: ['shaders', 'tools'],
             title: 'Seasons System - GLSL / HLSL - Maya & 3DS Max',
             shortDescription: 'A real-time Season System for Maya and 3DS Max viewports — swap and blend between Summer, Fall, and Snow with per-season textures, tints, and a companion Tool for switching seasons globally for all assets.',
@@ -217,7 +288,7 @@ N = TangentToWorld(Nw, Tw, Bw, tn);              // single TBN transform`
         },
         
         {
-            id: 3,
+            id: 4,
             category: ['shaders'],
             title: 'Maya GLSL Shader - Lighting Model - Blinn-Phong',
             shortDescription: 'Blinn-Phong real-time hardware shader for Maya viewport with multi-light support, normal mapping, and shadow casting.',
@@ -322,7 +393,7 @@ tn.y *= InvertNormalGreen ? -1.0 : 1.0;` },
             ]
         },
         {
-            id: 4,
+            id: 5,
             category: ['tools', 'pipeline'],
             title: 'ProjectReady — Pipeline Automation Tool',
             shortDescription: 'Maya tool to configure project, paths, source control, automation and scene defaults from a single UI.',
@@ -447,7 +518,7 @@ cmds.scriptJob(event=["SceneSaved", on_scene_saved])
         
 
         {
-    id: 4,
+    id: 6,
     category: ['graphics', 'tools'],
     title: 'OpenGL Graphics Application - SDL3 / GLM / GLAD',
     shortDescription: 'A simple real-time OpenGL graphics application built with SDL3, GLM, and GLAD, featuring a basic shader interpolation demo, textured 3D model rendering, and a bloom post-processing experiment.',
@@ -544,7 +615,7 @@ vec3 envColor = texture(skybox, R).rgb;`
 },
 
         {
-    id: 6,
+    id: 7,
     category: ['shaders', 'pipeline'],
     title: 'Advanced Texture Packing - Packed PBR / Normal Reconstruction',
     shortDescription: 'An optimized texture packing workflow that stores Diffuse in RGB, PBR data in RGB, and packs normal XY into alpha channels, reconstructing normal Z in the shader to reduce texture memory and sampling cost.',
@@ -609,7 +680,7 @@ return float3(normalXY, normalZ);`
 },
         
         {
-    id: 7,
+    id: 8,
     category: ['3d'],
     title: 'Armor Bust - 3D Model/Texture/Render',
     shortDescription: 'A stylized character bust modeled and textured using ZBrush, Maya, and Substance 3D Painter.',
@@ -654,7 +725,7 @@ return float3(normalXY, normalZ);`
     ]
 },
         {
-            id: 8,
+            id: 9,
             category: ['3d'],
             title: 'Raullate Table - 3D Model/Texture/Render',
             shortDescription: 'A game-ready Raullate table modeled and textured using Maya, and Substance 3D Painter.',
@@ -699,7 +770,7 @@ return float3(normalXY, normalZ);`
         },
 
         {
-    id: 9,
+    id: 10,
     category: 'misc',
     title: 'Biped Character Rig - Game Ready',
     shortDescription: 'A production-ready character rig built with animator-friendly controls, deformation support, and a demo including both manual rig animation and mocap retargeting tests.',
@@ -757,7 +828,7 @@ return float3(normalXY, normalZ);`
 },
         
         {
-    id: 10,
+    id: 11,
     category: ['shaders'],
     title: 'Maya GLSL Mipmapping - UV Bleeding Debug Shader',
     shortDescription: 'A real-time GLSL debug shader for Maya Viewport 2.0 designed to expose potential UV bleeding and texture seam issues.',
@@ -798,7 +869,7 @@ return float3(normalXY, normalZ);`
 },
 
     {
-    id: 11,
+    id: 12,
     category: 'misc',
     title: 'The other side of the Universe - Unreal Cinematic Trailer',
     shortDescription: 'A cinematic trailer design project combining Unreal Engine, Maya, After Effects, and Premiere for scene design, animation, rendering, post, and final edit.',
@@ -855,7 +926,7 @@ return float3(normalXY, normalZ);`
     ]
 },
     {
-    id: 12,
+    id: 13,
     category: ['misc'],
     title: 'Unreal Arch Viz - Interior Visualization',
     shortDescription: 'An architectural visualization project built with AutoCAD, 3ds Max, and Unreal Engine, combining layout planning, environment assembly, material development, cinematic cameras, and final rendering in real time.',
