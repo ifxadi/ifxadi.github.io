@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aditya Kumar — Technical Artist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,16..72,400;0,16..72,500;0,16..72,600;1,16..72,400&family=Archivo:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+<script>document.documentElement.classList.add('preanim');</script>
+<style>
+:root {
+  --bg: #131316;
+  --bg-2: #17171b;
+  --surface: #1b1b20;
+  --border: rgba(255,255,255,0.09);
+  --border-strong: rgba(255,255,255,0.18);
+  --text: #eceae6;
+  --text-dim: #a6a49e;
+  --text-mute: #6b6964;
+  --accent: #ff6a3d;
+  --accent-rgb: 255,106,61;
+  --accent-ink: #1a0c05;
+  --accent-2: #c9c6bf;
+  --accent-2-rgb: 201,198,191;
+  --code-text: #cfae9c;
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body: 'Archivo', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --radius: 0px;
+  --display-tracking: -0.012em;
+  --maxw: 1240px;
+}
+
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+  background: radial-gradient(ellipse 90% 50% at 50% -5%, rgba(255,106,61,0.05), transparent 55%), var(--bg);
+}
+
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 600;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px clamp(20px, 5vw, 56px);
+  backdrop-filter: blur(12px);
+  background: linear-gradient(180deg, rgba(19,19,22,0.9), transparent);
+}
+.brand { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text); }
+.brand b { color: var(--accent); }
+.topbar nav { display: flex; gap: 24px; }
+.topbar nav a { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color 0.25s; }
+.topbar nav a:hover { color: var(--accent); }
+@media (max-width: 720px) { .topbar nav { display: none; } }
+
+/* ── Hero ─────────────────────────────────────────── */
+.hero { padding: clamp(124px, 17vh, 190px) clamp(20px, 5vw, 56px) clamp(40px, 5vw, 70px); }
+.hero-grid { display: grid; grid-template-columns: 1fr 0.82fr; gap: clamp(34px, 6vw, 88px); align-items: center; }
+.hero-name {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(3.2rem, 8.5vw, 6.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  margin: 24px 0 26px;
+}
+.hero-name em { font-style: italic; color: var(--accent); font-weight: 400; }
+.hero-lead { font-family: var(--font-display); font-size: clamp(1.2rem, 2.1vw, 1.6rem); line-height: 1.55; color: var(--text-dim); max-width: 32ch; font-weight: 400; }
+.hero-lead b { color: var(--text); font-weight: 500; }
+.hero-body { font-size: 1rem; line-height: 1.85; color: var(--text-dim); max-width: 46ch; margin-top: 22px; }
+.hero-body strong { color: var(--text); font-weight: 600; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+.btn { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 13px 24px; border: 1px solid var(--border-strong); color: var(--text); transition: all 0.3s var(--ease); }
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn-primary:hover { background: transparent; color: var(--accent); }
+
+.featured { position: relative; cursor: pointer; overflow: hidden; background: var(--bg-2); border: 1px solid var(--border); }
+.featured img { width: 100%; aspect-ratio: 3 / 3.4; object-fit: cover; transition: transform 0.8s var(--ease), filter 0.6s; }
+.featured:hover img { transform: scale(1.04); }
+.featured-num { position: absolute; top: 16px; left: 18px; font-family: var(--font-display); font-style: italic; font-size: 1.4rem; color: #fff; mix-blend-mode: difference; z-index: 3; }
+.featured-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 18px 18px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.85)); z-index: 3; }
+.featured-cap .fc-tag { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+.featured-cap h3 { font-family: var(--font-display); font-weight: 500; font-size: 1.35rem; line-height: 1.12; color: #fff; margin-top: 6px; }
+.featured-cap .fc-open { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; color: var(--text-dim); margin-top: 10px; display: inline-block; }
+
+/* magazine meta strip */
+.hero-meta {
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border);
+  margin: clamp(40px, 6vw, 72px) auto 0; max-width: var(--maxw);
+}
+.hero-meta .cell { background: var(--bg); padding: 20px clamp(16px, 2vw, 26px); }
+.hero-meta .cell .k { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-mute); display: block; margin-bottom: 7px; }
+.hero-meta .cell .v { font-size: 0.95rem; color: var(--text); }
+.hero-meta .cell .v .on { color: var(--accent); }
+@media (max-width: 760px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+  .hero-right { order: -1; }
+  .hero-meta { grid-template-columns: repeat(2, 1fr); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-left > *, .hero-right { transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+  html.preanim .hero-left > *, html.preanim .hero-right { opacity: 0; transform: translateY(18px); }
+  .hero-left > *:nth-child(1) { transition-delay: 0.02s; }
+  .hero-left > *:nth-child(2) { transition-delay: 0.10s; }
+  .hero-left > *:nth-child(3) { transition-delay: 0.18s; }
+  .hero-left > *:nth-child(4) { transition-delay: 0.26s; }
+  .hero-left > *:nth-child(5) { transition-delay: 0.34s; }
+  .hero-right { transition-delay: 0.24s; }
+}
+.section-title { font-weight: 500; }
+.content-block-heading, .card-title, .footer-cta h2, .modal-title { font-weight: 500; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><b>AK</b> — Aditya Kumar</div>
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#skills">Skills</a>
+    <a href="./resume.html" target="_blank">Resume</a>
+    <a href="mailto:aditya.techartist@gmail.com">Contact</a>
+  </nav>
+</div>
+
+<header class="hero" data-screen-label="Hero">
+  <div class="hero-grid wrap">
+    <div class="hero-left">
+      <span class="eyebrow">Technical Artist · Mumbai, India</span>
+      <h1 class="hero-name">Aditya <em>Kumar</em></h1>
+      <p class="hero-lead">Building the bridge between <b>art</b> and <b>engineering</b> for real-time games.</p>
+      <p class="hero-body">Robust pipelines, artist-friendly <strong>tools</strong>, real-time <strong>shaders</strong> and rigs. Currently with <strong>Supercell</strong> on the <i>Brawl Stars</i> extended team — end-to-end from asset creation to engine implementation.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#work">View Work</a>
+        <a class="btn" href="mailto:aditya.techartist@gmail.com">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <figure class="featured" onclick="openModalById(1)">
+        <span class="featured-num">01</span>
+        <img src="assets/images/012_Earendel_01.png" alt="Earendel graphics engine PBR scene">
+        <figcaption class="featured-cap">
+          <span class="fc-tag">Featured · Engine · Rendering</span>
+          <h3>Earendel — Graphics Engine &amp; Editor</h3>
+          <span class="fc-open">Read the breakdown →</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+  <div class="hero-meta">
+    <div class="cell"><span class="k">Role</span><span class="v">Technical Artist</span></div>
+    <div class="cell"><span class="k">Focus</span><span class="v">Tools · Shaders · Pipeline</span></div>
+    <div class="cell"><span class="k">Now</span><span class="v">Supercell · Brawl Stars</span></div>
+    <div class="cell"><span class="k">Status</span><span class="v"><span class="on">●</span> Open to new roles</span></div>
+  </div>
+</header>
+
+<section class="section" id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Capabilities</span>
+        <h2 class="section-title" style="margin-top:18px;">Skills &amp; Expertise</h2>
+      </div>
+      <p class="section-sub">A generalist core wrapped around deep technical-art specialisation.</p>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-cat">
+        <h3><span class="idx">01</span> Technical Art</h3>
+        <ul>
+          <li>Game-art pipeline development</li>
+          <li>Tools programming</li>
+          <li>Shaders — GLSL, HLSL, material graph</li>
+          <li>Asset optimization &amp; implementation</li>
+          <li>Performance &amp; memory profiling</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3><span class="idx">02</span> Software &amp; Engines</h3>
+        <ul>
+          <li>Maya · Blender · 3DS Max</li>
+          <li>Unreal · Unity · proprietary tech</li>
+          <li>Substance Designer / Painter</li>
+          <li>ZBrush · Marmoset Toolbag</li>
+          <li>Adobe Suite</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3><span class="idx">03</span> Programming</h3>
+        <ul>
+          <li>Python · Maya API · PyQt</li>
+          <li>MEL · MaxScript</li>
+          <li>HLSL · GLSL shaders</li>
+          <li>C++ · C#</li>
+          <li>Git · Perforce · SVN</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3><span class="idx">04</span> 3D Generalist</h3>
+        <ul>
+          <li>Modeling &amp; texturing</li>
+          <li>Rigging &amp; animation</li>
+          <li>Level design &amp; set dressing</li>
+          <li>Shading &amp; lighting</li>
+          <li>Rendering &amp; post</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="filterbar" id="work">
+  <div class="filter-buttons">
+    <button class="filter-btn active" data-filter="all">All Work</button>
+    <button class="filter-btn" data-filter="tools">Tools</button>
+    <button class="filter-btn" data-filter="shaders">Shaders</button>
+    <button class="filter-btn" data-filter="3d">3D</button>
+    <button class="filter-btn" data-filter="pipeline">Pipeline</button>
+    <button class="filter-btn" data-filter="misc">Misc</button>
+  </div>
+</div>
+
+<section class="section" data-screen-label="Work">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Selected Projects</span>
+        <h2 class="section-title" style="margin-top:18px;">Portfolio</h2>
+      </div>
+      <p class="section-sub">Engines, shaders, tools &amp; pipelines — click any project for the full breakdown.</p>
+    </div>
+    <div class="portfolio-grid" id="portfolioGrid"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-cta">
+    <span class="eyebrow reveal">Let's build something</span>
+    <h2 class="reveal" style="margin-top:20px;">Open for new<br>adventures. <a href="mailto:aditya.techartist@gmail.com">Say hi →</a></h2>
+    <div class="footer-meta">
+      <div class="footer-links">
+        <a class="footer-link" href="mailto:aditya.techartist@gmail.com">Email</a>
+        <a class="footer-link" href="./resume.html" target="_blank">Resume</a>
+        <a class="footer-link" href="https://linkedin.com/in/ifxadi" target="_blank">LinkedIn</a>
+        <a class="footer-link" href="https://github.com/ifxadi" target="_blank">GitHub</a>
+      </div>
+      <span class="footer-copy">© 2026 Aditya Kumar · Technical Art</span>
+    </div>
+  </div>
+</footer>
+
+<script src="portfolioData.js"></script>
+<script src="app.js"></script>
+<script>
+(function () {
+  function soft() { document.documentElement.classList.remove('preanim'); }
+  function hard() {
+    document.documentElement.classList.remove('preanim');
+    var els = document.querySelectorAll('.hero-left > *, .hero-right');
+    for (var i = 0; i < els.length; i++) {
+      els[i].style.transition = 'none';
+      els[i].style.opacity = '1';
+      els[i].style.transform = 'none';
+    }
+  }
+  if (document.readyState === 'complete') { requestAnimationFrame(soft); }
+  else { window.addEventListener('load', function () { requestAnimationFrame(soft); }); }
+  setTimeout(hard, 1500);
+})();
+</script>
+</body>
+</html>

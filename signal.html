@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aditya Kumar — Technical Artist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@500;600;700;800;900&family=Archivo:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+<script>document.documentElement.classList.add('preanim');</script>
+<style>
+:root {
+  --bg: #050507;
+  --bg-2: #0a0a0d;
+  --surface: #0d0d11;
+  --border: rgba(46,230,214,0.13);
+  --border-strong: rgba(46,230,214,0.32);
+  --text: #e9f6f4;
+  --text-dim: #8ea2a0;
+  --text-mute: #56615f;
+  --accent: #2ee6d6;
+  --accent-rgb: 46,230,214;
+  --accent-ink: #02110f;
+  --accent-2: #ff4d8d;
+  --accent-2-rgb: 255,77,141;
+  --code-text: #8be9d6;
+  --font-display: 'Saira', sans-serif;
+  --font-body: 'Archivo', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --radius: 0px;
+  --display-tracking: 0.01em;
+  --maxw: 1320px;
+}
+
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+  background:
+    radial-gradient(circle at 78% 12%, rgba(46,230,214,0.10), transparent 42%),
+    radial-gradient(circle at 12% 88%, rgba(255,77,141,0.07), transparent 45%),
+    var(--bg);
+}
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.6;
+  background-image:
+    linear-gradient(rgba(46,230,214,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46,230,214,0.05) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: radial-gradient(ellipse 120% 80% at 50% 0%, #000 35%, transparent 78%);
+}
+/* slow scanline drift, very subtle */
+.scan { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.5;
+  background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,0.012) 3px 4px);
+  animation: scan 16s linear infinite; }
+@keyframes scan { to { background-position: 0 200px; } }
+@media (prefers-reduced-motion: reduce) { .scan { animation: none; } }
+
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 600;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px clamp(20px, 5vw, 56px);
+  backdrop-filter: blur(12px);
+  background: linear-gradient(180deg, rgba(5,5,7,0.9), transparent);
+  border-bottom: 1px solid var(--border);
+}
+.brand { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.1em; color: var(--text); }
+.brand b { color: var(--accent); }
+.topbar nav { display: flex; gap: 22px; }
+.topbar nav a { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color 0.25s; }
+.topbar nav a:hover { color: var(--accent); }
+@media (max-width: 720px) { .topbar nav { display: none; } }
+
+/* ── Hero ─────────────────────────────────────────── */
+.hero { padding: clamp(120px, 16vh, 170px) clamp(20px, 5vw, 56px) clamp(48px, 6vw, 80px); position: relative; }
+.hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(30px, 4vw, 64px); align-items: center; }
+.hero-kicker { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); display: flex; gap: 14px; align-items: center; }
+.hero-kicker::before { content: ""; width: 30px; height: 1px; background: var(--accent); }
+.hero-name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3.6rem, 11vw, 8.5rem);
+  line-height: 0.84;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin: 20px 0 22px;
+}
+.hero-name .ln2 { color: transparent; -webkit-text-stroke: 1.5px var(--accent); text-stroke: 1.5px var(--accent); }
+.tagchips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+.tagchip { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--border-strong); padding: 6px 13px; }
+.hero-intro { font-size: clamp(1rem, 1.4vw, 1.12rem); line-height: 1.78; color: var(--text-dim); max-width: 50ch; }
+.hero-intro strong { color: var(--text); font-weight: 600; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+.btn { font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; padding: 13px 24px; border: 1px solid var(--border-strong); color: var(--text); transition: all 0.3s var(--ease); }
+.btn:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 24px -6px rgba(46,230,214,0.5); }
+.btn-primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 700; }
+.btn-primary:hover { background: transparent; color: var(--accent); }
+
+.readout { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); display: grid; grid-template-columns: repeat(2, auto); gap: 8px 36px; font-family: var(--font-mono); font-size: 0.74rem; color: var(--text-dim); }
+.readout span b { color: var(--accent); font-weight: 500; }
+.readout .live { color: var(--accent-2); }
+
+/* featured HUD */
+.featured { position: relative; cursor: pointer; border: 1px solid var(--border-strong); background: var(--bg-2); overflow: hidden; }
+.featured img { width: 100%; aspect-ratio: 4 / 3.1; object-fit: cover; transition: transform 0.8s var(--ease), filter 0.6s; }
+.featured:hover img { transform: scale(1.05); filter: saturate(1.18) contrast(1.05); }
+.hud-corner { position: absolute; width: 18px; height: 18px; z-index: 4; }
+.hud-corner.tl { top: 10px; left: 10px; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+.hud-corner.tr { top: 10px; right: 10px; border-top: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+.hud-corner.bl { bottom: 10px; left: 10px; border-bottom: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+.hud-corner.br { bottom: 10px; right: 10px; border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+.hud-tag { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); background: rgba(5,5,7,0.6); padding: 4px 12px; border: 1px solid var(--border); z-index: 4; }
+.featured-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 18px 18px; display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; background: linear-gradient(180deg, transparent, rgba(5,5,7,0.92)); z-index: 3; }
+.featured-cap .fc-tag { font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+.featured-cap h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.01em; color: #fff; margin-top: 5px; line-height: 1.08; }
+.featured-cap .fc-open { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); white-space: nowrap; }
+
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+  .hero-right { order: -1; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-left > *, .hero-right { transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+  html.preanim .hero-left > *, html.preanim .hero-right { opacity: 0; transform: translateY(18px); }
+  .hero-left > *:nth-child(1) { transition-delay: 0.02s; }
+  .hero-left > *:nth-child(2) { transition-delay: 0.09s; }
+  .hero-left > *:nth-child(3) { transition-delay: 0.16s; }
+  .hero-left > *:nth-child(4) { transition-delay: 0.23s; }
+  .hero-left > *:nth-child(5) { transition-delay: 0.30s; }
+  .hero-left > *:nth-child(6) { transition-delay: 0.37s; }
+  .hero-right { transition-delay: 0.26s; }
+}
+</style>
+</head>
+<body>
+<div class="scan"></div>
+
+<div class="topbar">
+  <div class="brand"><b>//</b> ADITYA_KUMAR</div>
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#skills">Skills</a>
+    <a href="./resume.html" target="_blank">Resume</a>
+    <a href="mailto:aditya.techartist@gmail.com">Contact</a>
+  </nav>
+</div>
+
+<header class="hero" data-screen-label="Hero">
+  <div class="hero-grid wrap">
+    <div class="hero-left">
+      <span class="hero-kicker">Technical Artist · Mumbai, IN</span>
+      <h1 class="hero-name">Aditya<br><span class="ln2">Kumar</span></h1>
+      <div class="tagchips">
+        <span class="tagchip">Tools</span>
+        <span class="tagchip">Shaders</span>
+        <span class="tagchip">Pipeline</span>
+        <span class="tagchip">Real-time GFX</span>
+      </div>
+      <p class="hero-intro">I sit where art meets engineering — building <strong>pipelines</strong>, artist-friendly <strong>tools</strong>, and real-time <strong>shaders</strong> that keep production moving. Currently with <strong>Supercell</strong> on the <i>Brawl Stars</i> extended team.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#work">Explore Work</a>
+        <a class="btn" href="mailto:aditya.techartist@gmail.com">Contact</a>
+      </div>
+      <div class="readout">
+        <span><b>STATUS</b> <span class="live">● available</span></span>
+        <span><b>FOCUS</b> Graphics / OpenGL</span>
+        <span><b>STACK</b> Python · C++ · GLSL</span>
+        <span><b>PROJECTS</b> 13 shipped</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <figure class="featured" onclick="openModalById(1)">
+        <span class="hud-tag">Output_01 · Featured</span>
+        <span class="hud-corner tl"></span><span class="hud-corner tr"></span>
+        <span class="hud-corner bl"></span><span class="hud-corner br"></span>
+        <img src="assets/images/012_Earendel_01.png" alt="Earendel graphics engine PBR scene">
+        <figcaption class="featured-cap">
+          <div>
+            <span class="fc-tag">Engine · Rendering · GLSL</span>
+            <h3>Earendel — Graphics Engine</h3>
+          </div>
+          <span class="fc-open">[ open ]</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="skills" style="border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Capabilities</span>
+        <h2 class="section-title" style="margin-top:18px;text-transform:uppercase;">Skills &amp; Expertise</h2>
+      </div>
+      <p class="section-sub">Generalist core, deep technical-art specialisation.</p>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-cat">
+        <h3><span class="idx">01</span> Technical Art</h3>
+        <ul>
+          <li>Game-art pipeline development</li>
+          <li>Tools programming</li>
+          <li>Shaders — GLSL, HLSL, material graph</li>
+          <li>Asset optimization &amp; implementation</li>
+          <li>Performance &amp; memory profiling</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3><span class="idx">02</span> Software &amp; Engines</h3>
+        <ul>
+          <li>Maya · Blender · 3DS Max</li>
+          <li>Unreal · Unity · proprietary tech</li>
+          <li>Substance Designer / Painter</li>
+          <li>ZBrush · Marmoset Toolbag</li>
+          <li>Adobe Suite</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3><span class="idx">03</span> Programming</h3>
+        <ul>
+          <li>Python · Maya API · PyQt</li>
+          <li>MEL · MaxScript</li>
+          <li>HLSL · GLSL shaders</li>
+          <li>C++ · C#</li>
+          <li>Git · Perforce · SVN</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3><span class="idx">04</span> 3D Generalist</h3>
+        <ul>
+          <li>Modeling &amp; texturing</li>
+          <li>Rigging &amp; animation</li>
+          <li>Level design &amp; set dressing</li>
+          <li>Shading &amp; lighting</li>
+          <li>Rendering &amp; post</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="filterbar" id="work">
+  <div class="filter-buttons">
+    <button class="filter-btn active" data-filter="all">All Work</button>
+    <button class="filter-btn" data-filter="tools">Tools</button>
+    <button class="filter-btn" data-filter="shaders">Shaders</button>
+    <button class="filter-btn" data-filter="3d">3D</button>
+    <button class="filter-btn" data-filter="pipeline">Pipeline</button>
+    <button class="filter-btn" data-filter="misc">Misc</button>
+  </div>
+</div>
+
+<section class="section" data-screen-label="Work">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Selected Projects</span>
+        <h2 class="section-title" style="margin-top:18px;text-transform:uppercase;">Portfolio</h2>
+      </div>
+      <p class="section-sub">Click any project for the full technical breakdown.</p>
+    </div>
+    <div class="portfolio-grid" id="portfolioGrid"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-cta">
+    <span class="eyebrow reveal">Let's build something</span>
+    <h2 class="reveal" style="margin-top:20px;text-transform:uppercase;">Open for new<br>adventures. <a href="mailto:aditya.techartist@gmail.com">Say hi →</a></h2>
+    <div class="footer-meta">
+      <div class="footer-links">
+        <a class="footer-link" href="mailto:aditya.techartist@gmail.com">Email</a>
+        <a class="footer-link" href="./resume.html" target="_blank">Resume</a>
+        <a class="footer-link" href="https://linkedin.com/in/ifxadi" target="_blank">LinkedIn</a>
+        <a class="footer-link" href="https://github.com/ifxadi" target="_blank">GitHub</a>
+      </div>
+      <span class="footer-copy">© 2026 Aditya Kumar · Technical Art</span>
+    </div>
+  </div>
+</footer>
+
+<script src="portfolioData.js"></script>
+<script src="app.js"></script>
+<script>
+(function () {
+  function soft() { document.documentElement.classList.remove('preanim'); }
+  function hard() {
+    document.documentElement.classList.remove('preanim');
+    var els = document.querySelectorAll('.hero-left > *, .hero-right');
+    for (var i = 0; i < els.length; i++) {
+      els[i].style.transition = 'none';
+      els[i].style.opacity = '1';
+      els[i].style.transform = 'none';
+    }
+  }
+  if (document.readyState === 'complete') { requestAnimationFrame(soft); }
+  else { window.addEventListener('load', function () { requestAnimationFrame(soft); }); }
+  setTimeout(hard, 1500);
+})();
+</script>
+</body>
+</html>

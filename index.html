@@ -1,1076 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YCV9R69YSR"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-YCV9R69YSR');
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aditya Kumar - Technical Art</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Archivo:wght@300;400;600;700&family=Saira:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/annotation-mono" rel="stylesheet">
-    <style>
-@import url('https://fonts.cdnfonts.com/css/nexa-pro');
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Archivo:wght@300;400;600;700&display=swap');
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aditya Kumar — Technical Artist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Archivo:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+<script>document.documentElement.classList.add('preanim');</script>
+<style>
 :root {
-    --bg:#111111; --bg2:#161616; --card-bg:#1c1c1c; --card-bg2:#202020;
-    --border:#2e2e2e; --rust:#c9a84c; --teal:#4ecdc4; --gold:#c9a84c;
-    --purple:#b794f6; --sage:#a8c5c1; --burnt-orange:#c9a84c; --dark-teal:#3dd9c5;
-    --warm-black:#f5f1e8; --cyan:#4ecdc4; --cyan-dim:#3ab5ad; --magenta:#c9a84c;
-    --magenta-dim:#b09040; --green:#a8c5c1; --green-dim:#88a5a1; --text:#f5f1e8;
-    --text-dim:#a8c5c1; --text-muted:#4a4a4a; --accent:#f5f1e8;
-    --accent-warm:#c9a84c; --border-glow:#c9a84c;
+  --bg: #0b0b0c;
+  --bg-2: #0f0f11;
+  --surface: #141416;
+  --border: rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.17);
+  --text: #ece7df;
+  --text-dim: #a9a39a;
+  --text-mute: #6c675f;
+  --accent: #3b82f6;
+  --accent-rgb: 59,130,246;
+  --accent-ink: #ffffff;
+  --accent-2: #84b0a0;
+  --accent-2-rgb: 132,176,160;
+  --code-text: #b9d0c7;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Archivo', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --radius: 2px;
+  --display-tracking: -0.03em;
+  --maxw: 1280px;
 }
 
-body { font-family:'Archivo',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; overflow-x:hidden; }
-
-body::before { content:''; position:fixed; top:0; left:0; width:100%; height:100%; opacity:0.025; z-index:-1;
-    background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="noise"><feTurbulence baseFrequency="0.9" numOctaves="3"/></filter><rect width="200" height="200" filter="url(%23noise)"/></svg>'); }
-
-.scanlines { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:9999;
-    background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,0.008) 2px,rgba(255,255,255,0.008) 4px);
-    animation:scanMove 12s linear infinite; }
-@keyframes scanMove { 0%{background-position:0 0} 100%{background-position:0 100%} }
-
-.background-art { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-2;
-    background: linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px),
-        radial-gradient(ellipse at 20% 20%,rgba(255,255,255,0.03) 0%,transparent 50%),
-        radial-gradient(ellipse at 80% 80%,rgba(255,255,255,0.02) 0%,transparent 50%), var(--bg);
-    background-size:60px 60px,60px 60px,100% 100%,100% 100%,100% 100%; }
-
-.sine-wave { position:fixed; width:100%; height:100%; top:0; left:0; pointer-events:none; z-index:-1;
-    background: radial-gradient(circle at 10% 50%,rgba(255,255,255,0.02) 0%,transparent 30%),
-        radial-gradient(circle at 90% 50%,rgba(255,255,255,0.02) 0%,transparent 30%);
-    animation:ambientShift 15s ease-in-out infinite alternate; }
-@keyframes ambientShift { 0%{opacity:0.6} 100%{opacity:1} }
-
-.vertex-points { position:fixed; width:100%; height:100%; top:0; left:0; pointer-events:none; z-index:-1; }
-.vertex-point { position:absolute; width:2px; height:2px; border-radius:50%; opacity:0; animation:vertexFloat 8s ease-in-out infinite; }
-.vertex-point:nth-child(1){top:20%;left:10%;background:var(--cyan);box-shadow:0 0 6px var(--cyan);animation-duration:12s}
-.vertex-point:nth-child(2){top:40%;left:85%;background:var(--magenta);box-shadow:0 0 6px var(--magenta);animation-delay:1s;animation-duration:10s}
-.vertex-point:nth-child(3){top:65%;left:25%;background:var(--green);box-shadow:0 0 6px var(--green);animation-delay:2s;animation-duration:14s}
-.vertex-point:nth-child(4){top:15%;left:70%;background:var(--cyan);box-shadow:0 0 6px var(--cyan);animation-delay:0.5s;animation-duration:11s}
-.vertex-point:nth-child(5){top:80%;left:60%;background:var(--magenta);box-shadow:0 0 6px var(--magenta);animation-delay:1.5s;animation-duration:13s}
-.vertex-point:nth-child(6){top:35%;left:45%;background:var(--green);box-shadow:0 0 6px var(--green);animation-delay:2.5s;animation-duration:9s}
-.vertex-point:nth-child(7){top:70%;left:15%;background:var(--cyan);box-shadow:0 0 6px var(--cyan);animation-delay:3s;animation-duration:15s}
-.vertex-point:nth-child(8){top:25%;left:90%;background:var(--magenta);box-shadow:0 0 6px var(--magenta);animation-delay:1.8s;animation-duration:11s}
-@keyframes vertexFloat { 0%,100%{opacity:0;transform:translate(0,0) scale(1)} 10%{opacity:0.6} 50%{opacity:1;transform:translate(20px,-30px) scale(2)} 90%{opacity:0.6} }
-
-.shader-lines { position:fixed; width:100%; height:100%; top:0; left:0; pointer-events:none; z-index:-1; overflow:hidden; }
-.shader-line { position:absolute; height:1px; background:linear-gradient(90deg,transparent,var(--color,var(--cyan)),transparent); opacity:0; animation:lineFlow 12s linear infinite; }
-.shader-line:nth-child(1){top:15%;width:40%;left:-40%;--color:var(--cyan);animation-delay:0s}
-.shader-line:nth-child(2){top:45%;width:35%;left:-35%;--color:var(--magenta);animation-delay:4s}
-.shader-line:nth-child(3){top:75%;width:50%;left:-50%;--color:var(--green);animation-delay:8s}
-.shader-line:nth-child(4){top:30%;width:45%;left:-45%;--color:var(--cyan);animation-delay:2s}
-.shader-line:nth-child(5){top:60%;width:38%;left:-38%;--color:var(--magenta);animation-delay:6s}
-@keyframes lineFlow { 0%{left:-50%;opacity:0} 10%{opacity:0.4} 90%{opacity:0.2} 100%{left:110%;opacity:0} }
-
-.gradient-orb { position:fixed; border-radius:50%; pointer-events:none; z-index:-1; filter:blur(80px); animation:orbPulse 20s ease-in-out infinite; }
-.gradient-orb-1{width:400px;height:400px;background:radial-gradient(circle,rgba(255,255,255,0.03),transparent);top:-10%;right:5%}
-.gradient-orb-2{width:300px;height:300px;background:radial-gradient(circle,rgba(200,200,200,0.03),transparent);bottom:10%;left:5%;animation-delay:7s}
-.gradient-orb-3{width:250px;height:250px;background:radial-gradient(circle,rgba(201,168,76,0.04),transparent);top:50%;left:40%;animation-delay:3s}
-@keyframes orbPulse { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(30px,-20px) scale(1.15)} 66%{transform:translate(-20px,30px) scale(0.9)} }
-
-/* HEADER */
-header { padding:100px 40px 70px; text-align:center; position:relative; border-bottom:1px solid var(--border); background:var(--bg2); overflow:hidden; }
-header::before { content:''; position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,#888,var(--accent-warm),#888,transparent); animation:borderGlow 4s ease-in-out infinite; }
-@keyframes borderGlow { 0%,100%{opacity:0.5} 50%{opacity:1} }
-.header-deco { position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#555,var(--accent-warm),#888,var(--accent-warm),#555); background-size:200% 100%; animation:gradientFlow 3s linear infinite; }
-@keyframes gradientFlow { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
-.hero { max-width:1000px; margin:0 auto; }
-h1 { font-family:'Saira',sans-serif; font-size:clamp(4rem,11vw,8rem); font-weight:800; letter-spacing:2px; margin-bottom:25px; color:var(--text); text-transform:uppercase; position:relative; display:block; line-height:0.9; }
-h1::before,h1::after { content:none; }
-.subtitle-tags { display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; }
-.subtitle-tag { font-family:'DM Mono',monospace; font-size:0.94rem; font-weight:500; letter-spacing:2.5px; text-transform:uppercase; color:var(--teal); }
-.subtitle-sep { color:var(--text-muted); font-size:1.2rem; font-family:'DM Mono',monospace; }
-.intro-text { max-width:680px; margin:25px auto 0; font-size:clamp(0.95rem,2vw,1.1rem); line-height:1.85; color:var(--text-dim); padding:0 20px; }
-.intro-text strong { color:var(--text); font-weight:600; }
-.social-links { display:flex; gap:16px; justify-content:center; margin-top:25px; flex-wrap:wrap; }
-.social-link { color:var(--text); text-decoration:none; padding:12px 28px; border:1px solid #444; font-family:'DM Mono',monospace; font-size:0.82rem; letter-spacing:2px; text-transform:uppercase; position:relative; overflow:hidden; transition:all 0.3s; background:rgba(0,212,255,0.05); clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%); }
-.social-link::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:var(--accent-warm); transition:left 0.3s; z-index:-1; }
-.social-link:hover { color:#111; border-color:var(--accent-warm); }
-.social-link:hover::before { left:0; }
-
-/* SKILLS */
-.skills-section { padding:80px 40px; background:transparent; border-bottom:1px solid var(--border); position:relative; overflow:hidden; }
-.skill-decoration { position:absolute; pointer-events:none; }
-.skill-decoration-1 { top:20px; left:20px; width:40px; height:40px; border-top:1px solid #555; border-left:1px solid #555; opacity:0.6; }
-.skill-decoration-2 { bottom:20px; right:20px; width:40px; height:40px; border-bottom:1px solid #555; border-right:1px solid #555; opacity:0.6; }
-.skill-decoration-3 { top:50%; left:50%; width:60px; height:60px; border:1px solid rgba(0,255,136,0.1); border-radius:50%; transform:translate(-50%,-50%); }
-.skills-container { max-width:1200px; margin:0 auto; position:relative; z-index:1; }
-.skills-title { font-family:'Saira',sans-serif; font-size:clamp(2rem,5vw,3.5rem); font-weight:800; text-align:center; margin-bottom:60px; color:var(--text); text-transform:uppercase; letter-spacing:-2px; }
-.skills-title::after { content:''; display:block; width:80px; height:2px; margin:16px auto 0; background:linear-gradient(90deg,var(--accent-warm),#666); }
-.skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; }
-.skill-category { background:var(--card-bg); border:1px solid var(--border); padding:30px; transition:all 0.3s; position:relative; overflow:hidden; }
-.skill-category-title { font-family:'Saira',sans-serif; font-size:1.2rem; font-weight:700; margin-bottom:20px; color:var(--text); text-transform:uppercase; letter-spacing:0.5px; display:flex; align-items:center; gap:10px; }
-.skill-category-title::before { content:'//'; color:var(--accent-warm); font-family:'DM Mono',monospace; font-size:0.85rem; }
-.skill-list { list-style:none; }
-.skill-item { padding:8px 0; color:var(--text-dim); font-size:0.9rem; display:flex; align-items:center; gap:10px; border-bottom:1px solid rgba(255,255,255,0.03); }
-.skill-item:last-child { border-bottom:none; }
-.skill-item::before { content:'▸'; color:var(--accent-warm); font-size:1rem; flex-shrink:0; }
-.skills-vertex-canvas { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:0.55; }
-
-/* NAV */
-nav { padding:24px 20px; text-align:center; position:sticky; top:0; background:rgba(17,17,17,0.97); backdrop-filter:blur(20px); z-index:500; border-bottom:1px solid var(--border); }
-nav::after { content:''; display:block; position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,#555,transparent); }
-.filter-buttons { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; max-width:900px; margin:0 auto; }
-.filter-btn { padding:12px 28px; background:var(--card-bg); color:var(--text); border:2px solid var(--border); cursor:pointer; font-size:0.82rem; font-weight:600; letter-spacing:2px; font-family:'DM Mono',monospace; text-transform:uppercase; transition:all 0.2s; position:relative; overflow:hidden; box-shadow:4px 4px 0 rgba(0,0,0,0.4); }
-.filter-btn::before { content:''; position:absolute; inset:0; background:rgba(0,212,255,0.08); opacity:0; transition:opacity 0.25s; }
-.filter-btn:hover { color:var(--text); border-color:var(--rust); transform:translate(2px,2px); box-shadow:2px 2px 0 rgba(0,0,0,0.4); }
-.filter-btn:hover::before { opacity:1; }
-.filter-btn.active { background:var(--rust); color:#0d0d0d; border-color:var(--rust); font-weight:700; box-shadow:4px 4px 0 rgba(201,168,76,0.5); transform:none; }
-
-/* PORTFOLIO */
-.portfolio-container { max-width:1400px; margin:0 auto; padding:80px 40px; }
-.section-title { font-family:'Saira',sans-serif; font-size:clamp(2rem,5vw,3rem); font-weight:700; margin-bottom:60px; text-align:center; color:var(--text); text-transform:uppercase; letter-spacing:-1px; }
-.section-title::after { content:''; display:block; width:60px; height:2px; margin:14px auto 0; background:linear-gradient(90deg,var(--cyan),var(--magenta)); }
-.portfolio-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
-.portfolio-item { background:var(--card-bg); border:1px solid var(--border); cursor:pointer; transition:all 0.3s; position:relative; overflow:hidden; }
-.portfolio-item .card-dashed-outline { position:absolute; inset:-7px; border:2px dashed transparent; pointer-events:none; transition:border-color 0.3s,opacity 0.3s; z-index:10; opacity:0; }
-.portfolio-item:hover .card-dashed-outline { border-color:var(--rust); opacity:1; }
-.portfolio-item::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--rust),var(--gold)); transform:scaleX(0); transform-origin:left; transition:transform 0.3s; z-index:2; }
-.portfolio-item::after { content:''; position:absolute; inset:0; box-shadow:inset 0 0 0 1px rgba(0,212,255,0); transition:box-shadow 0.3s; pointer-events:none; z-index:2; }
-.portfolio-item:hover { transform:translateY(-6px); border-color:rgba(201,168,76,0.5); box-shadow:8px 8px 0 rgba(201,168,76,0.2),0 20px 50px rgba(0,0,0,0.7),0 0 40px rgba(255,211,61,0.08); }
-.portfolio-item:hover::before { transform:scaleX(1); }
-.portfolio-item:hover::after { box-shadow:inset 0 0 0 1px rgba(0,212,255,0.2); }
-.thumbnail-wrapper { position:relative; overflow:hidden; border-bottom:1px solid var(--border); }
-.thumbnail-wrapper::before,.thumbnail-wrapper::after { content:''; position:absolute; width:16px; height:16px; z-index:3; }
-.thumbnail-wrapper::before { top:10px; left:10px; border-top:2px solid rgba(255,255,255,0.5); border-left:2px solid rgba(255,255,255,0.5); }
-.thumbnail-wrapper::after { bottom:10px; right:10px; border-bottom:2px solid rgba(201,168,76,0.5); border-right:2px solid rgba(201,168,76,0.5); }
-.thumbnail { width:100%; height:300px; object-fit:cover; transition:transform 0.5s,filter 0.5s; filter:saturate(1.0) contrast(1.05); display:block; }
-.portfolio-item:hover .thumbnail { transform:scale(1.08); filter:saturate(1.15) contrast(1.1) brightness(1.05); }
-.card-content { padding:24px; }
-.category-tag { display:inline-block; padding:5px 14px; font-size:0.65rem; font-weight:700; font-family:'DM Mono',monospace; margin-bottom:6px; margin-right:6px; text-transform:uppercase; letter-spacing:2px; background:var(--border); border:2px solid var(--border); color:var(--text-dim); }
-.portfolio-item[data-category="tools"] .category-tag { background:var(--rust); border-color:var(--rust); color:#111; }
-.portfolio-item[data-category="shaders"] .category-tag { background:var(--teal); border-color:var(--teal); color:#111; }
-.portfolio-item[data-category="3d"] .category-tag { background:var(--purple); border-color:var(--purple); color:#111; }
-.portfolio-item[data-category="pipeline"] .category-tag { background:var(--gold); border-color:var(--gold); color:#111; }
-.portfolio-item[data-category="other"] .category-tag { background:var(--sage); border-color:var(--sage); color:#111; }
-.card-title { font-family:'Saira',sans-serif; font-size:1.4rem; font-weight:700; margin-bottom:10px; margin-top:8px; color:var(--text); letter-spacing:-0.3px; line-height:1.25; }
-.card-description { color:var(--text-dim); font-size:0.9rem; line-height:1.7; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; margin-bottom:14px; }
-.card-technologies { font-family:'DM Mono',monospace; font-size:0.72rem; color:#888; padding-top:12px; border-top:1px solid var(--border); letter-spacing:0.5px; }
-
-/* MODAL */
-.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.92); backdrop-filter:blur(8px); z-index:1000; animation:fadeIn 0.25s; }
-.modal.active { display:block; }
-.modal-wrapper { height:100%; display:flex; align-items:center; justify-content:center; padding:10px 12px; overflow:hidden; }
-.modal-content { background:var(--card-bg2); max-width:1440px; width:96%; max-height:94vh; border:1px solid var(--border); position:relative; animation:slideUp 0.35s ease-out; margin:auto; box-shadow:0 0 80px rgba(0,0,0,0.8),0 0 1px rgba(255,255,255,0.1); display:flex; flex-direction:column; overflow:hidden; }
-.modal-content::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--accent-warm),#888,var(--accent-warm)); }
-@keyframes fadeIn  { from{opacity:0} to{opacity:1} }
-@keyframes slideUp { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
-.modal-close { position:absolute; top:12px; right:16px; width:36px; height:36px; background:transparent; color:#ff4444; border:1px solid #ff4444; cursor:pointer; font-size:1.3rem; display:flex; align-items:center; justify-content:center; z-index:101; transition:all 0.25s; font-family:'DM Mono',monospace; }
-.modal-close:hover { background:#ff4444; color:#fff; transform:rotate(90deg); }
-.modal-header { padding:20px 30px; border-bottom:1px solid var(--border); background:#1a1a1a; position:relative; z-index:100; flex-shrink:0; }
-.modal-header h3 { font-family:'DM Mono',monospace; font-size:0.75rem; color:var(--accent-warm); text-transform:uppercase; letter-spacing:3px; }
-.modal-image-wrapper { position:relative; border-bottom:1px solid var(--border); }
-.modal-image { width:100%; height:500px; object-fit:cover; display:block; }
-.modal-image-wrapper::before { content:''; position:absolute; top:12px; left:12px; width:24px; height:24px; border-top:2px solid rgba(255,255,255,0.4); border-left:2px solid rgba(255,255,255,0.4); }
-.modal-image-wrapper::after  { content:''; position:absolute; top:12px; right:12px; width:24px; height:24px; border-top:2px solid rgba(201,168,76,0.4); border-right:2px solid rgba(201,168,76,0.4); }
-.corner-tl { position:absolute; bottom:12px; left:12px; width:24px; height:24px; border-bottom:2px solid rgba(255,255,255,0.4); border-left:2px solid rgba(255,255,255,0.4); }
-.corner-br { position:absolute; bottom:12px; right:12px; width:24px; height:24px; border-bottom:2px solid rgba(201,168,76,0.4); border-right:2px solid rgba(201,168,76,0.4); }
-.modal-body { padding:40px 45px; box-sizing:border-box; overflow-wrap:break-word; word-break:break-word; overflow-y:auto; flex:1; scrollbar-width:thin; scrollbar-color:#444 #1a1a1a; }
-.modal-body::-webkit-scrollbar { width:6px; }
-.modal-body::-webkit-scrollbar-track { background:#1a1a1a; }
-.modal-body::-webkit-scrollbar-thumb { background:#444; border-radius:3px; }
-.modal-body::-webkit-scrollbar-thumb:hover { background:var(--accent-warm); }
-.modal-category { display:inline-block; padding:5px 16px; margin-bottom:18px; margin-top:24px; background:rgba(201,168,76,0.1); color:var(--accent-warm); font-size:0.7rem; font-weight:700; font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:2px; border:1px solid var(--cyan); }
-.modal-title { font-family:'Saira',sans-serif; font-size:2.4rem; font-weight:800; margin-bottom:24px; color:var(--text); letter-spacing:-1px; line-height:1.1; }
-.modal-description { color:var(--text-dim); font-size:1.05rem; line-height:1.9; margin-bottom:32px; border-left:3px solid var(--accent-warm); padding-left:22px; overflow-wrap:break-word; word-break:break-word; }
-.modal-details { border-top:1px solid var(--border); padding-top:28px; display:grid; gap:16px; }
-.detail-item { display:grid; grid-template-columns:130px 1fr; gap:16px; align-items:start; }
-.detail-label { font-family:'DM Mono',monospace; font-weight:600; color:var(--accent-warm); text-transform:uppercase; font-size:0.72rem; letter-spacing:2px; }
-.detail-value { color:var(--text); font-size:0.95rem; }
-.detail-value a { color:#c0c0c0; text-decoration:none; border-bottom:1px solid #555; transition:all 0.25s; }
-.detail-value a:hover { color:var(--cyan); border-bottom-color:var(--cyan); }
-
-/* CONTENT BLOCKS */
-.modal-content-blocks { margin-top:28px; }
-.content-block { margin-bottom:26px; }
-.content-block-heading { font-family:'Saira',sans-serif; font-size:1.3rem; font-weight:700; color:var(--text); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.5px; }
-.content-block-heading::before { content:'// '; color:var(--accent-warm); font-family:'DM Mono',monospace; font-size:0.9em; }
-.content-block-paragraph { color:var(--text-dim); font-size:0.95rem; line-height:1.8; margin-bottom:12px; }
-.content-block-image { width:100%; border:1px solid var(--border); margin:18px 0; position:relative; }
-.content-block-image img { width:100%; display:block; }
-.content-block-image::before { content:''; position:absolute; top:8px; left:8px; width:16px; height:16px; border-top:1px solid #888; border-left:1px solid #888; }
-.content-block-image::after  { content:''; position:absolute; bottom:8px; right:8px; width:16px; height:16px; border-bottom:1px solid #888; border-right:1px solid #888; }
-.content-block-code { background:rgba(0,0,0,0.6); border:1px solid var(--border); border-left:3px solid var(--accent-warm); padding:28px 16px 16px; margin:16px 0; overflow-x:auto; position:relative; max-width:100%; box-sizing:border-box; }
-.content-block-code::before { content:'CODE'; position:absolute; top:0; left:0; background:var(--accent-warm); color:#111; padding:3px 10px; font-family:'DM Mono',monospace; font-size:0.65rem; font-weight:700; letter-spacing:2px; }
-.content-block-code pre { margin:0; font-family:'Annotation Mono','DM Mono',monospace; font-size:0.88rem; color:var(--green); line-height:1.75; white-space:pre-wrap; word-break:break-word; overflow-wrap:break-word; }
-.content-block-code code { color:var(--green); font-family:inherit; }
-
-/* VIDEO BLOCK */
-.content-block-video {
-    position: relative;
-    margin: 20px 0;
-    border: 1px solid var(--border);
-    background: #000;
-    overflow: hidden;
+/* faint warm vignette + grid, very subtle */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 0%, rgba(59,130,246,0.09), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 0% 100%, rgba(132,176,160,0.04), transparent 55%),
+    var(--bg);
 }
-.content-block-video .video-label {
-    position: absolute;
-    top: 0; left: 0;
-    z-index: 3;
-    background: var(--accent-warm);
-    color: #111;
-    padding: 3px 10px;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    pointer-events: none;
-    white-space: nowrap;
-}
-.content-block-video .video-corner-tl,
-.content-block-video .video-corner-br {
-    position: absolute;
-    width: 16px; height: 16px;
-    z-index: 4; pointer-events: none;
-}
-.content-block-video .video-corner-tl {
-    top: 28px; left: 8px;
-    border-top: 1px solid #888; border-left: 1px solid #888;
-}
-.content-block-video .video-corner-br {
-    bottom: 8px; right: 8px;
-    border-bottom: 1px solid #888; border-right: 1px solid #888;
-}
-.content-block-video .video-embed-wrapper {
-    position: relative;
-    width: 100%;
-    padding-top: 56.25%;
-}
-.content-block-video .video-embed-wrapper iframe {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    border: none;
-    display: block;
-}
-.content-block-video .video-link-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 32px 20px;
-    background: rgba(0, 0, 0, 0.6);
-    color: var(--text);
-    text-decoration: none;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.82rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: background 0.25s, color 0.25s;
-    border-top: 1px solid var(--border);
-}
-.content-block-video .video-link-btn:hover {
-    background: rgba(201, 168, 76, 0.1);
-    color: var(--accent-warm);
-}
-.content-block-video .video-link-btn svg {
-    flex-shrink: 0;
-    opacity: 0.75;
-    transition: opacity 0.2s;
-}
-.content-block-video .video-link-btn:hover svg { opacity: 1; }
-
-/* CANVAS BLOCK */
-    .content-block-canvas-wrap {
-        position: relative;
-        margin: 18px 0;
-        overflow: hidden;
-    }
-.content-block-canvas {
-    display: block;
-    width: 100%;
-    height: 280px;
-}
-/* Paragraphs immediately after a canvas wrap are centered + slightly larger */
-.content-block-canvas-wrap + .content-block .content-block-paragraph {
-    font-size: 1.045rem;
-    text-align: center;
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.5;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 100% 70% at 50% 0%, #000 30%, transparent 75%);
 }
 
-/* FOOTER */
-.footer-hire { margin-bottom:40px; }
-.footer-hire-title { font-family:'Saira',sans-serif; font-size:clamp(2rem,5vw,3.2rem); font-weight:700; color:var(--text); letter-spacing:-1px; margin-bottom:14px; text-transform:uppercase; }
-.footer-hire-title::after { content:'.'; color:var(--accent-warm); }
-.footer-hire-msg { font-family:'Archivo',sans-serif; font-size:1.05rem; color:var(--text-dim); line-height:1.8; }
-footer { text-align:center; padding:60px 20px 40px; color:var(--text-dim); border-top:1px solid var(--border); margin-top:80px; background:var(--bg2); position:relative; }
-footer::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,#888,var(--accent-warm),#888,transparent); }
-.footer-links { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:0; }
-.footer-link { color:var(--text-dim); text-decoration:none; font-family:'DM Mono',monospace; font-size:0.8rem; padding:8px 18px; border:1px solid var(--border); transition:all 0.25s; letter-spacing:1px; clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%); }
-.footer-link:hover { color:var(--accent-warm); border-color:var(--accent-warm); background:rgba(201,168,76,0.05); }
-.footer-link::before { content:'→ '; color:var(--accent-warm); }
-footer p { font-family:'DM Mono',monospace; font-size:0.78rem; letter-spacing:1px; margin-top:24px; color:var(--text-muted); }
-
-/* RESPONSIVE */
-@media (max-width:768px) {
-    h1 { font-size:3rem; letter-spacing:-2px; }
-    header { padding:60px 20px 50px; }
-    .portfolio-grid { grid-template-columns:1fr; gap:20px; }
-    .filter-btn { padding:9px 14px; font-size:0.72rem; letter-spacing:1px; }
-    .filter-buttons { gap:8px; }
-    .modal-wrapper { padding:0; align-items:flex-start; }
-    .modal-content { max-width:100%; width:100%; max-height:100vh; height:100vh; border-radius:0; border-left:none; border-right:none; }
-    .modal-body { padding:20px 16px; }
-    .modal-title { font-size:1.5rem; letter-spacing:-0.5px; }
-    .modal-image { height:200px; }
-    .modal-image-wrapper::before,.modal-image-wrapper::after,.corner-tl,.corner-br { display:none; }
-    .modal-description { font-size:0.95rem; padding-left:14px; }
-    .modal-header { padding:14px 16px; }
-    .modal-close { top:10px; right:10px; width:32px; height:32px; font-size:1.1rem; }
-    .detail-item { grid-template-columns:1fr; gap:4px; }
-    .social-links { flex-direction:column; align-items:center; }
-    .social-link { width:80%; text-align:center; }
-    .skills-section { padding:60px 20px; }
-    .portfolio-container { padding:60px 20px; }
-    .content-block-code pre { font-size:0.75rem; }
-    .content-block-video .video-link-btn { font-size:0.72rem; padding:24px 12px; }
+/* ── Top bar ─────────────────────────────────────── */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 600;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px clamp(20px, 5vw, 56px);
+  backdrop-filter: blur(12px);
+  background: linear-gradient(180deg, rgba(11,11,12,0.85), transparent);
 }
-    </style>
+.brand { font-family: var(--font-mono); font-size: 0.82rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text); }
+.brand b { color: var(--accent); }
+.brand-role { color: var(--text); border-left: 1px solid var(--border-strong); margin-left: 10px; padding-left: 12px; }
+@media (max-width: 600px) { .brand-role { display: none; } }
+.topbar nav { display: flex; gap: 10px; }
+.topbar nav a { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; border: 1px solid var(--border-strong); padding: 8px 15px; border-radius: var(--radius); transition: all 0.25s var(--ease); }
+.topbar nav a:hover { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+.topbar nav a.nav-cta { color: var(--accent); border-color: var(--accent); }
+.topbar nav a.nav-cta:hover { color: var(--accent-ink); background: var(--accent); }
+@media (max-width: 720px) { .topbar nav { display: none; } }
+
+/* ── Hero ────────────────────────────────────────── */
+.hero { padding: clamp(120px, 16vh, 180px) clamp(20px, 5vw, 56px) clamp(50px, 7vw, 90px); }
+.hero .wrap { max-width: min(1640px, 95vw); }
+.hero-head {
+  display: flex; justify-content: space-between; align-items: stretch;
+  gap: clamp(28px, 4vw, 56px); flex-wrap: wrap;
+  margin-bottom: clamp(26px, 3.4vw, 50px);
+}
+.hero-head-left { flex: 6 1 0; min-width: 320px; }
+.hero-intro { margin-top: 22px; }
+.hero-head-right { flex: 4 1 0; min-width: 240px; display: flex; flex-direction: column; gap: 22px; justify-content: center; padding-left: clamp(28px, 4vw, 56px); border-left: 1px solid var(--border); }
+.hero-foot { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
+.hero-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.7rem, 5.6vw, 5rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  margin: 18px 0 14px;
+}
+.hero-name em { font-style: normal; color: var(--accent); }
+/* the showreel is the hero centrepiece — large, full width, frameless */
+.reel-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 0 rgba(59,130,246,0.6); animation: reelpulse 2.4s infinite; }
+@keyframes reelpulse { 0% { box-shadow: 0 0 0 0 rgba(59,130,246,0.5); } 70% { box-shadow: 0 0 0 9px rgba(59,130,246,0); } 100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); } }
+.hero-reel { position: relative; width: 100%; background: #000; overflow: hidden; box-shadow: 0 26px 80px -42px rgba(0,0,0,0.9); }
+.hero-reel .featured-embed { aspect-ratio: 16 / 9; }
+/* transparent layer absorbs all pointer events so YouTube never shows its
+   title, play/pause or hover controls, and the loop can't be paused */
+.reel-block { position: absolute; inset: 0; z-index: 3; cursor: default; }
+/* showreel label, shown inside the video area (non-interactive overlay) */
+.reel-cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 4; pointer-events: none; display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding: clamp(16px, 2vw, 32px); background: linear-gradient(180deg, transparent 38%, rgba(0,0,0,0.45) 72%, rgba(0,0,0,0.82)); }
+.reel-cap-title { font-family: var(--font-display); font-weight: 600; font-size: clamp(1rem, 1.5vw, 1.45rem); letter-spacing: -0.01em; color: #fff; display: inline-flex; align-items: center; gap: 11px; }
+.reel-cap-tag { font-family: var(--font-mono); font-size: clamp(0.68rem, 0.9vw, 0.82rem); letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+.hero-roles {
+  font-family: var(--font-mono);
+  font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 28px;
+}
+.hero-intro { font-size: clamp(1rem, 1.4vw, 1.12rem); line-height: 1.8; color: var(--text-dim); max-width: 68ch; }
+.hero-intro strong { color: var(--text); font-weight: 600; }
+.hero-actions { display: flex; flex-direction: row; flex-wrap: nowrap; gap: 12px; margin-top: 0; }
+.hero-actions .btn { white-space: nowrap; }
+.btn {
+  font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.12em; text-transform: uppercase;
+  text-decoration: none; padding: 13px 24px; border: 1px solid var(--border-strong);
+  color: var(--text); transition: all 0.3s var(--ease); border-radius: var(--radius);
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn-primary:hover { background: transparent; color: var(--accent); }
+
+.hero-status {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-dim);
+}
+.hero-status .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-2); box-shadow: 0 0 0 0 rgba(132,176,160,0.6); animation: pulse 2.4s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(132,176,160,0.5); } 70% { box-shadow: 0 0 0 9px rgba(132,176,160,0); } 100% { box-shadow: 0 0 0 0 rgba(132,176,160,0); } }
+
+/* featured */
+.featured { position: relative; cursor: pointer; border: 1px solid var(--border-strong); overflow: hidden; background: var(--bg-2); box-shadow: 0 30px 80px -34px rgba(0,0,0,0.85); transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease); }
+.featured:hover { transform: translateY(-4px); box-shadow: 0 36px 100px -30px rgba(0,0,0,0.9), 0 0 0 1px var(--accent), 0 0 70px -12px rgba(59,130,246,0.5); }
+.featured img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 0.8s var(--ease), filter 0.6s; filter: saturate(1.08) contrast(1.03); }
+.featured:hover img { transform: scale(1.05); filter: saturate(1.18) contrast(1.05); }
+.featured-video { cursor: default; }
+.featured-embed { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; }
+.featured-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+.featured-frame { position: absolute; inset: 12px; border: 1px solid rgba(255,255,255,0.22); pointer-events: none; }
+.featured-cap {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
+  padding: 22px 20px;
+  background: linear-gradient(180deg, transparent 35%, rgba(0,0,0,0.55) 70%, rgba(0,0,0,0.86));
+}
+.featured-cap .fc-tag { font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+.featured-cap h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.25rem; line-height: 1.15; color: #fff; margin-top: 5px; }
+.featured-cap .fc-open { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; color: #fff; white-space: nowrap; background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.4); padding: 8px 13px; border-radius: var(--radius); cursor: pointer; transition: all 0.25s var(--ease); }
+.featured-cap .fc-open:hover { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.featured-badge { position: absolute; top: 16px; left: 16px; font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text); background: rgba(0,0,0,0.55); backdrop-filter: blur(6px); padding: 5px 11px; border: 1px solid var(--border); }
+
+@media (max-width: 760px) {
+  .hero-head { gap: 26px; }
+  .hero-name { font-size: clamp(2.6rem, 12vw, 4rem); }
+  .hero-head-right { border-left: none; padding-left: 0; padding-top: 24px; border-top: 1px solid var(--border); justify-content: flex-start; flex-basis: 100%; max-width: 100%; }
+}
+
+/* hero entrance — base style is VISIBLE. We hide only while html.preanim is
+   present, which JS adds before paint and always removes after load (+failsafe).
+   So no JS failure or frozen-timeline render can leave the hero hidden. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-head-left > *, .hero-head-right > *, .hero-reel { transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+  html.preanim .hero-head-left > *, html.preanim .hero-head-right > *, html.preanim .hero-reel { opacity: 0; transform: translateY(20px); }
+  .hero-head-left > *:nth-child(1) { transition-delay: 0.02s; }
+  .hero-head-left > *:nth-child(2) { transition-delay: 0.10s; }
+  .hero-head-left > *:nth-child(3) { transition-delay: 0.18s; }
+  .hero-head-right > *:nth-child(1) { transition-delay: 0.12s; }
+  .hero-head-right > *:nth-child(2) { transition-delay: 0.20s; }
+  .hero-head-right > *:nth-child(3) { transition-delay: 0.28s; }
+  .hero-reel { transition-delay: 0.34s; }
+}
+
+.divider { border-top: 1px solid var(--border); }
+.now-line { margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 14px; }
+.now-line p { font-size: 0.95rem; color: var(--text-dim); line-height: 1.7; max-width: 48ch; }
+.now-line p b { color: var(--text); }
+/* sticky-nav scroll offset so anchored sections clear the bar */
+#skills, #work, .hero { scroll-margin-top: 84px; }
+.footer-cta-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
+.footer-btn { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 15px 30px; border: 1px solid var(--border-strong); color: var(--text); transition: all 0.3s var(--ease); border-radius: var(--radius); }
+.footer-btn:hover { border-color: var(--accent); color: var(--accent); }
+.footer-btn-primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.footer-btn-primary:hover { background: transparent; color: var(--accent); }
+</style>
 </head>
 <body>
-<div class="scanlines"></div>
-<div class="background-art"></div>
-<div class="sine-wave"></div>
-<div class="vertex-points">
-    <div class="vertex-point"></div><div class="vertex-point"></div>
-    <div class="vertex-point"></div><div class="vertex-point"></div>
-    <div class="vertex-point"></div><div class="vertex-point"></div>
-    <div class="vertex-point"></div><div class="vertex-point"></div>
-</div>
-<div class="shader-lines">
-    <div class="shader-line"></div><div class="shader-line"></div>
-    <div class="shader-line"></div><div class="shader-line"></div>
-    <div class="shader-line"></div>
-</div>
-<div class="gradient-orb gradient-orb-1"></div>
-<div class="gradient-orb gradient-orb-2"></div>
-<div class="gradient-orb gradient-orb-3"></div>
 
-<header>
-    <div class="header-deco"></div>
-    <div class="hero">
-        <h1 data-text="ADITYA KUMAR">ADITYA KUMAR</h1>
-        <div class="subtitle-tags">
-            <span class="subtitle-tag">Technical Artist</span>
-            <span class="subtitle-sep">·</span>
-            <span class="subtitle-tag">Tools</span>
-            <span class="subtitle-sep">·</span>
-            <span class="subtitle-tag">Shaders</span>
-            <span class="subtitle-sep">·</span>
-            <span class="subtitle-tag">Pipeline</span>
-        </div>
-        <p class="intro-text">
-            Hey there! I'm Aditya, Tech Artist based in Mumbai, India, passionate about everything that blends art and technology.
-            I specialize in building robust pipelines, creating artist-friendly tools, shaders, rigs and optimizing workflows for game development. Currently, I'm working with <strong>Supercell</strong> on the <i>Brawl Stars</i> extended team, focusing on tools, shader development, and pipeline enhancements, while providing end-to-end support from game asset creation to engine implementation.
-            Core tech interests me and I’m currently deepening my knowledge in graphics programming and OpenGL. Feel free to reach out and say Hi!
-        </p>
-        <div class="social-links">
-            <a href="mailto:aditya.techartist@gmail.com" class="social-link">Email</a>
-            <a href="./resume.html" target="_blank" class="social-link">Resume</a>
-            <a href="https://linkedin.com/in/ifxadi" target="_blank" class="social-link">LinkedIn</a>
-            <a href="https://github.com/ifxadi" target="_blank" class="social-link">GitHub</a>
-        </div>
+<div class="topbar">
+  <div class="brand"><b>AK</b> / Aditya Kumar <span class="brand-role">Senior Technical Artist</span></div>
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#skills">Skills</a>
+    <a href="./resume.html" target="_blank">Resume</a>
+    <a href="mailto:aditya.techartist@gmail.com" class="nav-cta">Email</a>
+  </nav>
+</div>
+
+<header class="hero" data-screen-label="Hero">
+  <div class="wrap">
+    <div class="hero-head">
+      <div class="hero-head-left">
+        <h1 class="hero-name">Aditya <em>Kumar</em></h1>
+        <p class="hero-roles">Tools · Shaders · Pipeline · Real-time Graphics</p>
+        <p class="hero-intro">I build the bridge between art and engineering — robust pipelines, artist-friendly <strong>tools</strong>, real-time <strong>shaders</strong>, and animation rigs. Currently, I'm Sr. Technical Artist at Modma Studios contributing to the co-development of the LiveOps Game <strong><i>Brawl Stars</i></strong> with <strong><b>Supercell</b></strong> and other internal projects.</p>
+      </div>
+      <div class="hero-head-right">
+          <div class="hero-foot">
+              <span class="hero-status"><span class="dot"></span>Open to new roles · full-time &amp; contract</span>
+              <span class="hero-status"><span class="dot"></span>Open to relocate </span>
+              <div class="hero-actions">
+                  <a class="btn btn-primary" href="#work">View Work</a>
+                  <a class="btn" href="mailto:aditya.techartist@gmail.com">Get in touch</a>
+              </div>
+          </div>
+      </div>
     </div>
+    <figure class="featured-video hero-reel">
+      <div class="featured-embed">
+        <iframe id="reelIframe" src="https://www.youtube.com/embed/GYHmQCKvRzM?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=GYHmQCKvRzM&amp;controls=0&amp;modestbranding=1&amp;rel=0&amp;playsinline=1&amp;showinfo=0&amp;disablekb=1&amp;fs=0&amp;iv_load_policy=3&amp;enablejsapi=1"
+                title="Earendel Engine Preview" frameborder="0"
+                allow="autoplay; encrypted-media; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <span class="reel-block"></span>
+        <figcaption class="reel-cap">
+          <span class="reel-cap-title"><span class="reel-dot"></span>Showreel — Earendel Engine Preview</span>
+          <span class="reel-cap-tag">Real-time · GLSL · 2026</span>
+        </figcaption>
+      </div>
+    </figure>
+  </div>
 </header>
 
-<section class="skills-section">
-    <canvas class="skills-vertex-canvas" id="skillsCanvas"></canvas>
-    <div class="skill-decoration skill-decoration-1"></div>
-    <div class="skill-decoration skill-decoration-2"></div>
-    <div class="skill-decoration skill-decoration-3"></div>
-    <div class="skills-container">
-        <h2 class="skills-title">Skills &amp; Expertise</h2>
-        <div class="skills-grid">
-            <div class="skill-category">
-                <h3 class="skill-category-title">Technical Art</h3>
-                <ul class="skill-list">
-                    <li class="skill-item">Game-Art Pipeline Development</li>
-                    <li class="skill-item">Tools Programming</li>
-                    <li class="skill-item">Shader Development (GLSL, HLSL, Material Graph)</li>
-                    <li class="skill-item">Asset Optimization</li>
-                    <li class="skill-item">Asset Implementation</li>
-                    <li class="skill-item">Performance, Memory Profiling</li>
-                </ul>
-            </div>
-            <div class="skill-category">
-                <h3 class="skill-category-title">Software &amp; Engines</h3>
-                <ul class="skill-list">
-                    <li class="skill-item">Maya, Blender, 3DS Max</li>
-                    <li class="skill-item">Unreal Engine, Unity, Proprietary Tech</li>
-                    <li class="skill-item">Substance Designer/Painter</li>
-                    <li class="skill-item">ZBrush</li>
-                    <li class="skill-item">Marmoset Toolbag</li>
-                    <li class="skill-item">Adobe Suite</li>
-                </ul>
-            </div>
-            <div class="skill-category">
-                <h3 class="skill-category-title">Programming</h3>
-                <ul class="skill-list">
-                    <li class="skill-item">Python, Maya API, PyQt</li>
-                    <li class="skill-item">MEL, MaxScript</li>
-                    <li class="skill-item">HLSL, GLSL Shaders</li>
-                    <li class="skill-item">C++, C#</li>
-                    <li class="skill-item">Git, Perforce, SVN</li>
-                </ul>
-            </div>
-            <div class="skill-category">
-                <h3 class="skill-category-title">3D Art Generalist</h3>
-                <ul class="skill-list">
-                    <li class="skill-item">Modeling and Texturing</li>
-                    <li class="skill-item">Rigging and Animation</li>
-                    <li class="skill-item">Level Design and Set Dressing</li>
-                    <li class="skill-item">Shading and Lighting</li>
-                    <li class="skill-item">Rendering and Post-composition</li>
-                </ul>
-            </div>
-        </div>
+<section class="section divider" id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Capabilities</span>
+        <h2 class="section-title" style="margin-top:18px;">Skills &amp; Expertise</h2>
+      </div>
+      <p class="section-sub">A generalist core wrapped around deep technical-art specialisation.</p>
     </div>
+    <div class="skills-grid reveal">
+      <div class="skill-cat">
+        <h3><span class="idx">01</span> Technical Art</h3>
+        <ul>
+          <li>Game-art pipeline development</li>
+          <li>Tools programming</li>
+          <li>Shaders — GLSL, HLSL, material graph</li>
+          <li>Asset optimization &amp; implementation</li>
+          <li>Performance &amp; memory profiling</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3><span class="idx">02</span> Software &amp; Engines</h3>
+        <ul>
+          <li>Maya · Blender · 3DS Max</li>
+          <li>Unreal · Unity · proprietary tech</li>
+          <li>Substance Designer / Painter</li>
+          <li>ZBrush · Marmoset Toolbag</li>
+          <li>Adobe Suite</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3><span class="idx">03</span> Programming</h3>
+        <ul>
+          <li>Python · Maya API · PyQt</li>
+          <li>MEL · MaxScript</li>
+          <li>HLSL · GLSL shaders</li>
+          <li>C++ · C#</li>
+          <li>Git · Perforce · SVN</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3><span class="idx">04</span> 3D Generalist</h3>
+        <ul>
+          <li>Modeling &amp; texturing</li>
+          <li>Rigging &amp; animation</li>
+          <li>Level design &amp; set dressing</li>
+          <li>Shading &amp; lighting</li>
+          <li>Rendering &amp; post</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </section>
 
-<nav>
-    <div class="filter-buttons">
-        <button class="filter-btn active" data-filter="all">All Work</button>
-        <button class="filter-btn" data-filter="tools">Tools</button>
-        <button class="filter-btn" data-filter="shaders">Shaders</button>
-        <button class="filter-btn" data-filter="3d">3D Work</button>
-        <button class="filter-btn" data-filter="pipeline">Pipeline</button>
-        <button class="filter-btn" data-filter="misc">Misc</button>
-    </div>
-</nav>
+<div class="filterbar" id="work">
+  <div class="filter-buttons">
+    <button class="filter-btn active" data-filter="all">All Work</button>
+    <button class="filter-btn" data-filter="tools">Tools</button>
+    <button class="filter-btn" data-filter="shaders">Shaders</button>
+    <button class="filter-btn" data-filter="3d">3D</button>
+    <button class="filter-btn" data-filter="pipeline">Pipeline</button>
+    <button class="filter-btn" data-filter="misc">Misc</button>
+  </div>
+</div>
 
-<div class="portfolio-container">
-    <h2 class="section-title">Portfolio</h2>
+<section class="section" data-screen-label="Work">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">Selected Projects</span>
+        <h2 class="section-title" style="margin-top:18px;">Portfolio</h2>
+      </div>
+    </div>
     <div class="portfolio-grid" id="portfolioGrid"></div>
-</div>
+  </div>
+</section>
 
-<div class="modal" id="modal">
-    <div class="modal-wrapper">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Project Details</h3>
-                <button class="modal-close" onclick="closeModal()">×</button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-image-wrapper">
-                    <img class="modal-image" id="modalImage" src="" alt="">
-                    <div class="corner-tl"></div>
-                    <div class="corner-br"></div>
-                </div>
-                <span class="modal-category" id="modalCategory"></span>
-                <h2 class="modal-title" id="modalTitle"></h2>
-                <p class="modal-description" id="modalDescription"></p>
-                <div class="modal-details" id="modalDetails"></div>
-            </div>
-        </div>
+<footer class="site-footer">
+  <div class="footer-cta">
+    <span class="eyebrow reveal">Let's build something unique together</span>
+    <h2 class="reveal" style="margin-top:20px;">Open for new<br>adventures. <a href="mailto:aditya.techartist@gmail.com">Say hi →</a></h2>
+    <div class="footer-cta-actions reveal">
+      <a class="footer-btn footer-btn-primary" href="mailto:aditya.techartist@gmail.com">Email →</a>
+      <a class="footer-btn" href="https://linkedin.com/in/ifxadi" target="_blank" rel="noopener">LinkedIn →</a>
     </div>
-</div>
-
-<footer>
-    <div class="footer-hire">
-        <h2 class="footer-hire-title">Hire Me</h2>
-        <p class="footer-hire-msg">Let's work together — I'm open for new adventures.<br>Full-time &amp; contract roles welcome.</p>
+    <div class="footer-meta">
+      <div class="footer-links">
+        <a class="footer-link" href="mailto:aditya.techartist@gmail.com">Email</a>
+        <a class="footer-link" href="./resume.html" target="_blank">Resume</a>
+        <a class="footer-link" href="https://linkedin.com/in/ifxadi" target="_blank">LinkedIn</a>
+        <a class="footer-link" href="https://github.com/ifxadi" target="_blank">GitHub</a>
+      </div>
+      <span class="footer-copy">© 2026 Aditya Kumar · Technical Art</span>
     </div>
-    <div class="footer-links">
-        <a href="mailto:aditya.techartist@gmail.com" class="footer-link">Email</a>
-        <a href="./resume.html" target="_blank" class="footer-link">Resume</a>
-        <a href="https://linkedin.com/in/ifxadi" target="_blank" class="footer-link">LinkedIn</a>
-        <a href="https://github.com/ifxadi" target="_blank" class="footer-link">GitHub</a>
-    </div>
-    <p>© 2026 Aditya Kumar · Technical Art</p>
+  </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<script src="./portfolioData.js"></script>
+<script src="portfolioData.js"></script>
+<script src="app.js"></script>
 <script>
-
-// ── Helpers ───────────────────────────────────────────────────────────────────
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
-
-// ── Video block builder ───────────────────────────────────────────────────────
-function buildVideoBlock(block) {
-    const caption  = block.caption || 'Video';
-    const hasEmbed = block.embedSrc && block.embedSrc.trim() !== '';
-    const safeUrl  = escapeHtml(block.url || '#');
-    const safeCap  = escapeHtml(caption);
-
-    const corners = `
-        <span class="video-label">${safeCap}</span>
-        <span class="video-corner-tl"></span>
-        <span class="video-corner-br"></span>`;
-
-    if (hasEmbed) {
-        return `
-        <div class="content-block-video">
-            ${corners}
-            <div class="video-embed-wrapper">
-                <iframe
-                    src="${block.embedSrc.trim()}"
-                    title="${safeCap}"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin"
-                    allowfullscreen
-                ></iframe>
-            </div>
-        </div>`;
-    }
-
-    return `
-    <div class="content-block-video">
-        ${corners}
-        <a class="video-link-btn" href="${safeUrl}" target="_blank" rel="noopener noreferrer">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="1.6"
-                 stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <polygon points="10 8 16 12 10 16 10 8"/>
-            </svg>
-            Watch Video&nbsp;&nbsp;—&nbsp;&nbsp;${safeUrl}
-        </a>
-    </div>`;
-}
-
-// ── Canvas block builder ──────────────────────────────────────────────────────
-function buildCanvasBlock(block) {
-    const id      = 'cv_' + Math.random().toString(36).slice(2, 9);
-    const variant = block.variant || 'pipeline';
-    const labels  = JSON.stringify(block.labels || null);
-    const config  = JSON.stringify(block.config  || null);
-    return `
-    <div class="content-block-canvas-wrap" data-variant="${variant}">
-        <canvas
-            id="${id}"
-            class="content-block-canvas"
-            data-variant="${variant}"
-            data-labels='${labels}'
-            data-config='${config}'
-        ></canvas>
-    </div>`;
-}
-
-// ── Canvas animation definitions ──────────────────────────────────────────────
-const canvasDefs = {
-
-    pipeline: function(canvas, labels) {
-        const ctx  = canvas.getContext('2d');
-        const tags = labels || ['CI/CD','JSON','GIT','API','VCS','MEL'];
-        let t = 0, raf;
-        canvas.width  = canvas.offsetWidth || 400;
-        canvas.height = 280;
-        function draw() {
-            ctx.fillStyle = '#0d0d0d';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            const cols = Math.floor(canvas.width / 60) + 2, rows = 6;
-            for (let r = 0; r < rows; r++) {
-                for (let c = 0; c < cols; c++) {
-                    const x = c * 60 + (r % 2) * 30, y = r * 50 + 10;
-                    const phase = Math.sin(t * 0.04 + c * 0.5 + r * 0.8);
-                    const alpha = 0.2 + 0.5 * Math.max(0, phase);
-                    ctx.strokeStyle = `rgba(255,107,74,${alpha})`;
-                    ctx.lineWidth   = 1.5;
-                    ctx.strokeRect(x, y, 40, 30);
-                    if (c < cols - 1) {
-                        ctx.beginPath();
-                        ctx.moveTo(x + 40, y + 15);
-                        ctx.lineTo(x + 60, y + 15);
-                        ctx.strokeStyle = `rgba(78,205,196,${alpha * 0.8})`;
-                        ctx.stroke();
-                    }
-                    ctx.fillStyle = `rgba(255,217,61,${alpha})`;
-                    ctx.font      = '7px DM Mono,monospace';
-                    ctx.fillText(tags[Math.abs(r * cols + c) % tags.length], x + 6, y + 19);
-                }
-            }
-            const lineY = (t * 1.2) % (canvas.height + 20) - 10;
-            const grad  = ctx.createLinearGradient(0, lineY - 4, 0, lineY + 4);
-            grad.addColorStop(0,   'transparent');
-            grad.addColorStop(0.5, 'rgba(255,107,74,0.6)');
-            grad.addColorStop(1,   'transparent');
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, lineY - 4, canvas.width, 8);
-            t++;
-            raf = requestAnimationFrame(draw);
-        }
-        canvas._stopAnim = () => cancelAnimationFrame(raf);
-        draw();
-    },
-
-    shader: function(canvas, labels) {
-        const ctx = canvas.getContext('2d');
-        let t = 0, raf;
-        canvas.width  = canvas.offsetWidth || 400;
-        canvas.height = 280;
-        function draw() {
-            ctx.fillStyle = '#0d0d0d';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            for (let x = 0; x < canvas.width; x += 4) {
-                for (let y = 0; y < canvas.height; y += 4) {
-                    const nx   = x / canvas.width, ny = y / canvas.height;
-                    const wave = Math.sin(nx * 8 + t * 0.05) * Math.cos(ny * 6 - t * 0.03) * Math.sin((nx + ny) * 4 + t * 0.02);
-                    const r    = Math.floor(128 + wave * 127),
-                          g    = Math.floor(200 + wave * 55),
-                          b    = Math.floor(180 + wave * 75);
-                    ctx.fillStyle = `rgb(${r},${g},${b})`;
-                    ctx.fillRect(x, y, 4, 4);
-                }
-            }
-            ctx.fillStyle = 'rgba(13,13,13,0.55)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            t++;
-            raf = requestAnimationFrame(draw);
-        }
-        canvas._stopAnim = () => cancelAnimationFrame(raf);
-        draw();
-    },
-
-    tools: function(canvas, labels) {
-        const ctx = canvas.getContext('2d');
-        let t = 0, raf;
-        canvas.width  = canvas.offsetWidth || 400;
-        canvas.height = 280;
-        const defaultLabels = ['Maya','Git','Blender','PyQt','JSON','MEL'];
-        const nodeLabels    = (labels && labels.length >= 6) ? labels : defaultLabels;
-        const nodes = [
-            { x:0.2,  y:0.3,  l: nodeLabels[0] },
-            { x:0.5,  y:0.15, l: nodeLabels[1] },
-            { x:0.8,  y:0.3,  l: nodeLabels[2] },
-            { x:0.15, y:0.65, l: nodeLabels[3] },
-            { x:0.5,  y:0.75, l: nodeLabels[4] },
-            { x:0.85, y:0.65, l: nodeLabels[5] }
-        ];
-        const edges = [[0,1],[1,2],[0,3],[1,4],[2,5],[3,4],[4,5]];
-        function draw() {
-            ctx.fillStyle = '#0d0d0d';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            edges.forEach(([a, b]) => {
-                const na    = nodes[a], nb = nodes[b];
-                const pulse = 0.3 + 0.4 * Math.abs(Math.sin(t * 0.03 + a));
-                ctx.beginPath();
-                ctx.moveTo(na.x * canvas.width, na.y * canvas.height);
-                ctx.lineTo(nb.x * canvas.width, nb.y * canvas.height);
-                ctx.strokeStyle = `rgba(78,205,196,${pulse})`;
-                ctx.lineWidth   = 1.5;
-                ctx.stroke();
-            });
-            nodes.forEach((n, i) => {
-                const px   = n.x * canvas.width, py = n.y * canvas.height;
-                const r    = 18 + 4 * Math.sin(t * 0.04 + i);
-                const glow = 0.4 + 0.4 * Math.sin(t * 0.04 + i);
-                ctx.beginPath();
-                ctx.arc(px, py, r, 0, Math.PI * 2);
-                ctx.fillStyle   = `rgba(255,107,74,${glow})`;
-                ctx.fill();
-                ctx.strokeStyle = '#ffd93d';
-                ctx.lineWidth   = 2;
-                ctx.stroke();
-                ctx.fillStyle  = '#f5f1e8';
-                ctx.font       = 'bold 10px DM Mono,monospace';
-                ctx.textAlign  = 'center';
-                ctx.fillText(n.l, px, py + 4);
-            });
-            t++;
-            raf = requestAnimationFrame(draw);
-        }
-        canvas._stopAnim = () => cancelAnimationFrame(raf);
-        draw();
-    },
-
-    toolpipeline: function (canvas, labels, config) {
-        const ctx = canvas.getContext('2d');
-        let t = 0, raf;
-
-        canvas.width = canvas.offsetWidth || 400;
-        canvas.height = 620;
-        canvas.style.height = '620px';
-
-        const W = canvas.width, H = canvas.height;
-
-        const nodes = (config && config.nodes) || [
-            { label: 'Artists', sub: 'Maya / Blender' },
-            { label: 'Shared Drive', sub: 'Centralized Source' },
-            { label: 'Developers', sub: 'Git Dev Branch' },
-            { label: 'Pull Request', sub: 'Dev → Release' },
-            { label: 'Sync Drive', sub: 'Pull Latest Code' },
-            { label: 'Auto-Update', sub: 'Artist Machines' },
-            { label: 'Changelog', sub: 'On Next Open' },
-        ];
-        const edges = (config && config.edges) ||
-            nodes.map((_, i) => [i, (i + 1) % nodes.length]);
-        const stepLabels = (config && config.stepLabels) ||
-            edges.map(([a, b]) => `${nodes[a].label} → ${nodes[b].label}`);
-        const accent = (config && config.accent) || '#c9a84c';
-        const particle = (config && config.particle) || '#ffd93d';
-
-        const N = nodes.length;
-        const BOX_W = W * 0.44;   // narrower
-        const BOX_H = 52;         // taller
-        const PAD_T = 28;
-        const PAD_B = 60;
-        const TOTAL_H = H - PAD_T - PAD_B;
-        const GAP = (TOTAL_H - N * BOX_H) / (N - 1);
-        const LEFT = (W - BOX_W) / 2;
-
-        function nodeY(i) { return PAD_T + i * (BOX_H + GAP); }
-        function nodeCX() { return W / 2; }
-
-        const glow = new Array(N).fill(0);
-
-        function drawNode(i, g) {
-            const x = LEFT;
-            const y = nodeY(i);
-            const isLit = g > 0.05;
-
-            // Box fill
-            ctx.fillStyle = isLit ? 'rgba(201,168,76,0.09)' : 'rgba(22,22,22,0.98)';
-            ctx.fillRect(x, y, BOX_W, BOX_H);
-
-            // Border
-            ctx.strokeStyle = isLit ? `rgba(201,168,76,${0.25 + g * 0.75})` : '#2a2a2a';
-            ctx.lineWidth = isLit ? 1.5 : 1;
-            ctx.strokeRect(x, y, BOX_W, BOX_H);
-
-            // Left accent bar
-            ctx.fillStyle = `rgba(201,168,76,${g * 0.9})`;
-            ctx.fillRect(x, y, 2, BOX_H);
-
-            // Step number badge — right side
-            const BADGE_W = 26, BADGE_H = 18;
-            const bx = x + BOX_W - BADGE_W - 8;
-            const by = y + (BOX_H - BADGE_H) / 2;
-            ctx.fillStyle = isLit ? `rgba(201,168,76,${0.15 + g * 0.7})` : 'rgba(255,255,255,0.04)';
-            ctx.fillRect(bx, by, BADGE_W, BADGE_H);
-            ctx.font = 'bold 10px DM Mono,monospace';
-            ctx.textAlign = 'center';
-            ctx.fillStyle = isLit ? accent : '#444';
-            ctx.fillText(String(i + 1).padStart(2, '0'), bx + BADGE_W / 2, by + BADGE_H * 0.72);
-
-            // Text area between left bar and badge
-            const textLeft = x + 12;
-            const textRight = bx - 6;
-            const availW = textRight - textLeft;
-            const textCX = textLeft + availW / 2;
-
-            // Label
-            ctx.textAlign = 'center';
-            ctx.font = 'bold 13px DM Mono,monospace';
-            ctx.fillStyle = isLit ? accent : '#d8d5cc';
-            ctx.fillText(nodes[i].label, textCX, y + BOX_H * 0.40);
-
-            // Sub-label
-            ctx.font = '10.5px DM Mono,monospace';
-            ctx.fillStyle = isLit ? `rgba(78,205,196,${0.55 + g * 0.45})` : '#4a6a68';
-            let sub = nodes[i].sub;
-            while (ctx.measureText(sub).width > availW && sub.length > 4) sub = sub.slice(0, -1);
-            if (sub !== nodes[i].sub) sub += '…';
-            ctx.fillText(sub, textCX, y + BOX_H * 0.72);
-        }
-
-        function drawConnector(fromI, toI, alpha) {
-            const x = nodeCX();
-            const y1 = nodeY(fromI) + BOX_H;
-            const y2 = nodeY(toI);
-
-            ctx.beginPath();
-            ctx.moveTo(x, y1);
-            ctx.lineTo(x, y2);
-            ctx.strokeStyle = `rgba(78,205,196,${alpha})`;
-            ctx.lineWidth = 1.2;
-            ctx.setLineDash([4, 5]);
-            ctx.stroke();
-            ctx.setLineDash([]);
-
-            // Arrowhead
-            const AH = 8;
-            ctx.beginPath();
-            ctx.moveTo(x, y2);
-            ctx.lineTo(x - AH, y2 - AH * 1.3);
-            ctx.lineTo(x + AH, y2 - AH * 1.3);
-            ctx.closePath();
-            ctx.fillStyle = `rgba(78,205,196,${alpha})`;
-            ctx.fill();
-        }
-
-        const STEP_FRAMES = 240;
-
-        function draw() {
-            ctx.clearRect(0, 0, W, H);
-            ctx.fillStyle = '#0d0d0d';
-            ctx.fillRect(0, 0, W, H);
-
-            const frame = t % (edges.length * STEP_FRAMES);
-            const edgeIdx = Math.floor(frame / STEP_FRAMES);
-            const progress = (frame % STEP_FRAMES) / STEP_FRAMES;
-            const [fromI, toI] = edges[edgeIdx];
-
-            for (let i = 0; i < N; i++) glow[i] = 0;
-            glow[fromI] = 1;
-
-            // Connectors behind nodes
-            edges.forEach(([a, b], ei) => {
-                if (b !== a + 1) return;
-                const isActive = ei === edgeIdx;
-                drawConnector(a, b, isActive ? 0.55 + 0.3 * Math.sin(t * 0.08) : 0.10);
-            });
-
-            // Nodes
-            nodes.forEach((_, i) => drawNode(i, glow[i]));
-
-            // Travelling particle
-            if (toI === fromI + 1) {
-                const y1 = nodeY(fromI) + BOX_H;
-                const y2 = nodeY(toI);
-                const py = y1 + (y2 - y1) * progress;
-                const px = nodeCX();
-
-                const grad = ctx.createRadialGradient(px, py, 0, px, py, 12);
-                grad.addColorStop(0, 'rgba(255,217,61,0.95)');
-                grad.addColorStop(0.5, 'rgba(255,217,61,0.25)');
-                grad.addColorStop(1, 'rgba(255,217,61,0)');
-                ctx.fillStyle = grad;
-                ctx.beginPath();
-                ctx.arc(px, py, 12, 0, Math.PI * 2);
-                ctx.fill();
-
-                ctx.beginPath();
-                ctx.arc(px, py, 3.5, 0, Math.PI * 2);
-                ctx.fillStyle = particle;
-                ctx.fill();
-            }
-
-            // Bottom step label strip
-            const STRIP_H = 52;
-            ctx.fillStyle = 'rgba(10,10,10,0.92)';
-            ctx.fillRect(0, H - STRIP_H, W, STRIP_H);
-            ctx.fillStyle = 'rgba(201,168,76,1)';
-            ctx.font = '18px DM Mono,monospace';
-            ctx.textAlign = 'center';
-            // Fade label in/out with progress so it never pops abruptly
-            const labelAlpha = progress < 0.1 ? progress * 10 : progress > 0.85 ? (1 - progress) * 6.6 : 1;
-            ctx.globalAlpha = labelAlpha;
-            ctx.fillText(stepLabels[edgeIdx] || '', W / 2, H - STRIP_H / 2 + 6);
-            ctx.globalAlpha = 1;
-
-            t++;
-            raf = requestAnimationFrame(draw);
-        }
-        canvas._stopAnim = () => cancelAnimationFrame(raf);
-        draw();
-    },
-
-}; // end canvasDefs
-
-
-// ── Render cards ──────────────────────────────────────────────────────────────
-function renderPortfolio(filter = 'all') {
-    const grid = document.getElementById('portfolioGrid');
-    grid.innerHTML = '';
-    const data = filter === 'all'
-        ? portfolioData
-        : portfolioData.filter(item =>
-            Array.isArray(item.category)
-                ? item.category.includes(filter)
-                : item.category === filter
-          );
-    data.forEach(item => {
-        const card = document.createElement('div');
-        card.className      = 'portfolio-item';
-        card.dataset.category = Array.isArray(item.category) ? item.category[0] : item.category;
-        card.onclick        = () => openModal(item);
-        const tags = Array.isArray(item.category)
-            ? item.category.map(c => `<span class="category-tag">${c}</span>`).join(' ')
-            : `<span class="category-tag">${item.category}</span>`;
-        card.innerHTML = `
-            <div class="thumbnail-wrapper">
-                <img src="${item.thumbnail}" alt="${item.title}" class="thumbnail">
-            </div>
-            <div class="card-content">
-                ${tags}
-                <h3 class="card-title">${item.title}</h3>
-                <p class="card-description">${item.shortDescription}</p>
-                <div class="card-technologies">${item.technologies}</div>
-            </div>`;
-        grid.appendChild(card);
-    });
-}
-
-// ── Filter buttons ────────────────────────────────────────────────────────────
-document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', function () {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        renderPortfolio(this.dataset.filter);
-    });
-});
-
-// ── Modal open ────────────────────────────────────────────────────────────────
-function openModal(item) {
-    document.getElementById('modalImage').src        = item.image;
-    document.getElementById('modalCategory').textContent =
-        Array.isArray(item.category) ? item.category.join(' · ') : item.category;
-    document.getElementById('modalTitle').textContent       = item.title;
-    document.getElementById('modalDescription').textContent = item.fullDescription;
-
-    let blocksHtml = '';
-    if (item.contentBlocks && item.contentBlocks.length) {
-        blocksHtml = '<div class="modal-content-blocks">';
-        item.contentBlocks.forEach(block => {
-            switch (block.type) {
-                case 'heading':
-                    blocksHtml += `<div class="content-block">
-                        <h3 class="content-block-heading">${block.content}</h3></div>`;
-                    break;
-                case 'paragraph':
-                    blocksHtml += `<div class="content-block">
-                        <p class="content-block-paragraph">${block.content}</p></div>`;
-                    break;
-                case 'code':
-                    blocksHtml += `<div class="content-block">
-                        <div class="content-block-code">
-                            <pre><code>${escapeHtml(block.content)}</code></pre>
-                        </div></div>`;
-                    break;
-                case 'image':
-                    blocksHtml += `<div class="content-block">
-                        <div class="content-block-image">
-                            <img src="${block.src}" alt="${block.alt || ''}">
-                        </div></div>`;
-                    break;
-                case 'video':
-                    blocksHtml += `<div class="content-block">${buildVideoBlock(block)}</div>`;
-                    break;
-                case 'canvas':
-                    blocksHtml += `<div class="content-block">${buildCanvasBlock(block)}</div>`;
-                    break;
-            }
-        });
-        blocksHtml += '</div>';
-    }
-
-    document.getElementById('modalDetails').innerHTML = `
-        ${blocksHtml}
-        <div class="detail-item">
-            <span class="detail-label">Technologies</span>
-            <span class="detail-value">${item.technologies}</span>
-        </div>
-        <div class="detail-item">
-            <span class="detail-label">Role</span>
-            <span class="detail-value">${item.role}</span>
-        </div>
-        <div class="detail-item">
-            <span class="detail-label">Year</span>
-            <span class="detail-value">${item.year || '—'}</span>
-        </div>
-        ${item.link && item.link !== '#' ? `
-        <div class="detail-item">
-            <span class="detail-label">Project Link</span>
-            <span class="detail-value"><a href="${item.link}" target="_blank">View on GitHub →</a></span>
-        </div>` : ''}`;
-
-    // Stop any running canvas animations from a previous modal open
-    document.querySelectorAll('.content-block-canvas').forEach(c => {
-        if (c._stopAnim) c._stopAnim();
-    });
-
-    document.getElementById('modal').classList.add('active');
-    document.body.style.overflow = 'hidden'; // ← single, correct location
-
-    // Init new canvas blocks once the DOM has updated
-    requestAnimationFrame(() => {
-        document.querySelectorAll('.content-block-canvas').forEach(canvas => {
-            const variant = canvas.dataset.variant;
-            const labels  = JSON.parse(canvas.dataset.labels);
-            const config  = JSON.parse(canvas.dataset.config);
-            if (canvasDefs[variant]) canvasDefs[variant](canvas, labels, config);
-        });
-    });
-}
-
-function closeModal() {
-    // Stop all canvas animations when modal closes
-    document.querySelectorAll('.content-block-canvas').forEach(c => {
-        if (c._stopAnim) c._stopAnim();
-    });
-    document.getElementById('modal').classList.remove('active');
-    document.body.style.overflow = 'auto';
-}
-
-document.getElementById('modal').addEventListener('click', e => {
-    if (e.target === e.currentTarget || e.target.classList.contains('modal-wrapper')) closeModal();
-});
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-renderPortfolio();
-
-// ── Live vertex network (Skills section) ─────────────────────────────────────
 (function () {
-    const canvas = document.getElementById('skillsCanvas');
-    if (!canvas) return;
-    const ctx    = canvas.getContext('2d');
-    const COLORS = ['#4ecdc4','#c9a84c','#a8c5c1','#b794f6'];
-    const N = 55, DIST = 160;
-    let nodes = [], W, H;
-    function resize() {
-        W = canvas.width  = canvas.parentElement.offsetWidth;
-        H = canvas.height = canvas.parentElement.offsetHeight;
+  // Soft reveal: drop the hiding class so the staggered transition plays (real browsers).
+  function soft() { document.documentElement.classList.remove('preanim'); }
+  // Hard reveal: force the final visible state inline with no transition, so a
+  // frozen/throttled animation clock can never trap the hero at opacity:0.
+  function hard() {
+    document.documentElement.classList.remove('preanim');
+    var els = document.querySelectorAll('.hero-head-left > *, .hero-head-right > *, .hero-reel');
+    for (var i = 0; i < els.length; i++) {
+      els[i].style.transition = 'none';
+      els[i].style.opacity = '1';
+      els[i].style.transform = 'none';
     }
-    function initNodes() {
-        nodes = Array.from({ length: N }, () => ({
-            x: Math.random() * W, y: Math.random() * H,
-            vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5,
-            r:  Math.random() * 2 + 1,
-            color: COLORS[Math.floor(Math.random() * COLORS.length)]
-        }));
-    }
-    function draw() {
-        ctx.clearRect(0, 0, W, H);
-        nodes.forEach(n => {
-            n.x += n.vx; n.y += n.vy;
-            if (n.x < 0 || n.x > W) n.vx *= -1;
-            if (n.y < 0 || n.y > H) n.vy *= -1;
-        });
-        for (let i = 0; i < nodes.length; i++) {
-            for (let j = i + 1; j < nodes.length; j++) {
-                const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
-                const d  = Math.sqrt(dx * dx + dy * dy);
-                if (d < DIST) {
-                    ctx.beginPath();
-                    ctx.moveTo(nodes[i].x, nodes[i].y);
-                    ctx.lineTo(nodes[j].x, nodes[j].y);
-                    ctx.strokeStyle = `rgba(201,168,76,${(1 - d / DIST) * 0.35})`;
-                    ctx.lineWidth   = 0.6;
-                    ctx.stroke();
-                }
-            }
-        }
-        nodes.forEach(n => {
-            ctx.beginPath();
-            ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-            ctx.fillStyle   = n.color;
-            ctx.shadowColor = n.color;
-            ctx.shadowBlur  = 6;
-            ctx.fill();
-            ctx.shadowBlur  = 0;
-        });
-        requestAnimationFrame(draw);
-    }
-    window.addEventListener('resize', () => { resize(); initNodes(); });
-    resize(); initNodes(); draw();
+  }
+  if (document.readyState === 'complete') { requestAnimationFrame(soft); }
+  else { window.addEventListener('load', function () { requestAnimationFrame(soft); }); }
+  setTimeout(hard, 1500); // failsafe runs after the entrance completes
 })();
-
 </script>
 </body>
 </html>

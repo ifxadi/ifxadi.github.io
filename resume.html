@@ -3,24 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aditya Kumar – Technical Artist Resume</title>
+    <title>Aditya Kumar – Senior Technical Artist Resume</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-            --accent: #1a6b8a;
-            --text: #1a1a1a;
-            --muted: #4a4a4a;
-            --line: #c8d6dc;
+            --accent: #2563eb;
+            --ink: #14181f;
+            --text: #2b313b;
+            --muted: #5b6470;
+            --line: #dde3ea;
+            --line-strong: #b9c2cf;
+            --disp: 'Space Grotesk', 'Segoe UI', Arial, sans-serif;
+            --mono: 'Space Mono', 'Courier New', monospace;
+            --body: Arial, Helvetica, sans-serif;
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #dde3e7;
+            font-family: var(--body);
+            background: #e7ebef;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -28,200 +32,129 @@
             min-height: 100vh;
         }
 
-        /* Print button */
         .print-btn {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            margin-bottom: 16px;
-            background: #4a4a4a;
-            color: #fff;
-            border: none;
-            padding: 9px 22px;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 12px;
-            font-weight: bold;
-            letter-spacing: 0.04em;
-            cursor: pointer;
-            border-radius: 4px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+            display: flex; align-items: center; gap: 8px;
+            margin-bottom: 18px;
+            background: var(--ink); color: #fff; border: none;
+            padding: 11px 24px;
+            font-family: var(--mono); font-size: 11px; font-weight: 700;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            cursor: pointer; border-radius: 3px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
             transition: background 0.15s;
         }
-
-            .print-btn:hover {
-                background: #135570;
-            }
-
-            .print-btn svg {
-                flex-shrink: 0;
-            }
+        .print-btn:hover { background: var(--accent); }
+        .print-btn svg { flex-shrink: 0; }
 
         .page {
             width: 8.5in;
             background: #fff;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.15);
-            padding: 0.52in 0.65in 0.48in 0.65in;
-            /* base font scaled to 90% of original 9pt */
+            box-shadow: 0 6px 40px rgba(20,24,31,0.18);
+            padding: 0.42in 0.62in 0.4in;
             font-size: 8.1pt;
-            line-height: 1.52;
+            line-height: 1.46;
             color: var(--text);
+            position: relative;
+        }
+        /* unique accent spine down the left edge */
+        .page::before {
+            content: ""; position: absolute; top: 0; bottom: 0; left: 0;
+            width: 5px; background: var(--accent);
         }
 
-        /* Header */
+        /* ── Header ─────────────────────────────────── */
         .header {
-            text-align: center;
-            padding-bottom: 0.04in;
-            border-bottom: 1.5px solid var(--line);
+            display: flex; justify-content: space-between; align-items: flex-start;
+            gap: 24px; padding-bottom: 0.1in;
+            border-bottom: 2px solid var(--ink);
+        }
+        .header h1 {
+            font-family: var(--disp); font-weight: 700;
+            font-size: 22pt; letter-spacing: -0.01em; line-height: 0.95;
+            color: var(--ink);
+        }
+        .header .role {
+            font-family: var(--mono); font-weight: 700;
+            font-size: 8.2pt; letter-spacing: 0.22em; text-transform: uppercase;
+            color: var(--accent); margin-top: 6px;
+        }
+        .header .contact {
+            font-family: var(--mono); font-size: 7.0pt; line-height: 1.85;
+            color: var(--muted); text-align: right; white-space: nowrap;
+        }
+        .header .contact a { color: var(--ink); text-decoration: none; }
+        .header .contact .lbl { color: var(--accent); }
+
+        /* specialties strip */
+        .specialties {
+            display: flex; flex-wrap: wrap; gap: 5px;
+            padding: 0.075in 0 0.01in;
+        }
+        .chip {
+            font-family: var(--mono); font-size: 6.4pt; font-weight: 700;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--ink); border: 1px solid var(--line-strong);
+            padding: 3px 8px; border-radius: 2px;
         }
 
-            .header h1 {
-                font-family: 'Montserrat', sans-serif;
-                font-size: 22pt;
-                font-weight: 700;
-                letter-spacing: 0.08em;
-                color: var(--text);
-            }
-
-            .header .contact {
-                margin-top: 3px;
-                /* 8pt × 0.9 */
-                font-size: 8.0pt;
-                color: var(--muted);
-            }
-
-                .header .contact a {
-                    color: var(--accent);
-                    text-decoration: none;
-                }
-
-        /* Sections */
+        /* ── Sections ───────────────────────────────── */
         .section {
-            display: table;
-            width: 100%;
-            padding: 0.115in 0;
+            display: table; width: 100%;
+            padding: 0.065in 0;
             border-bottom: 1px solid var(--line);
         }
-
-            .section:last-child {
-                border-bottom: none;
-            }
+        .section:last-child { border-bottom: none; }
 
         .label {
-            display: table-cell;
-            width: 1.05in;
-            padding-right: 0.18in;
-            text-align: right;
-            vertical-align: top;
-            /* 6.5pt × 0.9 */
-            font-size: 5.85pt;
-            font-weight: bold;
-            letter-spacing: 0.09em;
-            text-transform: uppercase;
-            color: var(--accent);
-            padding-top: 1px;
-            line-height: 1.3;
+            display: table-cell; width: 0.92in;
+            padding-right: 0.12in; vertical-align: top; padding-top: 1px;
+            font-family: var(--mono); font-size: 6.0pt; font-weight: 700;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--accent); line-height: 1.5;
+        }
+        .label .num {
+            display: block; font-size: 6.4pt; color: var(--line-strong);
+            margin-bottom: 2px;
         }
 
-        .body {
-            display: table-cell;
-            vertical-align: top;
-            /* 8.6pt × 0.9 */
-            font-size: 7.74pt;
-            line-height: 1.52;
+        .body { display: table-cell; vertical-align: top; font-size: 7.74pt; line-height: 1.48; }
+        .body strong { color: var(--ink); }
+
+        ul.skills, ul.bullets { padding-left: 0; list-style: none; }
+        ul.skills li, ul.bullets li {
+            position: relative; padding-left: 0.95em; margin-bottom: 2px;
+        }
+        ul.skills li::before, ul.bullets li::before {
+            content: ""; position: absolute; left: 0; top: 0.46em;
+            width: 4px; height: 4px; background: var(--accent);
+            border-radius: 50%;
         }
 
-        ul.skills, ul.bullets {
-            padding-left: 1.1em;
-            list-style: disc;
-        }
-
-            ul.skills li, ul.bullets li {
-                margin-bottom: 1px;
-            }
-
-        .job {
-            margin-bottom: 0.1in;
-        }
-
-            .job:last-child {
-                margin-bottom: 0;
-            }
-
-        .job-header {
-            font-weight: bold;
-            /* 8.8pt × 0.9 */
-            font-size: 7.92pt;
-            color: var(--text);
-        }
-
+        .job { margin-bottom: 0.07in; padding-left: 0.16in; border-left: 1px solid var(--line); }
+        .job:last-child { margin-bottom: 0; }
+        .job-header { font-family: var(--disp); font-weight: 600; font-size: 8.4pt; color: var(--ink); }
         .job-date {
-            /* 7.8pt × 0.9 */
-            font-size: 7.02pt;
-            color: var(--muted);
-            margin-bottom: 3px;
+            font-family: var(--mono); font-size: 6.6pt; letter-spacing: 0.04em;
+            color: var(--muted); margin: 1px 0 3px;
         }
+        .job-prose { margin-bottom: 3px; }
 
-        .job-prose {
-            margin-bottom: 3px;
-        }
+        .edu-row { display: flex; justify-content: space-between; align-items: baseline; padding-left: 0.16in; border-left: 1px solid var(--line); }
+        .edu-degree { font-family: var(--disp); font-weight: 600; font-size: 8.2pt; color: var(--ink); }
+        .edu-school { font-size: 7.2pt; color: var(--muted); }
+        .edu-year { font-family: var(--mono); font-size: 6.8pt; color: var(--muted); white-space: nowrap; margin-left: 8px; }
 
-        .edu-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-        }
-
-        .edu-degree {
-            font-weight: bold;
-            /* 8.6pt × 0.9 */
-            font-size: 7.74pt;
-        }
-
-        .edu-school {
-            /* 8pt × 0.9 */
-            font-size: 7.2pt;
-            color: var(--muted);
-        }
-
-        .edu-year {
-            /* 7.8pt × 0.9 */
-            font-size: 7.02pt;
-            color: var(--muted);
-            white-space: nowrap;
-            margin-left: 8px;
-        }
-
-        /* Print */
+        /* ── Print ──────────────────────────────────── */
         @media print {
             html, body {
-                width: 100%;
-                margin: 0;
-                padding: 0;
-                background: #fff;
+                width: 100%; margin: 0; padding: 0; background: #fff;
                 display: block;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact; print-color-adjust: exact;
             }
-
-            .print-btn {
-                display: none;
-            }
-
-            .page {
-                width: 100%;
-                box-shadow: none;
-                padding: 0.48in 0.60in 0.44in 0.60in;
-            }
-
-            @page {
-                size: 8.5in 10.4in;
-                margin: 0;
-            }
-
-            a {
-                color: var(--accent) !important;
-                text-decoration: underline !important;
-            }
+            .print-btn { display: none; }
+            .page { width: 100%; box-shadow: none; padding: 0.4in 0.58in 0.36in; }
+            @page { size: 8.5in 11in; margin: 0; }
+            .header .contact a, .body a { color: var(--ink) !important; }
         }
     </style>
 </head>
@@ -240,23 +173,34 @@
 
         <!-- Header -->
         <div class="header">
-            <h1>Aditya Kumar</h1>
+            <div style="margin-top: 0.3in;">
+                <h1>Aditya Kumar</h1>
+                <div class="role">Senior Technical Artist</div>
+            </div>
             <div class="contact">
-                Mumbai, India &nbsp;&middot;&nbsp;
-                <a href="mailto:aditya.techartist@gmail.com">aditya.techartist@gmail.com</a> &nbsp;&middot;&nbsp;
-                <strong>Portfolio:</strong>
-                <a href="https://ifxadi.github.io">ifxadi.github.io</a>  &nbsp;&middot;&nbsp;
-    <a href="https://linkedin.com/in/ifxadi">linkedin.com/in/ifxadi</a> &nbsp;&middot;&nbsp;
-    (+91) 7544805419
+                Mumbai, India<br>
+                (+91) 7544805419<br>
+                <span class="lbl">PORTFOLIO</span> <a href="https://ifxadi.github.io">ifxadi.github.io</a><br>
+                <span class="lbl">LINKEDIN</span> <a href="https://linkedin.com/in/ifxadi">linkedin.com/in/ifxadi</a><br>
+                <span class="lbl">EMAIL</span> <a href="mailto:aditya.techartist@gmail.com">aditya.techartist@gmail.com</a>
+            </div>
+        </div>
 
-</div>
+        <!-- Specialties -->
+        <div class="specialties">
+            <span class="chip">Tools Programming</span>
+            <span class="chip">Shader Development</span>
+            <span class="chip">Art Pipeline</span>
+            <span class="chip">Rigging</span>
+            <span class="chip">Real-time Optimization</span>
+            <span class="chip">In-engine Implementation</span>
         </div>
 
         <!-- Summary -->
         <div class="section">
             <div class="label">Summary</div>
             <div class="body">
-                Technical Artist with a strong background in the game asset pipeline, tools programming, game art pipeline, optimization, rigging, shader development, and in-engine implementation. Known for delivering efficient and scalable solutions with a sharp artistic eye and strong attention to detail. Proactive and solution-oriented, with a passion for continuous learning and exploring emerging technologies. Core tech interests me and I’m currently deepening my knowledge in graphics programming.
+                Technical Artist with a strong background in the game asset pipeline, tools programming, game art pipeline, optimization, rigging, shader development, and in-engine implementation. Known for delivering efficient and scalable solutions with a sharp artistic eye and strong attention to detail. Proactive and solution-oriented, with a passion for continuous learning and exploring emerging technologies. Core tech interests me and I&rsquo;m currently deepening my knowledge in graphics programming.
             </div>
         </div>
 
@@ -280,11 +224,11 @@
             <div class="body">
 
                 <div class="job">
-                    <div class="job-header">Senior Technical Artist &mdash; Modma Studios X Supercell </div>
+                    <div class="job-header">Senior Technical Artist &mdash; Modma Studios X Supercell</div>
                     <div class="job-date">September 2023 &ndash; Present</div>
-                    <p class="job-prose">Working on LiveOps Game <strong>Brawl Stars</strong> External development team &mdash; responsible for making Artist's job as efficient as possible with Automation tools, Assets Validators, optimized workflows, mentorship and end-to-end pipeline support from DCC to Engine implementation. Had an opportunity to work with some epic collabs like <strong>Disney Toy Story, Spongebob, Subway Surfers, Stranger Things, UNO and more.</strong></p>
+                    <p class="job-prose">Working on LiveOps Game <strong>Brawl Stars</strong> External development team &mdash; responsible for making Artist's job as efficient as possible with Automation tools, Assets Validators, optimized workflows, mentorship and end-to-end pipeline support from DCC to Engine implementation. Worked on <strong>Disney Toy Story, Spongebob, Subway Surfers, Stranger Things, UNO and Godzilla </strong>collabs.</p>
                     <ul class="bullets">
-                        <li>Owned Studio's Game Art and asset pipeline; Authoring <strong>Tools, workflows, and shaders, rigs</strong> while considering performance, Engine requirements and limitations.</li>
+                        <li>Owned Studio's Game Art and asset pipeline; Authoring <strong>Tools, workflows, shaders, rigs</strong> while considering performance, Engine requirements and limitations.</li>
                         <li>Designed, implemented and maintained a robust CI/CD <strong>Tools development pipeline</strong> that is efficient and friendly for both artists and developers.</li>
                         <li><strong>Leading and mentoring</strong> the Tech Art team. Helping and contributing to other internal projects when needed.</li>
                         <li>Worked as a <strong>Pipeline generalist</strong> for the entire Art production including Modeling, Rigging, Animation, realtime lighting, rendering, VFX and UI.</li>
@@ -314,9 +258,11 @@
                     <div class="job-header">Motion Graphics Animator &mdash; Trillbit</div>
                     <div class="job-date">May 2022 &ndash; April 2023</div>
                     <p class="job-prose">Conceptualized and produced promotional animated videos, handling end-to-end asset creation, UI/UX, and animation.</p>
+                </div>
+                <div class="job">
                     <div class="job-header">Indie Android OS Developer</div>
                     <div class="job-date">2016 &ndash; 2019</div>
-                    <p class="job-prose">Worked as an indie Android OS developer delivering custom OS upgrades for devices no longer supported by OEMs, serving a community of over 100,000 users. Performed low-level porting and optimization of Android and kernel source code to run the latest versions on low-end hardware, and maintained regular weekly/monthly releases with bug fixes and security patches, contributing to multiple public source repositories and XDA build threads.</p>
+                    <p class="job-prose">As an indie Android OS developer delivering custom OS upgrades for devices no longer supported by OEMs, serving a community of over 100,000 users. Performed low-level porting and optimization of Android and kernel source code to run the latest versions on low-end hardware, and maintained regular weekly/monthly releases with bug fixes and security patches, contributing to multiple public source repositories and XDA build threads.</p>
                 </div>
             </div>
         </div>
@@ -337,5 +283,5 @@
 
     </div><!-- .page -->
 
-</body>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
 </html>
