@@ -117,7 +117,7 @@ img { display: block; max-width: 100%; }
 /* ── Filter nav ─────────────────────────────────────────────── */
 .filterbar {
     position: sticky;
-    top: 0;
+    top: var(--topbar-h, 64px);
     z-index: 400;
     background: color-mix(in srgb, var(--bg) 88%, transparent);
     backdrop-filter: blur(16px);
